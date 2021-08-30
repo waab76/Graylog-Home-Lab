@@ -1,0 +1,92 @@
+# Had to update to version 3.2 in order to use the more verbose syntax for volumes
+version: '3.2'
+services:
+  # MongoDB: https://hub.docker.com/_/mongo/
+  mongo:
+    image: mongo:4.2
+    container_name: mongodb
+    networks:
+      - graylog
+    ports:
+      - 27018:27017
+    # Using bind volumes so the data will be stored on my USB drive mounted at /mnt/graylog
+    # This also means the MongoDB files are accessible from outside of Docker
+    volumes:
+      - type: bind
+        source: /mnt/graylog/mongodata
+        target: /data/db
+      - type: bind
+        source: /mnt/graylog/mongoconfig
+        target: /data/configdb
+      # Sadly, none of the bindings for /var/log seem to have resulted in log files 
+      # appearing on disk.  This is definitely something I want to look more into
+      - type: bind
+        source: /mnt/graylog/logs/mongo
+        target: /var/log/mongodb
+  # Elasticsearch: https://www.elastic.co/guide/en/elasticsearch/reference/7.10/docker.html
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.2
+    container_name: elasticsearch
+    # Extra memory for Elastic, bumped from 512 MB to 2 GB
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=localhost
+      - network.host=0.0.0.0
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+    volumes:
+      - type: bind
+        source: /mnt/graylog/elasticdata
+        target: /usr/share/elasticsearch/data
+      - type: bind
+        source: /mnt/graylog/logs/elastic
+        target: /var/log/elasticsearch
+    networks:
+      - graylog
+  # Graylog: https://hub.docker.com/r/graylog/graylog/
+  graylog:
+    # Using the enterprise image instead of the standard
+    image: graylog/graylog-enterprise:4.1-arm64
+    environment:
+      # CHANGE ME (must be at least 16 characters)!
+      - GRAYLOG_PASSWORD_SECRET=DEADBEEF12345678
+      # Password: admin
+      - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+      - GRAYLOG_HTTP_EXTERNAL_URI=http://127.0.0.1:9000/
+      - GRAYLOG_ELASTICSEARCH_VERSION=7
+      - GRAYLOG_HTTP_ENABLE_CORS=true
+      - GRAYLOG_METRICS_PROMETHEUS_ENABLED=true
+    entrypoint: /usr/bin/tini -- wait-for-it elasticsearch:9200 --  /docker-entrypoint.sh
+    networks:
+      - graylog
+    restart: always
+    depends_on:
+      - mongo
+      - elasticsearch
+    ports:
+      # Graylog web interface and REST API
+      - 9000:9000
+      # Syslog TCP
+      - 1514:1514
+      # Syslog UDP
+      - 1514:1514/udp
+      # GELF TCP
+      - 12201:12201
+      # GELF UDP
+      - 12201:12201/udp
+    # As with Elastic and Mongo, want to keep data on my USB drive where possible
+    volumes:
+      - type: bind
+        source: /mnt/graylog/journal
+        target: /usr/share/graylog/data/journal
+      - type: bind
+        source: /mnt/graylog/logs/graylog-server
+        target: /var/log/graylog-server
+networks:
+  graylog:
+    driver: bridge
