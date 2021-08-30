@@ -1,0 +1,15 @@
+rule "Examine dropped IP"
+when
+    true
+then
+    let greynoise = lookup("greynoise", to_string($message.source_ip));
+    set_field("source_geo_country", to_string(greynoise.country_code));
+    set_field("source_hostname", to_string(greynoise.rdns));
+    set_field("source_os_name", to_string(greynoise.os));
+    set_field("source_geo_city", to_string(greynoise.city));
+    set_field("greynoise_classification", to_string(greynoise.classification));
+    set_field("greynoise_actor", to_string(greynoise.actor));
+    set_field("greynoise_category", to_string(greynoise.category));
+    set_field("source_as_number", to_string(greynoise.asn));
+    set_field("source_as_organization", to_string(greynoise.organization));
+end

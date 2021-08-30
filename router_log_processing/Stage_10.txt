@@ -1,0 +1,6 @@
+rule "Parse router DROP"
+when
+    starts_with(to_string($message.message), "DROP", true)
+then
+    set_fields(grok("DROP IN=%{DATA:network_interface_in} .* SRC=%{IPORHOST:source_ip} DST=%{IPORHOST:destination_ip} LEN=%{DATA:network_bytes} .* PROTO=%{DATA:network_transport} .*", to_string($message.message), true));
+end

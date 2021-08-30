@@ -1,0 +1,6 @@
+rule "Remap ASUS Router Source"
+when
+    starts_with(to_string($message.source), "RT-AC86U", true)
+then
+    set_field("source", "RT-AC86U");
+end

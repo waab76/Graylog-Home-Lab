@@ -1,0 +1,13 @@
+rule "Whois unknown IPs"
+when
+    (to_string($message.greynoise_classification) != "malicious")
+    && (to_string($message.greynoise_classification) != "benign")
+    && (to_string($message.greynoise_classification) != "unknown")
+then
+    let whois = lookup("whois", to_string($message.source_ip));
+    set_field("source_geo_country", to_string(whois.country_code));
+    set_field("greynoise_classification", "unknown");
+    set_field("greynoise_category", "unknown");
+    set_field("greynoise_actor", "unknown");
+    set_field("source_as_organization", to_string(whois.organization));
+end
