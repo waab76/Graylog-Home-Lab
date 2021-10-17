@@ -51,7 +51,7 @@ services:
   # Graylog: https://hub.docker.com/r/graylog/graylog/
   graylog:
     # Using the enterprise image instead of the standard
-    image: graylog/graylog-enterprise:4.1-arm64
+    image: graylog/graylog-enterprise:4.2-arm64
     environment:
       # CHANGE ME (must be at least 16 characters)!
       - GRAYLOG_PASSWORD_SECRET=DEADBEEF12345678
