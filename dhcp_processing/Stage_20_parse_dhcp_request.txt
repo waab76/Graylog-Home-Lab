@@ -1,0 +1,7 @@
+rule "Parse router DHCP Request"
+when
+    to_string($message.dhcp_type) == "REQUEST"
+then
+    set_fields(grok("DHCPREQUEST.br0. %{IP:source_ip} %{GREEDYDATA:source_mac}", to_string($message.message), true));
+    set_field("source_mac_vendor", lookup_value("mac-vendor", replace(to_string($message.source_mac), ":", "-")));
+end

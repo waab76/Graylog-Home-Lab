@@ -1,0 +1,9 @@
+rule "Parse router DHCP ACK"
+when
+    to_string($message.dhcp_type) == "ACK"
+then
+    set_fields(grok("DHCPACK.br0. %{IP:source_ip} %{DATA:source_mac} %{GREEDYDATA:source_hostname}", to_string($message.message), true));
+    set_field("source_mac_vendor", lookup_value("mac-vendor", replace(to_string($message.source_mac), ":", "-")));
+    lookup_set_value("local-hostnames", to_string($message.source_ip), to_string($message.source_hostname));
+    set_field("source_friendly_hostname", lookup_value("friendly-names", to_string($message.source_hostname)));
+end

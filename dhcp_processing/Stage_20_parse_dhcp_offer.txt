@@ -1,0 +1,8 @@
+rule "Parse router DHCP Offer"
+when
+    to_string($message.dhcp_type) == "OFFER"
+then
+    set_fields(grok("DHCPOFFER.br0. %{IP:source_ip} %{DATA:source_mac}", to_string($message.message), true));
+    set_field("source_mac_vendor", lookup_value("mac-vendor", replace(to_string($message.source_mac), ":", "-")));
+    
+end

@@ -1,0 +1,8 @@
+rule "Parse router DHCP msg type"
+when
+    starts_with(to_string($message.message), "DHCP")
+then
+    let parts = grok("%{DATA:dhcp_string} .*", to_string($message.message), true);
+    let dhcp_type = substring(to_string(parts.dhcp_string), 4, -5);
+    set_field("dhcp_type", dhcp_type);
+end
