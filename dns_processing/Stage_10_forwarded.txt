@@ -1,0 +1,12 @@
+rule "Parse DNS Forwarded"
+when
+    starts_with(to_string($message.message), "forwarded", true)
+then
+    set_fields(grok("forwarded %{DATA:dns_query} to %{IPORHOST:dns_server}", to_string($message.message), true));
+    set_field("dns_blocked", false);
+    set_field("source_ip", lookup_value("dns-hostname", to_string($message.dns_query)));
+    set_field("source_hostname", lookup_value("local-hostnames", to_string($message.source_ip)));
+    set_field("source_friendly_hostname", lookup_value("friendly-names", to_string($message.source_hostname, "No friendly hostname set")));
+    set_field("dns_type", "FORWARDED");
+    set_field("message", "DNS query for " + to_string($message.dns_query) + " forwarded to " + to_string($message.dns_server));
+end

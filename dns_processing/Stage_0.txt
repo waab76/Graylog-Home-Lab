@@ -1,0 +1,6 @@
+rule "Remap DNSMASQ Source"
+when
+    to_string($message.application_name) == "dnsmasq"
+then
+    set_field("source", "pihole");
+end

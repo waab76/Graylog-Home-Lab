@@ -1,0 +1,11 @@
+rule "Parse DNS Query"
+when
+    starts_with(to_string($message.message), "query", true)
+then
+    set_fields(grok("query\\[%{DATA:dns_query_type}\\] %{DATA:dns_query} from %{IPORHOST:source_ip}", to_string($message.message), true));
+    lookup_set_value("dns-hostname", to_string($message.dns_query), to_string($message.source_ip));
+    set_field("source_hostname", lookup_value("local-hostnames", to_string($message.source_ip)));
+    set_field("source_friendly_hostname", lookup_value("friendly-names", to_string($message.source_hostname, "No friendly hostname set")));
+    set_field("dns_type", "QUERY");
+    set_field("message", to_string($message.source_friendly_hostname) + " wants to talk to " + to_string($message.dns_query));
+end
