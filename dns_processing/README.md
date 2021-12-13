@@ -1,7 +1,3 @@
-Hi, it's Rob again.  For those that don't know me, I'm the North American Engineering Team Lead here at Graylog.  I posted a while back about [getting Graylog up and running in Docker on my Raspberry Pi](https://www.reddit.com/r/graylog/comments/penmnx/raspberry_pi_4_home_graylog_setup).  More recently, I posted about getting Graylog to [parse the DHCP logs from my router](https://www.reddit.com/r/graylog/comments/qa69sq/howto_processing_my_dhcp_logs/).
-
-This weekend, I finally got around to getting GeoIP lookups set up and combining them with the data from my firewall and my Pi-hole DNS server so I could visualize who's trying to talk to my home network and who my home network is trying to talk to.  You can see my tweet about it [here](https://twitter.com/BourbonInExile/status/1470114711735779329).
-
 ## What am I skipping?
 
 I'm not going to get into the details of installing Pi-hole.  You can find that info [here](https://pi-hole.net/).  I talked about getting the logs from Pi-hole into Graylog in my [first howto post](https://www.reddit.com/r/graylog/comments/penmnx/raspberry_pi_4_home_graylog_setup).
