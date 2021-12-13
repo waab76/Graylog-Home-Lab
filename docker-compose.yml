@@ -10,13 +10,13 @@ services:
       - 27018:27017
     volumes:
       - type: bind
-        source: /mnt/media/graylog/mongodata
+        source: /mnt/graylog/mongodata
         target: /data/db
       - type: bind
-        source: /mnt/media/graylog/mongoconfig
+        source: /mnt/graylog/mongoconfig
         target: /data/configdb
       - type: bind
-        source: /mnt/media/graylog/logs/mongo
+        source: /mnt/graylog/logs/mongo
         target: /var/log/mongodb
   # Elasticsearch: https://www.elastic.co/guide/en/elasticsearch/reference/7.10/docker.html
   elasticsearch:
@@ -35,16 +35,16 @@ services:
       - 9200:9200
     volumes:
       - type: bind
-        source: /mnt/media/graylog/elastic
+        source: /mnt/graylog/elasticdata
         target: /usr/share/elasticsearch/data
       - type: bind
-        source: /mnt/media/graylog/logs/elastic
+        source: /mnt/graylog/logs/elastic
         target: /var/log/elasticsearch
     networks:
       - graylog
   # Graylog: https://hub.docker.com/r/graylog/graylog/
   graylog:
-    image: graylog/graylog-enterprise:4.1-arm64
+    image: graylog/graylog-enterprise:4.2.3-arm64
     environment:
       # CHANGE ME (must be at least 16 characters)!
       - GRAYLOG_PASSWORD_SECRET=1234567890123456
@@ -72,13 +72,21 @@ services:
       - 12201:12201
       # GELF UDP
       - 12201:12201/udp
+      # Beats
+      - 5044:5044
+      - 5044:5044/udp
+      - 5045:5045
+      - 5045:5045/udp
     volumes:
       - type: bind
-        source: /mnt/media/graylog/journal
+        source: /mnt/graylog/journal
         target: /usr/share/graylog/data/journal
       - type: bind
-        source: /mnt/media/graylog/logs/graylog-server
+        source: /mnt/graylog/logs/graylog-server
         target: /var/log/graylog-server
+      - type: bind
+        source: /mnt/graylog/data
+        target: /usr/share/graylog/data/geo/
 networks:
   graylog:
     driver: bridge
