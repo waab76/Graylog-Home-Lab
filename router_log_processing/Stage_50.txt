@@ -1,0 +1,16 @@
+rule "50 MaxMind GEO Enrichment"
+when
+  has_field("source_ip")
+then
+  let asn_data = lookup("maxmind-asn", to_string($message.source_ip));
+  let city_data = lookup("maxmind-city", to_string($message.source_ip));
+  set_field("source_geo_coordinates", city_data.coordinates);
+  set_field("source_geo_city", city_data.city.names.en);
+  set_field("source_geo_continent", city_data.continent.names.en);
+  set_field("source_geo_country_iso", city_data.country.iso_code);
+  set_field("source_geo_country", city_data.country.names.en);
+  set_field("source_geo_state", substring(to_string(split(":",to_string(split(",", to_string(city_data.subdivisions))[1]))[1]), 1, 3));
+  set_field("source_geo_name", to_string($message.source_geo_city) + " " + to_string($message.source_geo_state) + " (" + to_string($message.source_geo_country) + ")");
+  set_field("source_as_number", asn_data.as_number);
+  set_field("source_as_organization", asn_data.as_organization);
+end
