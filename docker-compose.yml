@@ -2,7 +2,7 @@ version: '3.2'
 services:
   # MongoDB: https://hub.docker.com/_/mongo/
   mongo:
-    image: mongo:4.2
+    image: mongo:4.4
     container_name: mongodb
     networks:
       - graylog
@@ -15,52 +15,54 @@ services:
       - type: bind
         source: /mnt/graylog/mongoconfig
         target: /data/configdb
-      - type: bind
-        source: /mnt/graylog/logs/mongo
-        target: /var/log/mongodb
-  # Elasticsearch: https://www.elastic.co/guide/en/elasticsearch/reference/7.10/docker.html
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.2
-    container_name: elasticsearch
+
+  opensearch:
+    image: opensearchproject/opensearch:1.3.2
+    container_name: opensearch
     environment:
-      - http.host=0.0.0.0
-      - transport.host=localhost
-      - network.host=0.0.0.0
-      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch
+      - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
+      - "OPENSEARCH_JAVA_OPTS=-Xms4g -Xmx4g" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
+      - "DISABLE_INSTALL_DEMO_CONFIG=true" # disables execution of install_demo_configuration.sh bundled with security plugin, which installs demo certificates and security configurations to OpenSearch
+      - "DISABLE_SECURITY_PLUGIN=true" # disables security plugin entirely in OpenSearch by setting plugins.security.disabled: true in opensearch.yml
+      - "discovery.type=single-node" # disables bootstrap checks that are enabled when network.host is set to a non-loopback address
     ulimits:
       memlock:
         soft: -1
         hard: -1
+      nofile:
+        soft: 65536 # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
+        hard: 65536
     ports:
       - 9200:9200
+      - 9600:9600 # required for Performance Analyzer
     volumes:
       - type: bind
         source: /mnt/graylog/elasticdata
-        target: /usr/share/elasticsearch/data
-      - type: bind
-        source: /mnt/graylog/logs/elastic
-        target: /var/log/elasticsearch
+        target: /usr/share/opensearch/data
     networks:
       - graylog
+
   # Graylog: https://hub.docker.com/r/graylog/graylog/
   graylog:
-    image: graylog/graylog-enterprise:4.2.3-arm64
+    image: graylog/graylog-enterprise:4.3
     environment:
       # CHANGE ME (must be at least 16 characters)!
       - GRAYLOG_PASSWORD_SECRET=1234567890123456
       # Password: admin
       - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
       - GRAYLOG_HTTP_EXTERNAL_URI=http://127.0.0.1:9000/
-      - GRAYLOG_ELASTICSEARCH_VERSION=7
       - GRAYLOG_HTTP_ENABLE_CORS=true
       - GRAYLOG_METRICS_PROMETHEUS_ENABLED=true
-    entrypoint: /usr/bin/tini -- wait-for-it elasticsearch:9200 --  /docker-entrypoint.sh
+      - GRAYLOG_ELASTICSEARCH_HOSTS=http://opensearch:9200
+    entrypoint: /usr/bin/tini -- wait-for-it opensearch:9200 --  /docker-entrypoint.sh
     networks:
       - graylog
     restart: always
     depends_on:
       - mongo
-      - elasticsearch
+      - opensearch
     ports:
       # Graylog web interface and REST API
       - 9000:9000
@@ -82,11 +84,9 @@ services:
         source: /mnt/graylog/journal
         target: /usr/share/graylog/data/journal
       - type: bind
-        source: /mnt/graylog/logs/graylog-server
-        target: /var/log/graylog-server
-      - type: bind
         source: /mnt/graylog/data
         target: /usr/share/graylog/data/geo/
+
 networks:
   graylog:
     driver: bridge
