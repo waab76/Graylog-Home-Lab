@@ -1,7 +1,7 @@
 {
-  "v": 1,
+  "v": "1",
   "id": "f9c182a5-773a-4a67-a87e-60d80a0d2c03",
-  "rev": 1,
+  "rev": 2,
   "name": "Veilid",
   "summary": "Single glass of pain for veilid-server 0.3.0",
   "description": "Processing pipeline and simple dashboard for monitoring Veilid debug logs. This is just a first attempt and is definitely not handling all possible debug logs, just the stuff that I saw over the course of a day.",
@@ -393,7 +393,7 @@
         "name": "pipeline",
         "version": "1"
       },
-      "id": "4976b0bd-c3b8-403c-ae39-25e54baf8763",
+      "id": "3c89ef10-9dc2-47c9-9138-d752b161cc94",
       "data": {
         "title": {
           "@type": "string",
@@ -405,12 +405,12 @@
         },
         "source": {
           "@type": "string",
-          "@value": "pipeline \"Veilid Processing\"\nstage 0 match all\nrule \"Select Veilid Messages\"\nstage 10 match either\nrule \"Parse Syslog Log Level 0\"\nrule \"Parse Syslog Log Level 1\"\nrule \"Parse Syslog Log Level 2\"\nrule \"Parse Syslog Log Level 3\"\nrule \"Parse Syslog Log Level 4\"\nrule \"Parse Syslog Log Level 5\"\nrule \"Parse Syslog Log Level 6\"\nrule \"Parse Syslog Log Level 7\"\nstage 20 match either\nrule \"Veilid Parse Bucket Kick\"\nrule \"Veilid Parse Connection Accepted\"\nrule \"Veilid Parse Connection Closed\"\nrule \"Veilid Parse Connection Protect\"\nrule \"Veilid Parse Dead Route Failed\"\nrule \"Veilid Parse Get or Create Connection Retry\"\nrule \"Veilid Parse LRU Kill\"\nrule \"Veilid Parse RPC Drop\"\nrule \"Veilid Parse RPC Get Value\"\nrule \"Veilid Parse RPC Inspect Value\"\nrule \"Veilid Parse RPC Lost\"\nrule \"Veilid Parse RPC Set Value\"\nrule \"Veilid Parse RPC Watch Value\"\nrule \"Veilid Parse Receipt\"\nrule \"Veilid Parse Routing Table Update\"\nrule \"Veilid Parse SingleShot Receipt\"\nrule \"Veilid Parse Timestamp Ahead/Behind\"\nrule \"Veilid Parse RPC Failure\"\nend"
+          "@value": "pipeline \"Veilid Processing\"\nstage 0 match all\nrule \"Select Veilid Messages\"\nstage 20 match either\nrule \"Veilid Parse Bucket Kick\"\nrule \"Veilid Parse Connection Accepted\"\nrule \"Veilid Parse Connection Closed\"\nrule \"Veilid Parse Connection Protect\"\nrule \"Veilid Parse Dead Route Failed\"\nrule \"Veilid Parse Get or Create Connection Retry\"\nrule \"Veilid Parse LRU Kill\"\nrule \"Veilid Parse RPC Drop\"\nrule \"Veilid Parse RPC Get Value\"\nrule \"Veilid Parse RPC Inspect Value\"\nrule \"Veilid Parse RPC Lost\"\nrule \"Veilid Parse RPC Set Value\"\nrule \"Veilid Parse RPC Watch Value\"\nrule \"Veilid Parse Receipt\"\nrule \"Veilid Parse Routing Table Update\"\nrule \"Veilid Parse SingleShot Receipt\"\nrule \"Veilid Parse Timestamp Ahead/Behind\"\nrule \"Veilid Parse RPC Failure\"\nrule \"Veilid Parse No Protocol Handler\"\nrule \"Veilid Parse Get Peer Address Fail\"\nstage 10 match either\nrule \"Parse Syslog Log Level 0\"\nrule \"Parse Syslog Log Level 1\"\nrule \"Parse Syslog Log Level 2\"\nrule \"Parse Syslog Log Level 3\"\nrule \"Parse Syslog Log Level 4\"\nrule \"Parse Syslog Log Level 5\"\nrule \"Parse Syslog Log Level 6\"\nrule \"Parse Syslog Log Level 7\"\nrule \"Drop Syslog Facility Fields\"\nend"
         },
         "connected_streams": [
           {
             "@type": "string",
-            "@value": "5e60822b-9e46-4cdb-a002-3e6d819d5fab"
+            "@value": "5ad4684f-3e56-40d7-8c0d-43fa5c672ef8"
           }
         ]
       },
@@ -427,7 +427,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "c6b72a5f-58ed-4380-bc5d-6d5eac8ac5c4",
+      "id": "9edf8b53-1ec4-4e9e-91c7-0ebe5abe7c6b",
       "data": {
         "title": {
           "@type": "string",
@@ -455,7 +455,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "45aead60-3c3f-40fd-a15e-8fa50050663c",
+      "id": "81bda91e-75d1-4614-a24a-ad85ca7a0897",
       "data": {
         "title": {
           "@type": "string",
@@ -467,7 +467,7 @@
         },
         "source": {
           "@type": "string",
-          "@value": "rule \"Select Veilid Messages\"\nwhen\n    has_field(\"application_name\")\n    && to_string($message.application_name) == \"veilid-server\"\nthen\n    set_field(\"event_source_product\", \"veilid-server\");\nend"
+          "@value": "rule \"Select Veilid Messages\"\nwhen\n    has_field(\"application_name\")\n    && to_string($message.application_name) == \"veilid-server\"\nthen\n    rename_field(\"application_name\", \"event_source_product\");\nend"
         }
       },
       "constraints": [
@@ -483,7 +483,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "bc745196-70ba-40e6-8f01-7a25fa993308",
+      "id": "af3856af-d8d9-4ce8-928c-f1ec49bb4f3f",
       "data": {
         "title": {
           "@type": "string",
@@ -511,7 +511,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "423d1a00-bbea-4aee-af62-34c8aedee75c",
+      "id": "2ae3d0cb-ff87-4c9d-9f90-c542cfe7e0fc",
       "data": {
         "title": {
           "@type": "string",
@@ -539,7 +539,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "df157b9a-db25-49c9-87b9-4fc4049fb347",
+      "id": "da6ea62d-d13f-4149-9ff4-4913746b8754",
       "data": {
         "title": {
           "@type": "string",
@@ -567,7 +567,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "0f438b43-9aa9-47f2-bdeb-a34e95490de5",
+      "id": "9be21c7f-a14c-456c-a0a9-332d091ebd3e",
       "data": {
         "title": {
           "@type": "string",
@@ -595,7 +595,63 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "1e4cbc6b-9217-4b7d-9088-09bb9aada0ca",
+      "id": "761a1fa6-68fc-4627-aa4e-94fef1b07ca0",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse No Protocol Handler"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse No Protocol Handler\"\nwhen\n    starts_with(to_string($message.message), \"no protocol handler for connection from\")\nthen\n    // https://gitlab.com/veilid/veilid/-/blob/main/veilid-core/src/network_manager/native/network_tcp.rs#L221\n    set_field(\"vendor_event_category\", \"network\");\n    set_field(\"vendor_event_action\", \"drop\");\n    set_field(\"vendor_event_outcome\", \"failed\");\n    set_fields(grok(\"no protocol handler for connection from %{IPORHOST:remote_ip}:%{NUMBER:remote_port}\", to_string($message.message), true));\nend\n    "
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "182b38e9-cbc3-46d6-a0ac-b663576cb2d7",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Drop Syslog Facility Fields"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Drop Syslog Facility Fields\"\nwhen\n    has_field(\"facility\") && has_field(\"facility_num\")\nthen\n    remove_field(\"facility\");\n    remove_field(\"facility_num\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "060ee0bb-4781-45a8-873e-de3517ff70ad",
       "data": {
         "title": {
           "@type": "string",
@@ -623,7 +679,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "6375aa1e-bbde-477c-a7c1-cf14e4011fd0",
+      "id": "547022a1-2f05-489c-b25a-369d607cd282",
       "data": {
         "title": {
           "@type": "string",
@@ -651,7 +707,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "5e5ef1da-569d-4be9-85f6-69884a73c854",
+      "id": "57ed5c44-2dbf-4e34-99cb-ccb778cf126c",
       "data": {
         "title": {
           "@type": "string",
@@ -679,7 +735,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "5ed48d3c-14b3-4992-9c7b-bde00f7f06d8",
+      "id": "c0121c20-1229-4c6a-aa12-39f3ea519877",
       "data": {
         "title": {
           "@type": "string",
@@ -707,7 +763,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "c5f84137-f868-469e-8bca-c95b679c5e91",
+      "id": "994a1bf1-5b95-4f91-bd61-cd4ef62f2338",
       "data": {
         "title": {
           "@type": "string",
@@ -735,7 +791,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "c95a10c7-2ffe-4f6b-b656-c41fc0728174",
+      "id": "f37555ea-b610-4fae-b112-2f7e66b88f4c",
       "data": {
         "title": {
           "@type": "string",
@@ -763,7 +819,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "4bbb2789-8a35-41ac-b1dd-789c04081320",
+      "id": "0eecc3db-e119-4e87-b5ef-26ab84e9cd7b",
       "data": {
         "title": {
           "@type": "string",
@@ -791,7 +847,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "4594ee52-c4a9-453d-997c-4f1fbb62a172",
+      "id": "c8322c7d-0ff8-4210-92ee-e70ba84e1c1e",
       "data": {
         "title": {
           "@type": "string",
@@ -819,7 +875,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "5351ea10-ec58-41f8-865c-34b8463f3a0e",
+      "id": "84440443-d3f9-4054-b61b-280c659b7d10",
       "data": {
         "title": {
           "@type": "string",
@@ -847,7 +903,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "fe2e43fd-e51f-48c1-bc48-24d5e6d72f89",
+      "id": "95905afe-8e77-410a-be64-f92cf84b5d67",
       "data": {
         "title": {
           "@type": "string",
@@ -875,7 +931,35 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "e9ad75f5-7819-449c-86c3-70cf18d730c8",
+      "id": "1e105ac9-d8eb-4204-9e4a-1ad164b6daad",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse Get Peer Address Fail"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse Get Peer Address Fail\"\nwhen\n    starts_with(to_string($message.message), \"failed to get peer address\")\nthen\n    // https://gitlab.com/veilid/veilid/-/blob/main/veilid-core/src/network_manager/native/network_tcp.rs#L117\n    set_field(\"vendor_event_category\", \"network\");\n    set_field(\"vendor_event_action\", \"resolve\");\n    set_field(\"vendor_event_outcome\", \"failed\");\n    set_fields(grok(\"failed to get peer address: %{GREEDYDATA:error_message}\", to_string($message.message), true));\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "6982d781-e844-4112-a030-7c25e813918f",
       "data": {
         "title": {
           "@type": "string",
@@ -903,7 +987,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "ee861f7a-6c86-49fc-b08f-e3ea37951c90",
+      "id": "f6152c1c-0efc-437a-8255-42c17318c6dd",
       "data": {
         "title": {
           "@type": "string",
@@ -931,7 +1015,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "278b2c49-bb8e-4dd7-8af3-40f3aec38709",
+      "id": "820fe930-3582-41f3-8c82-faa8bfdf2ab9",
       "data": {
         "title": {
           "@type": "string",
@@ -959,7 +1043,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "e8446b96-a263-4e34-ba0b-bdb8d0a863df",
+      "id": "2c7b49af-4079-4c31-949f-91f0fd5c7c34",
       "data": {
         "title": {
           "@type": "string",
@@ -987,7 +1071,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "313db843-b024-4baf-81ca-c80cc354afc6",
+      "id": "b3f6d459-169d-4a79-b5c7-91cf7f32090a",
       "data": {
         "title": {
           "@type": "string",
@@ -1015,7 +1099,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "42a00545-8744-420c-a867-847a230b8533",
+      "id": "8a494d5f-52d2-4191-a12f-4044c00723ad",
       "data": {
         "title": {
           "@type": "string",
@@ -1043,7 +1127,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "050cd49a-7d44-4bba-af18-27c76f1a1253",
+      "id": "332f657c-5fbc-407a-9329-a354a6b624e6",
       "data": {
         "title": {
           "@type": "string",
@@ -1071,7 +1155,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "ea0424d5-566b-4a6e-88dd-d26c28fbea66",
+      "id": "1a3b8a01-7fbe-4964-bdd1-ebb4dddd2a5f",
       "data": {
         "title": {
           "@type": "string",
@@ -1099,7 +1183,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "2dcd0c37-47db-4637-b38d-e29ff308b56b",
+      "id": "8ba9de8b-25fc-435f-9164-cc977500eced",
       "data": {
         "title": {
           "@type": "string",
@@ -1127,7 +1211,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "f89c5fad-b59e-40e2-b8cd-0aeb531f4eff",
+      "id": "057c8af2-b5f5-4103-9937-d81713f416d7",
       "data": {
         "title": {
           "@type": "string",
@@ -1155,7 +1239,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "c00c343c-39bb-426c-b335-c4ac507e2901",
+      "id": "3abc66ef-0859-4b18-9bc7-91f2c7046fa9",
       "data": {
         "title": {
           "@type": "string",
@@ -1183,7 +1267,7 @@
         "name": "stream_title",
         "version": "1"
       },
-      "id": "5e60822b-9e46-4cdb-a002-3e6d819d5fab",
+      "id": "5ad4684f-3e56-40d7-8c0d-43fa5c672ef8",
       "data": {
         "title": {
           "@type": "string",
