@@ -10,8 +10,11 @@ This content pack is built to be easy to use for Veilid folks who might not be f
 
 * `Veilid Syslog` input
 * `Veilid Processing` pipeline
-  * 3 stages with (currently) 33 rules
+  * 3 stages with (currently) 30+ rules
 * `Veilid` dashboard
+* Saved Searches
+  * `Veiled Events` - Search for all Veilid logs in the last 30 minutes
+  * `Veilid Unparsed` - Search for all Veilid logs in the last 4 hours that aren't being parsed by the pipeline
 
 ### Veilid Syslog Input
 
@@ -36,6 +39,22 @@ The pipeline pulls messages from Graylog's `Default Stream`, which is where all 
 The rules in this stage parse various Veilid logs. All of the rules attempt to set `vendor_event_category` and `vendor_event_action` fields based on my best guess as to what the logs are saying about what's going on inside of Veilid. Some of the rules parse out additional fields (like `remote_ip`, `remote_port`, `veilid_key`, `veilid_subkey`, etc.) depending on what's in the logs.
 
 If you want to add parsing rules for other log types that I haven't covered yet, you should add them to this stage.
+
+### Veilid Dashboard
+
+The dashboard currently has an Overview tab and an Experimental tab.
+
+The Overview tab provides a summary view of the most common `vendor_event_category`-`vendor_event_action` pairs as well as a bar graph showing how those pairs break down by host.  It also has a message table showing the most recent Veilid log messages.
+
+The Experimental tab is where I'm playing with new visualizations trying to pull interesting stuff out of the log data.
+
+### Saved Searches
+
+On the Search page, there are `Save`, `Load`, and `Share` buttons to the right of the search bar. You can use the `Load` button to load a saved search.
+
+The `Veilid Events` search will give you all the Veilid logs for the last 30 minutes.
+
+The `Veilid Unparsed` search will give you all the Veilid logs from the last 4 hours which don't have a `vendor_event_category` field, meaning they aren't being parsed by any of my existing pipeline rules. This is how I find logs to write new rules for.
 
 ## Setup
 
