@@ -1,0 +1,66 @@
+version: '3.2'
+services:
+  # MongoDB: https://hub.docker.com/_/mongo/
+  mongo:
+    restart: "unless-stopped"
+    image: mongo:5
+    container_name: mongodb
+    networks:
+      - graylog
+    ports:
+      - 27018:27017
+  opensearch:
+    restart: "unless-stopped"
+    image: opensearchproject/opensearch:2
+    container_name: opensearch
+    environment:
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch
+      - bootstrap.memory_lock=true # along with the memlock settings below, disables swapping
+      - "OPENSEARCH_JAVA_OPTS=-Xms4g -Xmx4g" # minimum and maximum Java heap size, recommend setting both to 50% of system RAM
+      - "DISABLE_INSTALL_DEMO_CONFIG=true" # disables execution of install_demo_configuration.sh bundled with security plugin, which installs demo certificates and security configurations to OpenSearch
+      - "DISABLE_SECURITY_PLUGIN=true" # disables security plugin entirely in OpenSearch by setting plugins.security.disabled: true in opensearch.yml
+      - "discovery.type=single-node" # disables bootstrap checks that are enabled when network.host is set to a non-loopback address
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536 # maximum number of open files for the OpenSearch user, set to at least 65536 on modern systems
+        hard: 65536
+    ports:
+      - 9200:9200
+      - 9600:9600 # required for Performance Analyzer
+    networks:
+      - graylog
+
+  # Graylog: https://hub.docker.com/r/graylog/graylog/
+  graylog:
+    restart: "unless-stopped"
+    image: graylog/graylog-enterprise:5.2.5
+    environment:
+      # CHANGE ME (must be at least 16 characters)!
+      - GRAYLOG_PASSWORD_SECRET=1234567890123456
+      # Login with admin:admin
+      - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+      - GRAYLOG_HTTP_EXTERNAL_URI=http://127.0.0.1:9000/
+      - GRAYLOG_HTTP_ENABLE_CORS=true
+      - GRAYLOG_METRICS_PROMETHEUS_ENABLED=true
+      - GRAYLOG_ELASTICSEARCH_HOSTS=http://opensearch:9200
+      - GRAYLOG_INPUTBUFFER_PROCESSORS = 2
+      - GRAYLOG_PROCESSBUFFER_PROCESSORS = 1
+      - GRAYLOG_OUTPUTBUFFER_PROCESSORS = 1
+    entrypoint: /usr/bin/tini -- wait-for-it opensearch:9200 --  /docker-entrypoint.sh
+    networks:
+      - graylog
+    depends_on:
+      - mongo
+      - opensearch
+    ports:
+      # Graylog web interface and REST API
+      - 9000:9000
+      # GELF TCP
+      - 12201:12201
+networks:
+  graylog:
+    driver: bridge

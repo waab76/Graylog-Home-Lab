@@ -1,7 +1,7 @@
 {
   "v": "1",
   "id": "f9c182a5-773a-4a67-a87e-60d80a0d2c03",
-  "rev": 3,
+  "rev": 4,
   "name": "Veilid",
   "summary": "Single glass of pain for veilid-server 0.3.0",
   "description": "Processing pipeline and simple dashboard for monitoring Veilid debug logs. This is just a first attempt and is definitely not handling all possible debug logs, just the stuff that I saw over the course of a day.\n\nIf you want to drop the non-Veilid logs coming in, edit the \"Drop Non-Veilid Messages\" rule in stage 0 of the Veilid Processing pipeline and remove \"&& false\" from the when condition.",
@@ -15,7 +15,7 @@
         "name": "dashboard",
         "version": "2"
       },
-      "id": "a26f2832-a10f-4b12-a2f7-c0da82f47d22",
+      "id": "7f3b8c02-8da0-4d5c-984f-2705ca313e3a",
       "data": {
         "summary": {
           "@type": "string",
@@ -390,10 +390,118 @@
     {
       "v": "1",
       "type": {
+        "name": "input",
+        "version": "1"
+      },
+      "id": "153b7a7c-e2c9-4677-a4d3-17a7aa6b22ea",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Syslog"
+        },
+        "configuration": {
+          "tls_key_file": {
+            "@type": "string",
+            "@value": ""
+          },
+          "port": {
+            "@type": "integer",
+            "@value": 12201
+          },
+          "tls_enable": {
+            "@type": "boolean",
+            "@value": false
+          },
+          "use_null_delimiter": {
+            "@type": "boolean",
+            "@value": false
+          },
+          "recv_buffer_size": {
+            "@type": "integer",
+            "@value": 1048576
+          },
+          "tcp_keepalive": {
+            "@type": "boolean",
+            "@value": false
+          },
+          "force_rdns": {
+            "@type": "boolean",
+            "@value": false
+          },
+          "allow_override_date": {
+            "@type": "boolean",
+            "@value": true
+          },
+          "tls_client_auth_cert_file": {
+            "@type": "string",
+            "@value": ""
+          },
+          "bind_address": {
+            "@type": "string",
+            "@value": "0.0.0.0"
+          },
+          "tls_cert_file": {
+            "@type": "string",
+            "@value": ""
+          },
+          "expand_structured_data": {
+            "@type": "boolean",
+            "@value": false
+          },
+          "max_message_size": {
+            "@type": "integer",
+            "@value": 2097152
+          },
+          "store_full_message": {
+            "@type": "boolean",
+            "@value": false
+          },
+          "tls_client_auth": {
+            "@type": "string",
+            "@value": "disabled"
+          },
+          "timezone": {
+            "@type": "string",
+            "@value": "UTC"
+          },
+          "charset_name": {
+            "@type": "string",
+            "@value": "UTF-8"
+          },
+          "number_worker_threads": {
+            "@type": "integer",
+            "@value": 4
+          },
+          "tls_key_password": {
+            "@type": "string",
+            "@value": ""
+          }
+        },
+        "static_fields": {},
+        "type": {
+          "@type": "string",
+          "@value": "org.graylog2.inputs.syslog.tcp.SyslogTCPInput"
+        },
+        "global": {
+          "@type": "boolean",
+          "@value": true
+        },
+        "extractors": []
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
         "name": "pipeline",
         "version": "1"
       },
-      "id": "b276373b-1a1a-46a4-b891-d6c07a5db46c",
+      "id": "4b206790-fb5d-4056-8da1-4e0dfdb87d5a",
       "data": {
         "title": {
           "@type": "string",
@@ -410,7 +518,7 @@
         "connected_streams": [
           {
             "@type": "string",
-            "@value": "2089598b-9b6a-4800-8786-a840494eb888"
+            "@value": "1aeb24fd-2f60-4ff0-9a0e-69af9a3b8911"
           }
         ]
       },
@@ -427,7 +535,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "e81149e7-565a-47fd-934a-3ac3f15faeae",
+      "id": "428cae30-2da5-4d1d-9632-3cde917cca5c",
       "data": {
         "title": {
           "@type": "string",
@@ -455,7 +563,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "d59fa6fa-40e3-45bd-8746-53334a817cd1",
+      "id": "7ac2e858-a69a-40da-a5ed-2edcae21d036",
       "data": {
         "title": {
           "@type": "string",
@@ -483,7 +591,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "092f3e43-42c3-409f-af8f-6fc33ad2f0c0",
+      "id": "ec658566-35e5-4e2f-b6b6-203f66ac9e56",
       "data": {
         "title": {
           "@type": "string",
@@ -511,7 +619,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "fa896004-5f57-4018-98ec-e7e43ea14458",
+      "id": "3931eda8-88c0-45e8-8716-350445fcb8c2",
       "data": {
         "title": {
           "@type": "string",
@@ -539,7 +647,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "9c8ebe80-5032-4e4b-b0cb-7ea50df38cf4",
+      "id": "1c2e15b3-3fa8-4d63-bb72-e38f90f8ac75",
       "data": {
         "title": {
           "@type": "string",
@@ -567,7 +675,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "c31a604e-e9ca-476d-b54f-140833f400f4",
+      "id": "f6407684-b303-4bda-980a-4d7b37aa227f",
       "data": {
         "title": {
           "@type": "string",
@@ -595,7 +703,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "5d6d19f4-535c-4490-b712-c5bf040b5a57",
+      "id": "61e1f62d-501f-4502-9379-73dbf3ca23d9",
       "data": {
         "title": {
           "@type": "string",
@@ -623,7 +731,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "1e30006f-35ad-423e-9b1f-2f8f72180689",
+      "id": "ca71d0db-4947-4805-9c28-5c194644f33a",
       "data": {
         "title": {
           "@type": "string",
@@ -651,7 +759,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "5e4915bc-27a3-4e3e-aaef-cbb55adda81c",
+      "id": "be452952-cadc-4e0c-a36d-8d41f1be2490",
       "data": {
         "title": {
           "@type": "string",
@@ -679,7 +787,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "618570ba-532a-4061-98c2-ed7c829de3f9",
+      "id": "eca0bc68-7e74-43f1-b48f-ed89e3404e61",
       "data": {
         "title": {
           "@type": "string",
@@ -707,7 +815,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "d514db38-025e-43cc-befb-8f36315bff5a",
+      "id": "5536cf1b-90ec-4533-8d1f-678ad1fb69e9",
       "data": {
         "title": {
           "@type": "string",
@@ -735,7 +843,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "67160224-e04a-4c0a-bbcf-342ed49e2abd",
+      "id": "e806dd28-99e1-4a1e-98dd-17abdb00a1f7",
       "data": {
         "title": {
           "@type": "string",
@@ -763,7 +871,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "cd076dbb-007a-408c-88e0-826b2c307321",
+      "id": "83967634-24b9-4709-997c-c78d0b9c5f55",
       "data": {
         "title": {
           "@type": "string",
@@ -791,7 +899,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "2600cc17-bbb3-497b-b649-77b979e9cce6",
+      "id": "f73550ff-4e23-4946-b4ac-01ef5d886ac1",
       "data": {
         "title": {
           "@type": "string",
@@ -819,7 +927,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "84f8dccf-d326-41bd-ace8-f827f90efb43",
+      "id": "55de4da9-bf55-438f-842b-a1712a718352",
       "data": {
         "title": {
           "@type": "string",
@@ -847,7 +955,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "49184f9c-9ac4-412f-a0c1-ceb8219187b6",
+      "id": "1551bc91-26ea-48e1-bc99-779cfa77bb9d",
       "data": {
         "title": {
           "@type": "string",
@@ -875,7 +983,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "23fddd67-ed41-4c46-80c7-e1c4b6112bd5",
+      "id": "da43c257-f621-4b87-b396-cd67661ea4db",
       "data": {
         "title": {
           "@type": "string",
@@ -903,7 +1011,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "2f9ce21f-073f-4823-98e8-6d57f23d2fb4",
+      "id": "148b2e21-e339-4f2c-a137-79d3834d124d",
       "data": {
         "title": {
           "@type": "string",
@@ -931,7 +1039,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "2bdfc0b6-dfa8-4e2e-8acc-6b8d970e124f",
+      "id": "4b4553cd-4063-4efe-9030-902dc7cce0a9",
       "data": {
         "title": {
           "@type": "string",
@@ -959,7 +1067,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "27a7a12e-0ff1-4700-9088-13630ccb1b88",
+      "id": "f382f45e-c2b5-4723-a3cd-38fdf60edfca",
       "data": {
         "title": {
           "@type": "string",
@@ -987,7 +1095,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "7f174ee0-9a68-4b10-9330-ce92fdd7cfd1",
+      "id": "c585789d-ea08-4a53-9d46-c7851f93b86a",
       "data": {
         "title": {
           "@type": "string",
@@ -1015,7 +1123,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "b807838b-33ef-4c3c-b61b-e6d618fb18cd",
+      "id": "bc1c431f-194a-4a4f-925a-ada6703bd314",
       "data": {
         "title": {
           "@type": "string",
@@ -1043,7 +1151,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "c86f2c2b-10a9-4bdc-892d-096994e96ed9",
+      "id": "4961706e-7fa6-4da5-a6f3-49730188cf81",
       "data": {
         "title": {
           "@type": "string",
@@ -1071,7 +1179,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "4628f879-2a7d-4a26-a165-b39b4e1ffe5f",
+      "id": "319cc647-95ac-47b4-a946-f5c200822969",
       "data": {
         "title": {
           "@type": "string",
@@ -1099,7 +1207,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "bd9a85d0-fe62-4645-ab92-68103dfe04d6",
+      "id": "9f9093f1-316f-4b60-adf2-1e2bf3ac6fa4",
       "data": {
         "title": {
           "@type": "string",
@@ -1127,7 +1235,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "5e7191e8-ade5-4b12-9484-e9149412a484",
+      "id": "42da70ef-7947-408c-a2d8-36dc105ba0a4",
       "data": {
         "title": {
           "@type": "string",
@@ -1155,7 +1263,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "8a3c0173-4550-4d82-b3c9-33ff9dd8c7c5",
+      "id": "97205476-4abb-43d4-9cb0-0b863c47a2d9",
       "data": {
         "title": {
           "@type": "string",
@@ -1183,7 +1291,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "27b89144-ab87-4162-8932-7dbe3d576b2d",
+      "id": "c73b30c8-e5e5-4632-987d-b2fd601a4cc5",
       "data": {
         "title": {
           "@type": "string",
@@ -1211,7 +1319,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "73ab1249-8e43-4a65-9768-0fb2b580476a",
+      "id": "6afb5bf5-efd0-42d7-8e1f-d42d53419a59",
       "data": {
         "title": {
           "@type": "string",
@@ -1239,7 +1347,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "ab91c133-6cf5-4a56-9e5e-46f93e97c25f",
+      "id": "257792db-3660-41a3-a341-c59160932038",
       "data": {
         "title": {
           "@type": "string",
@@ -1267,7 +1375,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "2a1227eb-8e62-4048-bbb5-fce909eb437b",
+      "id": "1315e0d7-da1c-47e6-9328-035b986d9ab2",
       "data": {
         "title": {
           "@type": "string",
@@ -1295,7 +1403,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "55f638d3-d0ba-47b0-af61-928480f2a608",
+      "id": "46da04fd-acf9-441e-aecf-61a1b7caa087",
       "data": {
         "title": {
           "@type": "string",
@@ -1323,7 +1431,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "916db6cb-1293-4765-9b39-4d8cc4b21015",
+      "id": "028402e0-9368-4ae5-8ac5-bd49dd83bcda",
       "data": {
         "title": {
           "@type": "string",
@@ -1351,7 +1459,7 @@
         "name": "stream_title",
         "version": "1"
       },
-      "id": "2089598b-9b6a-4800-8786-a840494eb888",
+      "id": "1aeb24fd-2f60-4ff0-9a0e-69af9a3b8911",
       "data": {
         "title": {
           "@type": "string",
