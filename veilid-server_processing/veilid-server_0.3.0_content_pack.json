@@ -1,10 +1,10 @@
 {
   "v": "1",
   "id": "f9c182a5-773a-4a67-a87e-60d80a0d2c03",
-  "rev": 2,
+  "rev": 3,
   "name": "Veilid",
   "summary": "Single glass of pain for veilid-server 0.3.0",
-  "description": "Processing pipeline and simple dashboard for monitoring Veilid debug logs. This is just a first attempt and is definitely not handling all possible debug logs, just the stuff that I saw over the course of a day.",
+  "description": "Processing pipeline and simple dashboard for monitoring Veilid debug logs. This is just a first attempt and is definitely not handling all possible debug logs, just the stuff that I saw over the course of a day.\n\nIf you want to drop the non-Veilid logs coming in, edit the \"Drop Non-Veilid Messages\" rule in stage 0 of the Veilid Processing pipeline and remove \"&& false\" from the when condition.",
   "vendor": "BourbonInExile",
   "url": "https://twitter.com/BourbonInExile/",
   "parameters": [],
@@ -15,7 +15,7 @@
         "name": "dashboard",
         "version": "2"
       },
-      "id": "c5bf59bc-0cfb-40d7-8606-3d19d3371d4e",
+      "id": "a26f2832-a10f-4b12-a2f7-c0da82f47d22",
       "data": {
         "summary": {
           "@type": "string",
@@ -393,7 +393,7 @@
         "name": "pipeline",
         "version": "1"
       },
-      "id": "3c89ef10-9dc2-47c9-9138-d752b161cc94",
+      "id": "b276373b-1a1a-46a4-b891-d6c07a5db46c",
       "data": {
         "title": {
           "@type": "string",
@@ -405,12 +405,12 @@
         },
         "source": {
           "@type": "string",
-          "@value": "pipeline \"Veilid Processing\"\nstage 0 match all\nrule \"Select Veilid Messages\"\nstage 20 match either\nrule \"Veilid Parse Bucket Kick\"\nrule \"Veilid Parse Connection Accepted\"\nrule \"Veilid Parse Connection Closed\"\nrule \"Veilid Parse Connection Protect\"\nrule \"Veilid Parse Dead Route Failed\"\nrule \"Veilid Parse Get or Create Connection Retry\"\nrule \"Veilid Parse LRU Kill\"\nrule \"Veilid Parse RPC Drop\"\nrule \"Veilid Parse RPC Get Value\"\nrule \"Veilid Parse RPC Inspect Value\"\nrule \"Veilid Parse RPC Lost\"\nrule \"Veilid Parse RPC Set Value\"\nrule \"Veilid Parse RPC Watch Value\"\nrule \"Veilid Parse Receipt\"\nrule \"Veilid Parse Routing Table Update\"\nrule \"Veilid Parse SingleShot Receipt\"\nrule \"Veilid Parse Timestamp Ahead/Behind\"\nrule \"Veilid Parse RPC Failure\"\nrule \"Veilid Parse No Protocol Handler\"\nrule \"Veilid Parse Get Peer Address Fail\"\nstage 10 match either\nrule \"Parse Syslog Log Level 0\"\nrule \"Parse Syslog Log Level 1\"\nrule \"Parse Syslog Log Level 2\"\nrule \"Parse Syslog Log Level 3\"\nrule \"Parse Syslog Log Level 4\"\nrule \"Parse Syslog Log Level 5\"\nrule \"Parse Syslog Log Level 6\"\nrule \"Parse Syslog Log Level 7\"\nrule \"Drop Syslog Facility Fields\"\nend"
+          "@value": "pipeline \"Veilid Processing\"\nstage 0 match either\nrule \"Select Veilid Messages\"\nrule \"Drop Non-Veilid Messages\"\nstage 10 match either\nrule \"Parse Syslog Log Level 0\"\nrule \"Parse Syslog Log Level 1\"\nrule \"Parse Syslog Log Level 2\"\nrule \"Parse Syslog Log Level 3\"\nrule \"Parse Syslog Log Level 4\"\nrule \"Parse Syslog Log Level 5\"\nrule \"Parse Syslog Log Level 6\"\nrule \"Parse Syslog Log Level 7\"\nrule \"Drop Syslog Facility Fields\"\nstage 20 match either\nrule \"Veilid Parse Bucket Kick\"\nrule \"Veilid Parse Connection Accepted\"\nrule \"Veilid Parse Connection Closed\"\nrule \"Veilid Parse Connection Protect\"\nrule \"Veilid Parse Dead Route Failed\"\nrule \"Veilid Parse Get or Create Connection Retry\"\nrule \"Veilid Parse LRU Kill\"\nrule \"Veilid Parse RPC Drop\"\nrule \"Veilid Parse RPC Get Value\"\nrule \"Veilid Parse RPC Inspect Value\"\nrule \"Veilid Parse RPC Lost\"\nrule \"Veilid Parse RPC Set Value\"\nrule \"Veilid Parse RPC Watch Value\"\nrule \"Veilid Parse Receipt\"\nrule \"Veilid Parse Routing Table Update\"\nrule \"Veilid Parse SingleShot Receipt\"\nrule \"Veilid Parse Timestamp Ahead/Behind\"\nrule \"Veilid Parse RPC Failure\"\nrule \"Veilid Parse No Protocol Handler\"\nrule \"Veilid Parse Get Peer Address Fail\"\nrule \"Veilid Parse Dialinfo Failure\"\nrule \"Veilid Parse Dialinfo Permit\"\nend"
         },
         "connected_streams": [
           {
             "@type": "string",
-            "@value": "5ad4684f-3e56-40d7-8c0d-43fa5c672ef8"
+            "@value": "2089598b-9b6a-4800-8786-a840494eb888"
           }
         ]
       },
@@ -427,7 +427,35 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "9edf8b53-1ec4-4e9e-91c7-0ebe5abe7c6b",
+      "id": "e81149e7-565a-47fd-934a-3ac3f15faeae",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Drop Non-Veilid Messages"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Drop Non-Veilid Messages\"\nwhen\n    has_field(\"application_name\")\n    && to_string($message.application_name) != \"veilid-server\"\n    && false\nthen\n    drop_message();\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "d59fa6fa-40e3-45bd-8746-53334a817cd1",
       "data": {
         "title": {
           "@type": "string",
@@ -455,7 +483,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "81bda91e-75d1-4614-a24a-ad85ca7a0897",
+      "id": "092f3e43-42c3-409f-af8f-6fc33ad2f0c0",
       "data": {
         "title": {
           "@type": "string",
@@ -483,7 +511,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "af3856af-d8d9-4ce8-928c-f1ec49bb4f3f",
+      "id": "fa896004-5f57-4018-98ec-e7e43ea14458",
       "data": {
         "title": {
           "@type": "string",
@@ -511,7 +539,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "2ae3d0cb-ff87-4c9d-9f90-c542cfe7e0fc",
+      "id": "9c8ebe80-5032-4e4b-b0cb-7ea50df38cf4",
       "data": {
         "title": {
           "@type": "string",
@@ -539,7 +567,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "da6ea62d-d13f-4149-9ff4-4913746b8754",
+      "id": "c31a604e-e9ca-476d-b54f-140833f400f4",
       "data": {
         "title": {
           "@type": "string",
@@ -567,7 +595,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "9be21c7f-a14c-456c-a0a9-332d091ebd3e",
+      "id": "5d6d19f4-535c-4490-b712-c5bf040b5a57",
       "data": {
         "title": {
           "@type": "string",
@@ -595,7 +623,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "761a1fa6-68fc-4627-aa4e-94fef1b07ca0",
+      "id": "1e30006f-35ad-423e-9b1f-2f8f72180689",
       "data": {
         "title": {
           "@type": "string",
@@ -623,7 +651,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "182b38e9-cbc3-46d6-a0ac-b663576cb2d7",
+      "id": "5e4915bc-27a3-4e3e-aaef-cbb55adda81c",
       "data": {
         "title": {
           "@type": "string",
@@ -651,7 +679,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "060ee0bb-4781-45a8-873e-de3517ff70ad",
+      "id": "618570ba-532a-4061-98c2-ed7c829de3f9",
       "data": {
         "title": {
           "@type": "string",
@@ -679,7 +707,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "547022a1-2f05-489c-b25a-369d607cd282",
+      "id": "d514db38-025e-43cc-befb-8f36315bff5a",
       "data": {
         "title": {
           "@type": "string",
@@ -707,7 +735,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "57ed5c44-2dbf-4e34-99cb-ccb778cf126c",
+      "id": "67160224-e04a-4c0a-bbcf-342ed49e2abd",
       "data": {
         "title": {
           "@type": "string",
@@ -735,7 +763,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "c0121c20-1229-4c6a-aa12-39f3ea519877",
+      "id": "cd076dbb-007a-408c-88e0-826b2c307321",
       "data": {
         "title": {
           "@type": "string",
@@ -763,7 +791,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "994a1bf1-5b95-4f91-bd61-cd4ef62f2338",
+      "id": "2600cc17-bbb3-497b-b649-77b979e9cce6",
       "data": {
         "title": {
           "@type": "string",
@@ -791,7 +819,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "f37555ea-b610-4fae-b112-2f7e66b88f4c",
+      "id": "84f8dccf-d326-41bd-ace8-f827f90efb43",
       "data": {
         "title": {
           "@type": "string",
@@ -819,7 +847,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "0eecc3db-e119-4e87-b5ef-26ab84e9cd7b",
+      "id": "49184f9c-9ac4-412f-a0c1-ceb8219187b6",
       "data": {
         "title": {
           "@type": "string",
@@ -847,7 +875,35 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "c8322c7d-0ff8-4210-92ee-e70ba84e1c1e",
+      "id": "23fddd67-ed41-4c46-80c7-e1c4b6112bd5",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse Dialinfo Permit"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse Dialinfo Permit\"\nwhen\n    starts_with(to_string($message.message), \">>> DIALINFO PERMIT\")\nthen\n    set_field(\"vendor_event_category\", \"dial_info\");\n    set_field(\"vendor_event_action\", \"permit\");\n    set_fields(grok(\">>> DIALINFO PERMIT: %{GREEDYDATA:veilid_dial_info}\", to_string($message.message), true));\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "2f9ce21f-073f-4823-98e8-6d57f23d2fb4",
       "data": {
         "title": {
           "@type": "string",
@@ -875,7 +931,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "84440443-d3f9-4054-b61b-280c659b7d10",
+      "id": "2bdfc0b6-dfa8-4e2e-8acc-6b8d970e124f",
       "data": {
         "title": {
           "@type": "string",
@@ -903,7 +959,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "95905afe-8e77-410a-be64-f92cf84b5d67",
+      "id": "27a7a12e-0ff1-4700-9088-13630ccb1b88",
       "data": {
         "title": {
           "@type": "string",
@@ -931,7 +987,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "1e105ac9-d8eb-4204-9e4a-1ad164b6daad",
+      "id": "7f174ee0-9a68-4b10-9330-ce92fdd7cfd1",
       "data": {
         "title": {
           "@type": "string",
@@ -959,7 +1015,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "6982d781-e844-4112-a030-7c25e813918f",
+      "id": "b807838b-33ef-4c3c-b61b-e6d618fb18cd",
       "data": {
         "title": {
           "@type": "string",
@@ -987,7 +1043,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "f6152c1c-0efc-437a-8255-42c17318c6dd",
+      "id": "c86f2c2b-10a9-4bdc-892d-096994e96ed9",
       "data": {
         "title": {
           "@type": "string",
@@ -1015,7 +1071,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "820fe930-3582-41f3-8c82-faa8bfdf2ab9",
+      "id": "4628f879-2a7d-4a26-a165-b39b4e1ffe5f",
       "data": {
         "title": {
           "@type": "string",
@@ -1043,7 +1099,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "2c7b49af-4079-4c31-949f-91f0fd5c7c34",
+      "id": "bd9a85d0-fe62-4645-ab92-68103dfe04d6",
       "data": {
         "title": {
           "@type": "string",
@@ -1071,7 +1127,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "b3f6d459-169d-4a79-b5c7-91cf7f32090a",
+      "id": "5e7191e8-ade5-4b12-9484-e9149412a484",
       "data": {
         "title": {
           "@type": "string",
@@ -1099,7 +1155,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "8a494d5f-52d2-4191-a12f-4044c00723ad",
+      "id": "8a3c0173-4550-4d82-b3c9-33ff9dd8c7c5",
       "data": {
         "title": {
           "@type": "string",
@@ -1127,7 +1183,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "332f657c-5fbc-407a-9329-a354a6b624e6",
+      "id": "27b89144-ab87-4162-8932-7dbe3d576b2d",
       "data": {
         "title": {
           "@type": "string",
@@ -1155,7 +1211,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "1a3b8a01-7fbe-4964-bdd1-ebb4dddd2a5f",
+      "id": "73ab1249-8e43-4a65-9768-0fb2b580476a",
       "data": {
         "title": {
           "@type": "string",
@@ -1183,7 +1239,35 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "8ba9de8b-25fc-435f-9164-cc977500eced",
+      "id": "ab91c133-6cf5-4a56-9e5e-46f93e97c25f",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse Dialinfo Failure"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse Dialinfo Failure\"\nwhen\n    starts_with(to_string($message.message), \">>> DIALINFO FAILURE\")\nthen\n    set_field(\"vendor_event_category\", \"dial_info\");\n    set_field(\"vendor_event_action\", \"fail\");\n    set_fields(grok(\">>> DIALINFO %{DATA:vendor_event_outcome}: %{GREEDYDATA:veilid_dial_info}\", to_string($message.message), true));\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "2a1227eb-8e62-4048-bbb5-fce909eb437b",
       "data": {
         "title": {
           "@type": "string",
@@ -1211,7 +1295,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "057c8af2-b5f5-4103-9937-d81713f416d7",
+      "id": "55f638d3-d0ba-47b0-af61-928480f2a608",
       "data": {
         "title": {
           "@type": "string",
@@ -1239,7 +1323,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "3abc66ef-0859-4b18-9bc7-91f2c7046fa9",
+      "id": "916db6cb-1293-4765-9b39-4d8cc4b21015",
       "data": {
         "title": {
           "@type": "string",
@@ -1267,7 +1351,7 @@
         "name": "stream_title",
         "version": "1"
       },
-      "id": "5ad4684f-3e56-40d7-8c0d-43fa5c672ef8",
+      "id": "2089598b-9b6a-4800-8786-a840494eb888",
       "data": {
         "title": {
           "@type": "string",
