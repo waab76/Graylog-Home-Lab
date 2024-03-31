@@ -8,7 +8,7 @@ This content pack is built to be easy to use for Veilid folks who might not be f
 
 ## What's Inside
 
-* `Veilid Syslog` input
+* ~~`Veilid Syslog` input~~
 * `Veilid Processing` pipeline
   * 4 stages with (currently) 40+ rules
 * `Veilid` dashboard
@@ -18,7 +18,11 @@ This content pack is built to be easy to use for Veilid folks who might not be f
 
 ### Veilid Syslog Input
 
-Just a basic TCP Syslog input pre-configured to listen on port 12201 (which is the only port configured in the accompanying `docker-compose.yml`). 
+~~Just a basic TCP Syslog input pre-configured to listen on port 12201 (which is the only port configured in the accompanying `docker-compose.yml`).~~
+
+I decided to remove the Input from the content pack because it could make it harder to install the content pack on an established Graylog system that may already be receiving syslog data.
+
+You will need a TCP Syslog input set up to receive the Veilid data.
 
 ### Veilid Processing Pipeline
 
