@@ -10,7 +10,7 @@ This content pack is built to be easy to use for Veilid folks who might not be f
 
 * `Veilid Syslog` input
 * `Veilid Processing` pipeline
-  * 3 stages with (currently) 30+ rules
+  * 4 stages with (currently) 40+ rules
 * `Veilid` dashboard
 * Saved Searches
   * `Veiled Events` - Search for all Veilid logs in the last 30 minutes
@@ -39,6 +39,12 @@ The pipeline pulls messages from Graylog's `Default Stream`, which is where all 
 The rules in this stage parse various Veilid logs. All of the rules attempt to set `vendor_event_category` and `vendor_event_action` fields based on my best guess as to what the logs are saying about what's going on inside of Veilid. Some of the rules parse out additional fields (like `remote_ip`, `remote_port`, `veilid_key`, `veilid_subkey`, etc.) depending on what's in the logs.
 
 If you want to add parsing rules for other log types that I haven't covered yet, you should add them to this stage.
+
+**Stage 30**
+
+This stage performs further parsing on compound fields extracted in Stage 20 including `veilid_conn_debug` and `veilid_receipt_details`.
+
+If you extracted a compound field in Stage 20 and you want to further parse it, you should do so in this stage.
 
 ### Veilid Dashboard
 
