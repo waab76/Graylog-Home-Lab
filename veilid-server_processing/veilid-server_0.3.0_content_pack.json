@@ -1,7 +1,7 @@
 {
   "v": "1",
   "id": "f9c182a5-773a-4a67-a87e-60d80a0d2c03",
-  "rev": 9,
+  "rev": 10,
   "name": "Veilid",
   "summary": "Single glass of pain for veilid-server 0.3.0",
   "description": "Processing pipeline and simple dashboard for monitoring Veilid debug logs. This is just a first attempt and is definitely not handling all possible debug logs, just the stuff that I saw over the course of a day.\n\nIf you want to drop the non-Veilid logs coming in, edit the \"Drop Non-Veilid Messages\" rule in stage 0 of the Veilid Processing pipeline and remove \"&& false\" from the when condition.",
@@ -1576,7 +1576,7 @@
         "name": "pipeline",
         "version": "1"
       },
-      "id": "10eed344-540d-49f9-8d8f-919efed79c4c",
+      "id": "68885709-9813-4420-94c9-8558ef44546b",
       "data": {
         "title": {
           "@type": "string",
@@ -1588,12 +1588,12 @@
         },
         "source": {
           "@type": "string",
-          "@value": "pipeline \"Veilid Processing\"\nstage 0 match either\nrule \"Select Veilid Messages\"\nrule \"Drop Non-Veilid Messages\"\nstage 10 match either\nrule \"Parse Syslog Log Level 0\"\nrule \"Parse Syslog Log Level 1\"\nrule \"Parse Syslog Log Level 2\"\nrule \"Parse Syslog Log Level 3\"\nrule \"Parse Syslog Log Level 4\"\nrule \"Parse Syslog Log Level 5\"\nrule \"Parse Syslog Log Level 6\"\nrule \"Parse Syslog Log Level 7\"\nrule \"Drop Syslog Facility Fields\"\nrule \"Unwrap Syslog Repeated Message\"\nstage 30 match pass\nrule \"Veilid Parse Connection Debug String\"\nrule \"Veilid Parse Receipt Details InBand\"\nrule \"Veilid Parse Receipt Details OutOfBand\"\nrule \"Veilid Parse Receipt Details Private\"\nrule \"Veilid Parse Receipt Details Safety\"\nrule \"Parse Veilid Debug String\"\nstage 20 match either\nrule \"Veilid Parse Bucket Kick\"\nrule \"Veilid Parse Connection Accepted\"\nrule \"Veilid Parse Connection Closed\"\nrule \"Veilid Parse Connection Protect\"\nrule \"Veilid Parse Dead Route Failed\"\nrule \"Veilid Parse Get or Create Connection Retry\"\nrule \"Veilid Parse LRU Kill\"\nrule \"Veilid Parse RPC Drop\"\nrule \"Veilid Parse RPC Get Value\"\nrule \"Veilid Parse RPC Inspect Value\"\nrule \"Veilid Parse RPC Lost\"\nrule \"Veilid Parse RPC Set Value\"\nrule \"Veilid Parse RPC Watch Value\"\nrule \"Veilid Parse Receipt\"\nrule \"Veilid Parse Routing Table Update\"\nrule \"Veilid Parse SingleShot Receipt\"\nrule \"Veilid Parse Timestamp Ahead/Behind\"\nrule \"Veilid Parse RPC Failure\"\nrule \"Veilid Parse No Protocol Handler\"\nrule \"Veilid Parse Get Peer Address Fail\"\nrule \"Veilid Parse Dialinfo Failure\"\nrule \"Veilid Parse Dialinfo Permit\"\nrule \"Veilid Parse Forgive\"\nrule \"Veilid Parse Punish\"\nrule \"Veilid Parse Can't Add Dial Info\"\nrule \"Veilid Parse Websocket Error\"\nrule \"Veilid Parse Commit\"\nrule \"Veilid Parse Commit Over Limit\"\nrule \"Veilid Parse Rollback\"\nend"
+          "@value": "pipeline \"Veilid Processing\"\nstage 0 match either\nrule \"Select Veilid Messages\"\nrule \"Drop Non-Veilid Messages\"\nstage 10 match either\nrule \"Parse Syslog Log Level 0\"\nrule \"Parse Syslog Log Level 1\"\nrule \"Parse Syslog Log Level 2\"\nrule \"Parse Syslog Log Level 3\"\nrule \"Parse Syslog Log Level 4\"\nrule \"Parse Syslog Log Level 5\"\nrule \"Parse Syslog Log Level 6\"\nrule \"Parse Syslog Log Level 7\"\nrule \"Drop Syslog Facility Fields\"\nrule \"Unwrap Syslog Repeated Message\"\nstage 30 match pass\nrule \"Veilid Parse Connection Debug String\"\nrule \"Veilid Parse Receipt Details InBand\"\nrule \"Veilid Parse Receipt Details OutOfBand\"\nrule \"Veilid Parse Receipt Details Private\"\nrule \"Veilid Parse Receipt Details Safety\"\nrule \"Parse Veilid Debug String\"\nstage 20 match either\nrule \"Veilid Parse Bucket Kick\"\nrule \"Veilid Parse Connection Accepted\"\nrule \"Veilid Parse Connection Closed\"\nrule \"Veilid Parse Connection Protect\"\nrule \"Veilid Parse Dead Route Failed\"\nrule \"Veilid Parse Get or Create Connection Retry\"\nrule \"Veilid Parse LRU Kill\"\nrule \"Veilid Parse RPC Drop\"\nrule \"Veilid Parse RPC Get Value\"\nrule \"Veilid Parse RPC Inspect Value\"\nrule \"Veilid Parse RPC Lost\"\nrule \"Veilid Parse RPC Set Value\"\nrule \"Veilid Parse RPC Watch Value\"\nrule \"Veilid Parse Receipt\"\nrule \"Veilid Parse Routing Table Update\"\nrule \"Veilid Parse SingleShot Receipt\"\nrule \"Veilid Parse Timestamp Ahead/Behind\"\nrule \"Veilid Parse RPC Failure\"\nrule \"Veilid Parse No Protocol Handler\"\nrule \"Veilid Parse Get Peer Address Fail\"\nrule \"Veilid Parse Dialinfo Failure\"\nrule \"Veilid Parse Dialinfo Permit\"\nrule \"Veilid Parse Forgive\"\nrule \"Veilid Parse Punish\"\nrule \"Veilid Parse Can't Add Dial Info\"\nrule \"Veilid Parse Websocket Error\"\nrule \"Veilid Parse Commit\"\nrule \"Veilid Parse Commit Over Limit\"\nrule \"Veilid Parse Rollback\"\nrule \"Veilid Parse Realy Node Clear\"\nrule \"Veilid Parse Realy Node Set\"\nrule \"Veilid Parse Relay Died\"\nrule \"Veilid Parse Relay Select\"\nrule \"Veilid Parse Connection Exists\"\nrule \"Veilid Parse Route Spec Flush\"\nend"
         },
         "connected_streams": [
           {
             "@type": "string",
-            "@value": "98f88924-2e2e-43f5-a10a-209364590dc7"
+            "@value": "b97e2639-e6c5-4284-a9c7-0ea8c7c22a8a"
           }
         ]
       },
@@ -1610,7 +1610,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "fe7ee3e9-e7c2-4c56-9985-3102e94d54a5",
+      "id": "b086b012-ebc6-4d3f-b900-2013ffc74a8f",
       "data": {
         "title": {
           "@type": "string",
@@ -1638,7 +1638,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "138d7b19-7479-4725-9c82-7d82535f4b0f",
+      "id": "1f1de665-e4f2-4311-89dc-c241d7e2560e",
       "data": {
         "title": {
           "@type": "string",
@@ -1666,7 +1666,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "12593e64-9132-41be-8d92-93963005d6d5",
+      "id": "d8aaec5d-0fd0-4777-957c-57a17435b2b7",
       "data": {
         "title": {
           "@type": "string",
@@ -1694,7 +1694,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "f66cf69e-d7bf-4b12-87af-22301b570c4c",
+      "id": "a031baa9-0eae-4056-aa49-7f56d931d874",
       "data": {
         "title": {
           "@type": "string",
@@ -1722,7 +1722,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "f94d8b7a-1373-4046-a381-1eaf5e65445a",
+      "id": "779edb36-6447-4b99-abdb-a59d1907d4de",
       "data": {
         "title": {
           "@type": "string",
@@ -1750,63 +1750,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "713b88fc-ab61-4602-8e0f-9d0392137745",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "Veilid Parse Get or Create Connection Retry"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"Veilid Parse Get or Create Connection Retry\"\nwhen\n    starts_with(to_string($message.message), \"get_or_create_connection retries left\", true)\nthen\n    // https://gitlab.com/veilid/veilid/-/blob/main/veilid-core/src/network_manager/connection_manager.rs#L360\n    set_field(\"vendor_event_category\", \"connection\");\n    set_field(\"vendor_event_action\", \"retry\");\n    set_fields(grok(\"get_or_create_connection retries left: %{NUMBER:retries_left}\", to_string($message.message), true));\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "227afa14-2eee-49ac-9371-945a5ff93c19",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "Parse Syslog Log Level 7"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"Parse Syslog Log Level 7\"\nwhen\n    has_field(\"level\") && to_string($message.level) == \"7\"\nthen\n    set_field(\"vendor_event_severity\", \"debug\");\n    rename_field(\"level\", \"vendor_event_severity_level\");\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "2891cdca-f84b-42ac-bf0f-afc3480d2a0f",
+      "id": "01a7c6c9-9603-41a4-93f3-f6492afe1450",
       "data": {
         "title": {
           "@type": "string",
@@ -1834,11 +1778,11 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "0a603b1f-ed8b-49a3-8c6e-b7764e3e15fa",
+      "id": "c102691f-e6d2-4ab8-9e38-6f1f8f678d9c",
       "data": {
         "title": {
           "@type": "string",
-          "@value": "Veilid Parse RPC Inspect Value"
+          "@value": "Veilid Parse Realy Node Clear"
         },
         "description": {
           "@type": "string",
@@ -1846,7 +1790,7 @@
         },
         "source": {
           "@type": "string",
-          "@value": "rule \"Veilid Parse RPC Inspect Value\"\nwhen\n    starts_with(to_string($message.message), \"IN <=== InspectValueQ\")\nthen\n    // https://gitlab.com/veilid/veilid/-/blob/main/veilid-core/src/rpc_processor/rpc_inspect_value.rs#L207\n    set_field(\"vendor_event_category\", \"rpc\");\n    set_field(\"vendor_event_action\", \"inspect\");\n    set_fields(grok(\"IN <=== InspectValueQ\\\\(%{GREEDYDATA:veilid_key} {GREEDYDATA:veilid_subkey}\\\\) <== %{GREEDYDATA:veilid_sender_node_id}\", to_string($message.message), true));\nend\n"
+          "@value": "rule \"Veilid Parse Realy Node Clear\"\nwhen\n    contains(to_string($message.message), \"cleared relay node\")\nthen\n    // https://gitlab.com/veilid/veilid/-/blob/main/veilid-core/src/routing_table/routing_domain_editor.rs#L177\n    set_field(\"vendor_event_category\", \"relay\");\n    set_field(\"vendor_event_action\", \"clear\");\n    set_fields(grok(\"\\\\[%{WORD:veilid_routing_domain}\\\\] cleared relay node\", to_string($message.message), true));\nend"
         }
       },
       "constraints": [
@@ -1862,119 +1806,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "89c856b1-423d-474c-9cef-6e6a1ff04ae6",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "Veilid Parse No Protocol Handler"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"Veilid Parse No Protocol Handler\"\nwhen\n    starts_with(to_string($message.message), \"no protocol handler for connection from\")\nthen\n    // https://gitlab.com/veilid/veilid/-/blob/main/veilid-core/src/network_manager/native/network_tcp.rs#L221\n    set_field(\"vendor_event_category\", \"network\");\n    set_field(\"vendor_event_action\", \"drop\");\n    set_field(\"vendor_event_outcome\", \"failed\");\n    set_fields(grok(\"no protocol handler for connection from %{IPORHOST:remote_ip}:%{NUMBER:remote_port}\", to_string($message.message), true));\nend\n    "
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "25db9a18-5244-434d-b41e-649cc2f9d2c9",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "Drop Syslog Facility Fields"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"Drop Syslog Facility Fields\"\nwhen\n    has_field(\"facility\") && has_field(\"facility_num\")\nthen\n    remove_field(\"facility\");\n    remove_field(\"facility_num\");\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "f2f69702-f511-49c4-b823-23cfbc3073d5",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "Veilid Parse Connection Debug String"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"Veilid Parse Connection Debug String\"\nwhen\n    has_field(\"veilid_conn_debug\")\nthen\n    set_fields(\n      grok(\n        pattern: \"%{IPORHOST:remote_ip}:%{NUMBER:remote_port} <- %{IPORHOST:local_ip}:%{NUMBER:local_port} \\\\| %{NUMBER:network_connection_id} \\\\| est %{GREEDYDATA:network_connection_duration} sent %{GREEDYDATA:network_send_duration} rcvd %{GREEDYDATA:network_receive_duration} refcount %{NUMBER:veilid_refcount}\", \n        value: to_string($message.veilid_conn_debug), \n        only_named_captures: true\n      )\n    );\n    remove_field(\"veilid_conn_debug\");\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "970fc3d7-8b72-42de-97d5-24ac3000f220",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "Veilid Parse Connection Closed"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"Veilid Parse Connection Closed\"\nwhen\n    starts_with(to_string($message.message), \"Connection closed\", true)\nthen\n    set_field(\"vendor_event_category\", \"connection\");\n    set_field(\"vendor_event_action\", \"close\");\n    set_fields(grok(\"Connection closed from: %{IPORHOST:remote_ip}:%{NUMBER:remote_port} \\\\(%{WORD:network_transport}\\\\)\", to_string($message.message), true));\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "8dc86ec2-e75a-4b7b-9b3d-07f06b08732c",
+      "id": "a5e4155f-51ba-47d3-a0c0-8dfaf33c35cf",
       "data": {
         "title": {
           "@type": "string",
@@ -2002,7 +1834,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "27aa1483-787a-4d35-bdf1-02549553a514",
+      "id": "2ccaca95-ffa5-457d-98be-f5c8d7f72f27",
       "data": {
         "title": {
           "@type": "string",
@@ -2030,35 +1862,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "579630b0-3f31-4814-a01e-f686cadfc449",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "Veilid Parse LRU Kill"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"Veilid Parse LRU Kill\"\nwhen\n    starts_with(to_string($message.message), \"== LRU kill connection\")\nthen\n    // https://gitlab.com/veilid/veilid/-/blob/main/veilid-core/src/network_manager/connection_manager.rs#L231\n    set_field(\"vendor_event_category\", \"connection\");\n    set_field(\"vendor_event_action\", \"kill\");\n    set_fields(grok(\"== LRU kill connection due to limit: %{GREEDYDATA:veilid_conn_debug}\", to_string($message.message), true));\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "9c5fd1b4-1e80-4cc8-bb68-7341059bb9a1",
+      "id": "a6727d84-7b1e-4fff-b786-1d3993a6722b",
       "data": {
         "title": {
           "@type": "string",
@@ -2086,7 +1890,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "3db4765a-9ba5-47e3-af66-998c616d850d",
+      "id": "f1da7e67-eaad-408a-9f50-0cd62055a961",
       "data": {
         "title": {
           "@type": "string",
@@ -2114,7 +1918,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "1b2cfac6-503c-4345-afc3-aeaf8908eaa2",
+      "id": "fcf0c76c-ad83-40a2-af6e-2dffa8c254b5",
       "data": {
         "title": {
           "@type": "string",
@@ -2142,35 +1946,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "11f2e961-d040-4b3d-bb7a-ed8a5180378d",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "Veilid Parse Receipt Details Private"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"Veilid Parse Receipt Details Private\"\nwhen\n    has_field(\"veilid_receipt_details\")\n    && starts_with(to_string($message.veilid_receipt_details), \"Private\")\nthen\n    set_field(\"veilid_receipt_type\", \"Private\");\n    set_fields(grok(\"Private\\\\(%{GREEDYDATA:veilid_private_route}\\\\)\", to_string($message.veilid_receipt_details), true));\n    remove_field(\"veilid_receipt_details\");\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "ce2be69e-2ba6-4823-9092-716b788734e3",
+      "id": "1158588e-ef5a-4b70-8038-710a846021ec",
       "data": {
         "title": {
           "@type": "string",
@@ -2198,35 +1974,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "b7be476b-d23e-4a74-9389-f6f15406a479",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "Veilid Parse RPC Get Value"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"Veilid Parse RPC Get Value\"\nwhen\n    starts_with(to_string($message.message), \"IN <=== GetValueQ\")\nthen\n    set_field(\"vendor_event_category\", \"rpc\");\n    set_field(\"vendor_event_action\", \"get\");\n    set_fields(grok(\"IN <=== GetValueQ\\\\(%{GREEDYDATA:veilid_key} #{GREEDYDATA:veilid_subkey}\\\\) <== %{GREEDYDATA:veilid_sender_node_id}\", to_string($message.message), true));\nend\n"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "c0517bc6-2720-43f0-9499-ab6c1a5c2130",
+      "id": "503ce40f-f443-43b8-b771-866883797ce2",
       "data": {
         "title": {
           "@type": "string",
@@ -2254,35 +2002,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "5b3dfb9b-1d01-4cd2-9a87-1ffd0d6ee6d8",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "Parse Syslog Log Level 0"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"Parse Syslog Log Level 0\"\nwhen\n    has_field(\"level\") && to_string($message.level) == \"0\"\nthen\n    set_field(\"vendor_event_severity\", \"emergency\");\n    rename_field(\"level\", \"vendor_event_severity_level\");\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "a37a9501-9336-457d-bceb-d20d03edf539",
+      "id": "56854bdf-d6df-4314-a6b4-af03e868538d",
       "data": {
         "title": {
           "@type": "string",
@@ -2310,7 +2030,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "8ae60550-83f8-44cd-912e-21db3e6a2bf9",
+      "id": "a2b627bd-362c-4682-af25-174f4bfee7ae",
       "data": {
         "title": {
           "@type": "string",
@@ -2338,11 +2058,11 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "4db788bd-e7a7-4352-9d19-657ee580f0d9",
+      "id": "7db3deab-b21b-41fa-9b55-db0a42fd9ce6",
       "data": {
         "title": {
           "@type": "string",
-          "@value": "Veilid Parse Can't Add Dial Info"
+          "@value": "Veilid Parse Realy Node Set"
         },
         "description": {
           "@type": "string",
@@ -2350,7 +2070,7 @@
         },
         "source": {
           "@type": "string",
-          "@value": "rule \"Veilid Parse Can't Add Dial Info\"\nwhen\n    to_string($message.message) == \"can not add dial info to this routing domain\"\nthen\n    // https://gitlab.com/veilid/veilid/-/blob/main/veilid-core/src/routing_table/routing_table_inner.rs#L167\n    set_field(\"vendor_event_category\", \"dial_info\");\n    set_field(\"vendor_event_action\", \"add\");\n    set_field(\"vendor_event_outcome\", \"failed\");\nend"
+          "@value": "rule \"Veilid Parse Realy Node Set\"\nwhen\n    contains(to_string($message.message), \"set relay node:\")\nthen\n    // https://gitlab.com/veilid/veilid/-/blob/main/veilid-core/src/routing_table/routing_domain_editor.rs#L177\n    set_field(\"vendor_event_category\", \"relay\");\n    set_field(\"vendor_event_action\", \"set\");\n    set_fields(grok(\"\\\\[%{WORD:veilid_routing_domain}\\\\] set relay node: %{GREEDYDATA:veilid_node_id}\", to_string($message.message), true));\nend"
         }
       },
       "constraints": [
@@ -2366,7 +2086,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "7d647e51-6530-438f-937b-ca35d4d62e92",
+      "id": "02d743c4-4c2b-439f-bcf9-78a39b09e438",
       "data": {
         "title": {
           "@type": "string",
@@ -2394,7 +2114,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "51baaf53-5978-43c9-8fc0-ae8d00909ca9",
+      "id": "a1c76a76-488f-45ff-8e1a-379828dd812d",
       "data": {
         "title": {
           "@type": "string",
@@ -2422,7 +2142,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "e5765536-d7be-46ac-84d9-f9bf7734d4ec",
+      "id": "f3f8b565-08cb-48c0-a2f7-d0bb4a64068a",
       "data": {
         "title": {
           "@type": "string",
@@ -2450,63 +2170,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "68937723-d013-4c3d-bbf2-51c211b591de",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "Veilid Parse Commit Over Limit"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"Veilid Parse Commit Over Limit\"\nwhen\n    starts_with(to_string($message.message), \"Commit over limit\")\nthen\n    set_field(\"vendor_event_category\", \"data\");\n    set_field(\"vendor_event_action\", \"commit\");\n    set_field(\"vendor_event_outcome\", \"failed\");\n    set_fields(grok(\"Commit over limit failed \\\\(%{DATA:veilid_commit_description}\\\\): %{NUMBER:veilid_uncommited_value} %{NOTSPACE} %{NUMBER:veilid_value_limit}\", to_string($message.message), true));\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "62b5f714-eee9-45e3-8820-6a3ea3bcd697",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "Parse Veilid Debug String"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"Parse Veilid Debug String\"\nwhen\n    has_field(\"debug_string\")\n    && starts_with(to_string($message.debug_string), \"Status =>\")\nthen\n    set_fields(grok(\"Status => %{GREEDYDATA:veilid_node_id}\", to_string($message.debug_string), true));\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "ed90a813-cf76-43c2-a75a-0f3acb59ca01",
+      "id": "d7e7b8a9-d4b2-4b1c-839d-2fc702feb81c",
       "data": {
         "title": {
           "@type": "string",
@@ -2534,7 +2198,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "b6d5730f-1d10-4e70-aef5-6cff26ef2cc9",
+      "id": "20bdf42d-0332-4bd5-b95c-23b216adcd88",
       "data": {
         "title": {
           "@type": "string",
@@ -2562,7 +2226,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "ce85024a-b657-4668-9c8b-dc6ef1e6625c",
+      "id": "16480651-ee77-4ab3-903f-7861028ac48d",
       "data": {
         "title": {
           "@type": "string",
@@ -2590,11 +2254,11 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "c5114f87-c099-451a-b605-f1c6a3ad2a2c",
+      "id": "89acee14-1b6e-43d3-9ddb-a2d254e2d879",
       "data": {
         "title": {
           "@type": "string",
-          "@value": "Veilid Parse Receipt"
+          "@value": "Veilid Parse Relay Select"
         },
         "description": {
           "@type": "string",
@@ -2602,7 +2266,7 @@
         },
         "source": {
           "@type": "string",
-          "@value": "rule \"Veilid Parse Receipt\"\nwhen\n    starts_with(to_string($message.message), \"<<== RECEIPT\")\nthen\n    // https://gitlab.com/veilid/veilid/-/blob/main/veilid-core/src/network_manager/receipt_manager.rs#L415\n    set_field(\"vendor_event_category\",\"rpc\");\n    set_field(\"vendor_event_action\", \"receive\");\n    set_fields(grok(\"<<== RECEIPT %{DATA:veilid_receipt_nonce} <- %{GREEDYDATA:veilid_receipt_details}\", to_string($message.message), true));\nend"
+          "@value": "rule \"Veilid Parse Relay Select\"\nwhen\n    starts_with(to_string($message.message), \"Inbound relay node selected\")\nthen\n    set_field(\"vendor_event_category\", \"relay\");\n    set_field(\"vendor_event_action\", \"select\");\n    set_fields(grok(\"Inbound relay node selected: %{GREEDYDATA:veilid_node_id}\", to_string($message.message), true));\nend"
         }
       },
       "constraints": [
@@ -2618,35 +2282,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "79e49106-f0f1-4210-8c62-60a9648f9777",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "Veilid Parse Connection Accepted"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"Veilid Parse Connection Accepted\"\nwhen\n    starts_with(to_string($message.message), \"Connection accepted\", true)\nthen\n    set_field(\"vendor_event_category\", \"connection\");\n    set_field(\"vendor_event_action\", \"accept\");\n    set_fields(grok(\"Connection accepted from: %{IPORHOST:remote_ip}:%{NUMBER:remote_port} \\\\(%{WORD:network_transport}\\\\)\", to_string($message.message), true));\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "f3fa3d7d-d32b-4f13-b11b-586138c84487",
+      "id": "58e6b42a-b1ce-4161-9e60-489305ea55dc",
       "data": {
         "title": {
           "@type": "string",
@@ -2674,7 +2310,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "45ae14d4-28a5-4efb-9550-cb9df58b7667",
+      "id": "efac4c7d-9c82-4906-807f-b976085d540e",
       "data": {
         "title": {
           "@type": "string",
@@ -2702,35 +2338,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "e80fc02b-d24f-4613-be4e-2cf27774e780",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "Veilid Parse Websocket Error"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"Veilid Parse Websocket Error\"\nwhen\n    to_string($message.message) == \"websocket start_send error: WebSocket protocol error: Sending after closing is not allowed\"\nthen\n    set_field(\"vendor_event_category\", \"websocket\");\n    set_field(\"vendor_event_action\", \"send\");\n    set_field(\"vendor_event_outcome\", \"failed\");\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "240c97d4-aeb8-4474-a7aa-6db3ed0eceba",
+      "id": "1cb7b19d-d041-4553-a9b8-ef44618bd0ed",
       "data": {
         "title": {
           "@type": "string",
@@ -2758,7 +2366,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "92984de8-1127-433b-bad0-579afdf27762",
+      "id": "063d9dfa-4834-4dee-a114-a8cc958401ce",
       "data": {
         "title": {
           "@type": "string",
@@ -2786,7 +2394,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "95afcdf6-191c-463e-a49d-68700be964b2",
+      "id": "21e7a8f2-a32a-4a18-a9ff-5b6973050cc1",
       "data": {
         "title": {
           "@type": "string",
@@ -2814,7 +2422,595 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "b0026446-e0c0-4725-8ccc-3da8511b5cce",
+      "id": "417d2b2f-4680-4bb2-81d7-c5e5c67d5a28",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse Bucket Kick"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse Bucket Kick\"\nwhen\n    starts_with(to_string($message.message), \"Bucket \")\nthen\n    set_field(\"vendor_event_category\", \"routing\");\n    set_field(\"vendor_event_action\", \"kick\");\n    set_fields(grok(\"Bucket %{DATA:veilid_bucket_crypto}:%{DATA:veilid_bucket_size} kicked Routing table now has %{NUMBER:veilid_routing_table_entries} nodes\", to_string($message.message), true));\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "ff54c99d-fd50-4b65-994a-a29375663da3",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse Get or Create Connection Retry"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse Get or Create Connection Retry\"\nwhen\n    starts_with(to_string($message.message), \"get_or_create_connection retries left\", true)\nthen\n    // https://gitlab.com/veilid/veilid/-/blob/main/veilid-core/src/network_manager/connection_manager.rs#L360\n    set_field(\"vendor_event_category\", \"connection\");\n    set_field(\"vendor_event_action\", \"retry\");\n    set_fields(grok(\"get_or_create_connection retries left: %{NUMBER:retries_left}\", to_string($message.message), true));\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "85eee616-1313-424b-93aa-a88af3f1d1fd",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Parse Syslog Log Level 7"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Parse Syslog Log Level 7\"\nwhen\n    has_field(\"level\") && to_string($message.level) == \"7\"\nthen\n    set_field(\"vendor_event_severity\", \"debug\");\n    rename_field(\"level\", \"vendor_event_severity_level\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "1ab011f4-ace4-4591-8f33-b492f04b6260",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse RPC Inspect Value"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse RPC Inspect Value\"\nwhen\n    starts_with(to_string($message.message), \"IN <=== InspectValueQ\")\nthen\n    // https://gitlab.com/veilid/veilid/-/blob/main/veilid-core/src/rpc_processor/rpc_inspect_value.rs#L207\n    set_field(\"vendor_event_category\", \"rpc\");\n    set_field(\"vendor_event_action\", \"inspect\");\n    set_fields(grok(\"IN <=== InspectValueQ\\\\(%{GREEDYDATA:veilid_key} {GREEDYDATA:veilid_subkey}\\\\) <== %{GREEDYDATA:veilid_sender_node_id}\", to_string($message.message), true));\nend\n"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "48d890b4-5246-4a50-8432-0f53cfcb5b8a",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse No Protocol Handler"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse No Protocol Handler\"\nwhen\n    starts_with(to_string($message.message), \"no protocol handler for connection from\")\nthen\n    // https://gitlab.com/veilid/veilid/-/blob/main/veilid-core/src/network_manager/native/network_tcp.rs#L221\n    set_field(\"vendor_event_category\", \"network\");\n    set_field(\"vendor_event_action\", \"drop\");\n    set_field(\"vendor_event_outcome\", \"failed\");\n    set_fields(grok(\"no protocol handler for connection from %{IPORHOST:remote_ip}:%{NUMBER:remote_port}\", to_string($message.message), true));\nend\n    "
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "4de85a77-cf71-4dd4-9a67-5b4a2d23f549",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse Relay Died"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse Relay Died\"\nwhen\n    starts_with(to_string($message.message), \"Relay node died\")\nthen\n    set_field(\"vendor_event_category\", \"relay\");\n    set_field(\"vendor_event_action\", \"died\");\n    set_fields(grok(\"Relay node died, dropping relay %{GREEDYDATA:veilid_node_id}\", to_string($message.message), true));\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "8e8ffc20-abd4-4e1f-b5fd-83d57e80820c",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Drop Syslog Facility Fields"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Drop Syslog Facility Fields\"\nwhen\n    has_field(\"facility\") && has_field(\"facility_num\")\nthen\n    remove_field(\"facility\");\n    remove_field(\"facility_num\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "aab081bc-4eaf-47aa-8602-91213a812807",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse Connection Debug String"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse Connection Debug String\"\nwhen\n    has_field(\"veilid_conn_debug\")\nthen\n    set_fields(\n      grok(\n        pattern: \"%{IPORHOST:remote_ip}:%{NUMBER:remote_port} <- %{IPORHOST:local_ip}:%{NUMBER:local_port} \\\\| %{NUMBER:network_connection_id} \\\\| est %{GREEDYDATA:network_connection_duration} sent %{GREEDYDATA:network_send_duration} rcvd %{GREEDYDATA:network_receive_duration} refcount %{NUMBER:veilid_refcount}\", \n        value: to_string($message.veilid_conn_debug), \n        only_named_captures: true\n      )\n    );\n    remove_field(\"veilid_conn_debug\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "6e6ad3dd-5e37-42ab-98d0-62608b216689",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse Connection Closed"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse Connection Closed\"\nwhen\n    starts_with(to_string($message.message), \"Connection closed\", true)\nthen\n    set_field(\"vendor_event_category\", \"connection\");\n    set_field(\"vendor_event_action\", \"close\");\n    set_fields(grok(\"Connection closed from: %{IPORHOST:remote_ip}:%{NUMBER:remote_port} \\\\(%{WORD:network_transport}\\\\)\", to_string($message.message), true));\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "f795590a-b48b-4824-a1a5-f225c6aedd2e",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse LRU Kill"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse LRU Kill\"\nwhen\n    starts_with(to_string($message.message), \"== LRU kill connection\")\nthen\n    // https://gitlab.com/veilid/veilid/-/blob/main/veilid-core/src/network_manager/connection_manager.rs#L231\n    // A new connection was successfully added and an old connection (least recently used)\n    //  was dropped to make room. Send a message to note that a conn was added\n    // create_message(\"INTERNAL add connection\");\n    set_field(\"vendor_event_category\", \"connection\");\n    set_field(\"vendor_event_action\", \"kill\");\n    set_fields(grok(\"== LRU kill connection due to limit: %{GREEDYDATA:veilid_conn_debug}\", to_string($message.message), true));\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "858629f7-af59-4b14-9bff-223da3c29fd0",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse Receipt Details Private"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse Receipt Details Private\"\nwhen\n    has_field(\"veilid_receipt_details\")\n    && starts_with(to_string($message.veilid_receipt_details), \"Private\")\nthen\n    set_field(\"veilid_receipt_type\", \"Private\");\n    set_fields(grok(\"Private\\\\(%{GREEDYDATA:veilid_private_route}\\\\)\", to_string($message.veilid_receipt_details), true));\n    remove_field(\"veilid_receipt_details\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "5d994be0-01dc-4d9e-bd5b-82dc143481e4",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse RPC Get Value"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse RPC Get Value\"\nwhen\n    starts_with(to_string($message.message), \"IN <=== GetValueQ\")\nthen\n    set_field(\"vendor_event_category\", \"rpc\");\n    set_field(\"vendor_event_action\", \"get\");\n    set_fields(grok(\"IN <=== GetValueQ\\\\(%{GREEDYDATA:veilid_key} #{GREEDYDATA:veilid_subkey}\\\\) <== %{GREEDYDATA:veilid_sender_node_id}\", to_string($message.message), true));\nend\n"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "f8b5fcd7-b162-45ac-997d-8e778949f7f5",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Parse Syslog Log Level 0"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Parse Syslog Log Level 0\"\nwhen\n    has_field(\"level\") && to_string($message.level) == \"0\"\nthen\n    set_field(\"vendor_event_severity\", \"emergency\");\n    rename_field(\"level\", \"vendor_event_severity_level\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "623ffae7-c38c-452d-8481-65d2ca5888d7",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse Can't Add Dial Info"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse Can't Add Dial Info\"\nwhen\n    to_string($message.message) == \"can not add dial info to this routing domain\"\nthen\n    // https://gitlab.com/veilid/veilid/-/blob/main/veilid-core/src/routing_table/routing_table_inner.rs#L167\n    set_field(\"vendor_event_category\", \"dial_info\");\n    set_field(\"vendor_event_action\", \"add\");\n    set_field(\"vendor_event_outcome\", \"failed\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "f74fb5d1-9f3c-4124-a0ea-dca1e9755857",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse Connection Exists"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse Connection Exists\"\nwhen\n    starts_with(to_string($message.message), \"== Connection already exists\")\nthen\n    set_field(\"vendor_event_category\", \"connection\");\n    set_field(\"vendor_event_action\", \"add\");\n    set_field(\"vendor_event_outcome\", \"failed\");\n    set_field(\"vendor_event_outcome_reason\", \"Connection already exists\");\n    set_fields(grok(\"== Connection already exists: %{GREEDYDATA:veilid_conn_debug}\", to_string($message.message), true));\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "d8daf2a9-0b4b-4bd6-9a1e-d2b0f857d5cd",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse Commit Over Limit"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse Commit Over Limit\"\nwhen\n    starts_with(to_string($message.message), \"Commit over limit\")\nthen\n    set_field(\"vendor_event_category\", \"data\");\n    set_field(\"vendor_event_action\", \"commit\");\n    set_field(\"vendor_event_outcome\", \"failed\");\n    set_fields(grok(\"Commit over limit failed \\\\(%{DATA:veilid_commit_description}\\\\): %{NUMBER:veilid_uncommited_value} %{NOTSPACE} %{NUMBER:veilid_value_limit}\", to_string($message.message), true));\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "d17b998b-1688-478c-bcae-63f816b6345a",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Parse Veilid Debug String"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Parse Veilid Debug String\"\nwhen\n    has_field(\"debug_string\")\n    && starts_with(to_string($message.debug_string), \"Status =>\")\nthen\n    set_fields(grok(\"Status => %{GREEDYDATA:veilid_node_id}\", to_string($message.debug_string), true));\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "f67e73f0-bd7c-4520-9dc8-385a5a01be03",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse Receipt"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse Receipt\"\nwhen\n    starts_with(to_string($message.message), \"<<== RECEIPT\")\nthen\n    // https://gitlab.com/veilid/veilid/-/blob/main/veilid-core/src/network_manager/receipt_manager.rs#L415\n    set_field(\"vendor_event_category\",\"rpc\");\n    set_field(\"vendor_event_action\", \"receive\");\n    set_fields(grok(\"<<== RECEIPT %{DATA:veilid_receipt_nonce} <- %{GREEDYDATA:veilid_receipt_details}\", to_string($message.message), true));\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "95bb901b-14cc-4935-a3fc-d70f9fb0e11d",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse Connection Accepted"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse Connection Accepted\"\nwhen\n    starts_with(to_string($message.message), \"Connection accepted\", true)\nthen\n    set_field(\"vendor_event_category\", \"connection\");\n    set_field(\"vendor_event_action\", \"add\");\n    set_field(\"vendor_event_outcome\", \"success\");\n    set_fields(grok(\"Connection accepted from: %{IPORHOST:remote_ip}:%{NUMBER:remote_port} \\\\(%{WORD:network_transport}\\\\)\", to_string($message.message), true));\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "9c5dd6ba-a18c-4140-997a-3f0e3a2296eb",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse Route Spec Flush"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse Route Spec Flush\"\nwhen\n    to_string($message.message) == \"flushing route spec store\"\nthen\n    set_field(\"vendor_event_category\", \"routing\");\n    set_field(\"vendor_event_actoin\", \"flush\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "dc8040f0-d780-4cd8-81ec-473c4e5f0189",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Veilid Parse Websocket Error"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Veilid Parse Websocket Error\"\nwhen\n    to_string($message.message) == \"websocket start_send error: WebSocket protocol error: Sending after closing is not allowed\"\nthen\n    set_field(\"vendor_event_category\", \"websocket\");\n    set_field(\"vendor_event_action\", \"send\");\n    set_field(\"vendor_event_outcome\", \"failed\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "7f1e2394-c788-46cf-8634-f8b9ab17b5be",
       "data": {
         "title": {
           "@type": "string",
@@ -2842,7 +3038,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "843d2a2a-dab8-41e1-a8fa-87595b9b5824",
+      "id": "e20238de-78e2-40da-82ad-81aea3b3595b",
       "data": {
         "title": {
           "@type": "string",
@@ -2870,7 +3066,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "390c8692-4a07-4f8e-8514-0c9758213767",
+      "id": "922ab5a2-df91-4d87-908a-6620bf44a3c0",
       "data": {
         "title": {
           "@type": "string",
@@ -2883,34 +3079,6 @@
         "source": {
           "@type": "string",
           "@value": "rule \"Veilid Parse Forgive\"\nwhen\n    starts_with(to_string($message.message), \">>> FORGIVING:\")\nthen\n    set_field(\"vendor_event_category\", \"punishment\");\n    set_field(\"vendor_event_action\", \"forgive\");\n    // Could be node id, ipv4 or ipv6\n    set_fields(grok(\">>> FORGIVING: %{GREEDYDATA:veilid_punished}\", to_string($message.message), true));\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "869abe68-d9b5-4e30-a890-b8eb1f38947d",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "Veilid Parse Bucket Kick"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"Veilid Parse Bucket Kick\"\nwhen\n    starts_with(to_string($message.message), \"Bucket \")\nthen\n    set_field(\"vendor_event_category\", \"routing\");\n    set_field(\"vendor_event_action\", \"kick\");\n    set_fields(grok(\"Bucket %{DATA:veilid_bucket_crypto}:%{DATA:veilid_bucket_size} kicked Routing table now has %{NUMBER:veilid_routing_table_entries} nodes\", to_string($message.message), true));\nend"
         }
       },
       "constraints": [
@@ -3346,7 +3514,7 @@
         "name": "stream_title",
         "version": "1"
       },
-      "id": "98f88924-2e2e-43f5-a10a-209364590dc7",
+      "id": "b97e2639-e6c5-4284-a9c7-0ea8c7c22a8a",
       "data": {
         "title": {
           "@type": "string",
