@@ -1,0 +1,838 @@
+{
+  "v": 1,
+  "id": "e3a2eb70-fd7f-472a-8b1d-0ed2f7791185",
+  "rev": 1,
+  "name": "Metricbeat Processing",
+  "summary": "Handling for Metricbeat data",
+  "description": "",
+  "vendor": "BourbonInExile",
+  "url": "https://github.com/waab76/Graylog-Home-Lab",
+  "parameters": [],
+  "entities": [
+    {
+      "v": "1",
+      "type": {
+        "name": "lookup_cache",
+        "version": "1"
+      },
+      "id": "d052552e-7436-4007-a36d-7cffc7fb1744",
+      "data": {
+        "_scope": {
+          "@type": "string",
+          "@value": "DEFAULT"
+        },
+        "name": {
+          "@type": "string",
+          "@value": "no-cache"
+        },
+        "title": {
+          "@type": "string",
+          "@value": "No Cache"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "configuration": {
+          "type": {
+            "@type": "string",
+            "@value": "none"
+          }
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline",
+        "version": "1"
+      },
+      "id": "6c574fde-473f-423d-b993-4d937ea3c52d",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Metricbeat"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "pipeline \"Metricbeat\"\nstage 20 match either\nrule \"MetricBeat-20-NetworkDataIncrementsIn\"\nrule \"MetricBeat-20-NetworkDataIncrementsOut\"\nrule \"MetricBeat-20-NetworkDroppedIn\"\nrule \"MetricBeat-20-NetworkDroppedOut\"\nrule \"MetricBeat-20-NetworkErrorsIn\"\nrule \"MetricBeat-20-NetworkErrorsOut\"\nrule \"MetricBeat-20-NetworkPacketsIn\"\nrule \"MetricBeat-20-NetworkPacketsOut\"\nrule \"MetricBeat-20-RemapFields\"\nstage 25 match pass\nrule \"MetricBeat-25-FixNegativeBytesIn\"\nrule \"MetricBeat-25-FixNegativeBytesOut\"\nrule \"MetricBeat-25-FixNegativeDroppedIn\"\nrule \"MetricBeat-25-FixNegativeDroppedOut\"\nrule \"MetricBeat-25-FixNegativeErrorsIn\"\nrule \"MetricBeat-25-FixNegativeErrorsOut\"\nrule \"MetricBeat-25-FixNegativePacketsIn\"\nrule \"MetricBeat-25-FixNegativePacketsOut\"\nstage 30 match pass\nrule \"MetricBeat-30-CalcMBytesIn\"\nrule \"MetricBeat-30-CalcMBytesOut\"\nstage 40 match either\nrule \"MetricBeat-40-NormalizeHostFields\"\nrule \"Metricbeat-40-RemapIPMacHostname\"\nend"
+        },
+        "connected_streams": [
+          {
+            "@type": "string",
+            "@value": "36e2da96-7e9c-4f6b-8308-2e98f8cf1353"
+          }
+        ]
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "lookup_table",
+        "version": "1"
+      },
+      "id": "32afd72f-8fcf-40f5-9389-a2e51bbb198f",
+      "data": {
+        "default_single_value_type": {
+          "@type": "string",
+          "@value": "NULL"
+        },
+        "cache_name": {
+          "@type": "string",
+          "@value": "d052552e-7436-4007-a36d-7cffc7fb1744"
+        },
+        "name": {
+          "@type": "string",
+          "@value": "metricbeat-fix"
+        },
+        "default_multi_value_type": {
+          "@type": "string",
+          "@value": "NULL"
+        },
+        "default_multi_value": {
+          "@type": "string",
+          "@value": ""
+        },
+        "data_adapter_name": {
+          "@type": "string",
+          "@value": "009d5f0c-aecb-4912-84f7-b3ee1958acf0"
+        },
+        "_scope": {
+          "@type": "string",
+          "@value": "DEFAULT"
+        },
+        "title": {
+          "@type": "string",
+          "@value": "Metricbeat Fix"
+        },
+        "default_single_value": {
+          "@type": "string",
+          "@value": ""
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "stream",
+        "version": "1"
+      },
+      "id": "36e2da96-7e9c-4f6b-8308-2e98f8cf1353",
+      "data": {
+        "alarm_callbacks": [],
+        "outputs": [],
+        "remove_matches": {
+          "@type": "boolean",
+          "@value": true
+        },
+        "title": {
+          "@type": "string",
+          "@value": "Metricbeat Data"
+        },
+        "stream_rules": [
+          {
+            "type": {
+              "@type": "string",
+              "@value": "EXACT"
+            },
+            "field": {
+              "@type": "string",
+              "@value": "beats_type"
+            },
+            "value": {
+              "@type": "string",
+              "@value": "metricbeat"
+            },
+            "inverted": {
+              "@type": "boolean",
+              "@value": false
+            },
+            "description": {
+              "@type": "string",
+              "@value": ""
+            }
+          }
+        ],
+        "alert_conditions": [],
+        "matching_type": {
+          "@type": "string",
+          "@value": "AND"
+        },
+        "disabled": {
+          "@type": "boolean",
+          "@value": false
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "default_stream": {
+          "@type": "boolean",
+          "@value": false
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "lookup_adapter",
+        "version": "1"
+      },
+      "id": "009d5f0c-aecb-4912-84f7-b3ee1958acf0",
+      "data": {
+        "_scope": {
+          "@type": "string",
+          "@value": "DEFAULT"
+        },
+        "name": {
+          "@type": "string",
+          "@value": "metricbeat-fix"
+        },
+        "title": {
+          "@type": "string",
+          "@value": "Metricbeat Fix"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "configuration": {
+          "type": {
+            "@type": "string",
+            "@value": "mongodb"
+          },
+          "cidr_lookup": {
+            "@type": "boolean",
+            "@value": false
+          }
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "7f178a3a-2a80-4aab-8b3d-82bcd10020a4",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-25-FixNegativePacketsIn"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-25-FixNegativePacketsIn\"\nwhen\n  has_field(\"network_packets_rx\") &&\n  to_long($message.network_packets_rx) < 0\nthen\n    set_field(\"network_packets_rx\", 0);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "90e05b3b-f2f7-4212-96c1-5da9be99601c",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-40-NormalizeHostFields"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-40-NormalizeHostFields\"\nwhen\n    has_field(\"metricbeat_event_dataset\") \n    && has_field(\"metricbeat_host_mac\")\n    && has_field(\"metricbeat_host_id\")\nthen\n    set_field(\"host_mac\", replace(to_string($message.metricbeat_host_mac), \"-\", \":\", 99));\n    rename_field(\"metricbeat_host_id\", \"host_id\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "8d11ee10-ec0e-450e-a272-1611e6a451d1",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-30-CalcMBytesIn"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-30-CalcMBytesIn\"\nwhen\n  has_field(\"network_bytes_rx\")\nthen\n    let mbytes = to_double($message.network_bytes_rx) / 1048576.0;\n    set_field(\"network_mbytes_rx\", mbytes);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "4ce5d431-31b0-47e2-9e59-dc4665ddd765",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-20-NetworkDroppedOut"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-20-NetworkDroppedOut\"\nwhen\n  has_field(\"metricbeat_system_network_name\") &&\n  has_field(\"metricbeat_system_network_out_dropped\") &&\n  to_long($message.metricbeat_system_network_out_dropped) >= 0\nthen\n    let key = concat(to_string($message.source), concat(\"-\", concat(to_string($message.metricbeat_system_network_name), \"-DroppedOut\")));\n    let prev_errors = to_long(lookup_value(\"metricbeat-fix\", key, 0));\n    let curr_errors = to_long($message.metricbeat_system_network_out_dropped);\n    let diff_errors = curr_errors - prev_errors;\n    lookup_set_value(\"metricbeat-fix\", key, $message.metricbeat_system_network_out_dropped);\n    set_field(\"network_dropped_tx\", diff_errors);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "5eb3747a-fb27-4da6-804a-0a2fb7aaffa6",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-20-NetworkErrorsIn"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-20-NetworkErrorsIn\"\nwhen\n  has_field(\"metricbeat_system_network_name\") &&\n  has_field(\"metricbeat_system_network_in_errors\") &&\n  to_long($message.metricbeat_system_network_in_errors) > 0\nthen\n    let key = concat(to_string($message.source), concat(\"-\", concat(to_string($message.metricbeat_system_network_name), \"-ERRORSIN\")));\n    let prev_errors = to_long(lookup_value(\"metricbeat-fix\", key, 0));\n    let curr_errors = to_long($message.metricbeat_system_network_in_errors);\n    let diff_errors = curr_errors - prev_errors;\n    lookup_set_value(\"metricbeat-fix\", key, $message.metricbeat_system_network_in_errors);\n    set_field(\"network_errors_rx\", diff_errors);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "9a014b86-ec41-4258-b184-135441a989cb",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-20-NetworkPacketsIn"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-20-NetworkPacketsIn\"\nwhen\n  has_field(\"metricbeat_system_network_name\") &&\n  has_field(\"metricbeat_system_network_in_packets\") &&\n  to_long($message.metricbeat_system_network_in_packets) > 0\nthen\n    let key = concat(to_string($message.source), concat(\"-\", concat(to_string($message.metricbeat_system_network_name), \"-PACKETSIN\")));\n    let prev_packets = to_long(lookup_value(\"metricbeat-fix\", key, 0));\n    let curr_packets = to_long($message.metricbeat_system_network_in_packets);\n    let diff_packets = curr_packets - prev_packets;\n    lookup_set_value(\"metricbeat-fix\", key, $message.metricbeat_system_network_in_packets);\n    set_field(\"network_packets_rx\", diff_packets);\n    set_field(\"network_interface_in\", $message.metricbeat_system_network_name);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "287207bc-4e6e-41eb-ae09-15f4a1ab2bcd",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-30-CalcMBytesOut"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-30-CalcMBytesOut\"\nwhen\n  has_field(\"network_bytes_tx\")\nthen\n    let mbytes = to_double($message.network_bytes_tx) / 1048576.0;\n    set_field(\"network_mbytes_tx\", mbytes);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "3f489ffc-c2e4-4779-9434-02f6da961380",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-20-NetworkPacketsOut"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-20-NetworkPacketsOut\"\nwhen\n  has_field(\"metricbeat_system_network_name\") &&\n  has_field(\"metricbeat_system_network_out_packets\") &&\n  to_long($message.metricbeat_system_network_out_packets) > 0\nthen\n    let key = concat(to_string($message.source), concat(\"-\", concat(to_string($message.metricbeat_system_network_name), \"-PACKETSOUT\")));\n    let prev_packets = to_long(lookup_value(\"metricbeat-fix\", key, 0));\n    let curr_packets = to_long($message.metricbeat_system_network_out_packets);\n    let diff_packets = curr_packets - prev_packets;\n    lookup_set_value(\"metricbeat-fix\", key, $message.metricbeat_system_network_out_packets);\n    set_field(\"network_packets_tx\", diff_packets);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "9f6a38cc-9482-4e9f-abbd-be823aa33e84",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-20-RemapFields"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-20-RemapFields\"\nwhen\n  true\nthen\n    let ip_list = split(\",\", to_string($message.metricbeat_host_ip));\n    let ipv4_untrimmed = to_string(ip_list[0]);\n    let ipv4_trimmed = substring(ipv4_untrimmed, 1);\n    set_field(\"source_ip\", ipv4_trimmed);\n    set_field(\"source_hostname\", to_string($message.metricbeat_host_hostname));\n    set_field(\"source_mac\", replace(substring(to_string($message.metricbeat_host_mac), 1, 18), \"-\", \":\", 5));\n    set_associated_assets();\n    let asset_info = machine_asset_lookup(\"ip\", to_string($message.source_ip));\n    set_field(\"source_category\", asset_info.category);\n    set_field(\"source_friendly_hostname\", asset_info.name);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "7abc9af5-d968-4adf-a5f5-12be2950b7ed",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-25-FixNegativeErrorsOut"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-25-FixNegativeErrorsOut\"\nwhen\n  has_field(\"network_errors_tx\") &&\n  to_long($message.network_errors_tx) < 0\nthen\n    set_field(\"network_errors_tx\", 0);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "6b92b717-53d8-4063-8dd0-9d637f3a1944",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Metricbeat-40-RemapIPMacHostname"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Metricbeat-40-RemapIPMacHostname\"\nwhen\n  true\nthen\n    let ip_list = split(\",\", to_string($message.metricbeat_host_ip));\n    let ipv4_untrimmed = to_string(ip_list[0]);\n    let ipv4_trimmed = substring(ipv4_untrimmed, 1);\n    set_field(\"source_ip\", ipv4_trimmed);\n    set_field(\"source_hostname\", to_string($message.metricbeat_host_hostname));\n    set_field(\"source_mac\", replace(substring(to_string($message.metricbeat_host_mac), 1, 18), \"-\", \":\", 5));\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "e948d2ce-5013-4255-9dd3-8f7e3bd47bcd",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-25-FixNegativeBytesOut"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-25-FixNegativeBytesOut\"\nwhen\n  has_field(\"network_bytes_tx\") &&\n  to_long($message.network_bytes_tx) < 0\nthen\n    set_field(\"network_bytes_tx\", 0);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "915cb13a-f3f7-4452-811c-11e67094467d",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-25-FixNegativeDroppedOut"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-25-FixNegativeDroppedOut\"\nwhen\n  has_field(\"network_dropped_tx\") &&\n  to_long($message.network_dropped_tx) < 0\nthen\n    set_field(\"network_dropped_tx\", 0);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "3af7d22b-f5d3-44a8-af66-95b084e8f57e",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-25-FixNegativeBytesIn"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-25-FixNegativeBytesIn\"\nwhen\n  has_field(\"network_bytes_rx\") &&\n  to_long($message.network_bytes_rx) < 0\nthen\n    set_field(\"network_bytes_rx\", 0);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "9c988106-c9df-480c-9402-a2b35cb0dd06",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-20-NetworkErrorsOut"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-20-NetworkErrorsOut\"\nwhen\n  has_field(\"metricbeat_system_network_name\") &&\n  has_field(\"metricbeat_system_network_out_errors\") &&\n  to_long($message.metricbeat_system_network_out_errors) >= 0\nthen\n    let key = concat(to_string($message.source), concat(\"-\", concat(to_string($message.metricbeat_system_network_name), \"-ERRORSOUT\")));\n    let prev_errors = to_long(lookup_value(\"metricbeat-fix\", key, 0));\n    let curr_errors = to_long($message.metricbeat_system_network_out_errors);\n    let diff_errors = curr_errors - prev_errors;\n    lookup_set_value(\"metricbeat-fix\", key, $message.metricbeat_system_network_out_errors);\n    set_field(\"network_errors_tx\", diff_errors);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "fff1fd5d-669c-47a4-82bc-3248c008943b",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-25-FixNegativeErrorsIn"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-25-FixNegativeErrorsIn\"\nwhen\n  has_field(\"network_errors_rx\") &&\n  to_long($message.network_errors_rx) < 0\nthen\n    set_field(\"network_errors_rx\", 0);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "5dc13866-2297-4f2e-a1ec-653ddf158f3c",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-20-NetworkDroppedIn"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-20-NetworkDroppedIn\"\nwhen\n  has_field(\"metricbeat_system_network_name\") &&\n  has_field(\"metricbeat_system_network_in_dropped\") &&\n  to_long($message.metricbeat_system_network_in_dropped) > 0\nthen\n    let key = concat(to_string($message.source), concat(\"-\", concat(to_string($message.metricbeat_system_network_name), \"-DroppedIN\")));\n    let prev_errors = to_long(lookup_value(\"metricbeat-fix\", key, 0));\n    let curr_errors = to_long($message.metricbeat_system_network_in_dropped);\n    let diff_errors = curr_errors - prev_errors;\n    lookup_set_value(\"metricbeat-fix\", key, $message.metricbeat_system_network_in_dropped);\n    set_field(\"network_dropped_rx\", diff_errors);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "a6d7b5c6-2b60-4048-bab3-1912558b80a4",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-25-FixNegativePacketsOut"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-25-FixNegativePacketsOut\"\nwhen\n  has_field(\"network_packets_tx\") &&\n  to_long($message.network_packets_tx) < 0\nthen\n    set_field(\"network_packets_tx\", 0);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "70098567-c913-44e2-b305-513465770d6f",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-20-NetworkDataIncrementsIn"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-20-NetworkDataIncrementsIn\"\nwhen\n  has_field(\"metricbeat_system_network_name\") &&\n  has_field(\"metricbeat_system_network_in_bytes\") &&\n  to_long($message.metricbeat_system_network_in_bytes) > 0\nthen\n    let key = concat(to_string($message.source), concat(\"-\", concat(to_string($message.metricbeat_system_network_name), \"-BYTESIN\")));\n    let prev_bytes = to_long(lookup_value(\"metricbeat-fix\", key, 0));\n    let curr_bytes = to_long($message.metricbeat_system_network_in_bytes);\n    let diff_bytes = curr_bytes - prev_bytes;\n    lookup_set_value(\"metricbeat-fix\", key, $message.metricbeat_system_network_in_bytes);\n    set_field(\"network_bytes_rx\", diff_bytes);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "598aa5e5-aa47-4723-b9bc-1d613ae1b584",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-20-NetworkDataIncrementsOut"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-20-NetworkDataIncrementsOut\"\nwhen\n  has_field(\"metricbeat_system_network_name\") &&\n  has_field(\"metricbeat_system_network_out_bytes\") &&\n  to_long($message.metricbeat_system_network_out_bytes) > 0\nthen\n    let key = concat(to_string($message.source), concat(\"-\", concat(to_string($message.metricbeat_system_network_name), \"-BYTESOUT\")));\n    let prev_bytes = to_long(lookup_value(\"metricbeat-fix\", key, 0));\n    let curr_bytes = to_long($message.metricbeat_system_network_out_bytes);\n    let diff_bytes = curr_bytes - prev_bytes;\n    lookup_set_value(\"metricbeat-fix\", key, $message.metricbeat_system_network_out_bytes);\n    set_field(\"network_bytes_tx\", diff_bytes);\n    set_field(\"network_interface_out\", $message.metricbeat_system_network_name);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "432a290a-d6a9-44b4-a25e-4758e144845f",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-25-FixNegativeDroppedIn"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-25-FixNegativeDroppedIn\"\nwhen\n  has_field(\"network_dropped_rx\") &&\n  to_long($message.network_dropped_rx) < 0\nthen\n    set_field(\"network_dropped_rx\", 0);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    }
+  ]
+}
