@@ -7,6 +7,7 @@ This is a Graylog content pack for parsing data from Metricbeat.
 * `Metricbeat` pipeline
     * 4 stages with 21 rules
 * `Metricbeat Fix` lookup table
+* `Metricbeat` Dashboard
 * `Metricbeat Data` stream
 
 ### Metricbeat Data stream
@@ -17,23 +18,31 @@ This stream looks for messages with a `beats_type` field with a value of "metric
 
 The pipeline pulls messages from the Metricbeat stream.
 
-**Stage 20**
+**Stage 10**
+
+The rules in this stage handle fields that are common across Metricbeat metricsets. Unneeded fields are removed to save space and some other fields are renamed.
+
+**Stage 40**
+
+The rules in this stage handle field renames for the different metricsets.
+
+**Stage 50**
 
 The thing about Metricbeat is that most of the interesting data is presented as running totals for the day rather than discrete amounts for the reporting period. So instead of 10 bytes in then 20 bytes in then 10 bytes in, you see 10 bytes in then 30 bytes in then 40 bytes in.
 
 The rules in this stage use the `Metricbeat Fix` lookup table to break down the accumulator values into deltas so you can get  better look at exactly how much is going on during particular time slices.
 
-**Stage 25**
+**Stage 55**
 
 The problem with Stage 20 is that it can occasionally produce negative values. This stage exists mostly to zero out negative values.
 
-**Stage 30**
+**Stage 60**
 
 This stage just converts bytes to MB
 
-**Stage 40**
+### Metricbeat Dashboard
 
-This stage renames some fields, reformats some values, and drops some Metricbeat fields to save on storage. It is far from complete.
+The dashboard includes visualizations for some basic various host metrics including CPU, memory, network traffic, and file system usage.
 
 ## Setup
 

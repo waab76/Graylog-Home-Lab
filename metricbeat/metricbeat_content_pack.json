@@ -1,7 +1,7 @@
 {
-  "v": 1,
+  "v": "1",
   "id": "e3a2eb70-fd7f-472a-8b1d-0ed2f7791185",
-  "rev": 1,
+  "rev": 2,
   "name": "Metricbeat Processing",
   "summary": "Handling for Metricbeat data",
   "description": "",
@@ -9,6 +9,1336 @@
   "url": "https://github.com/waab76/Graylog-Home-Lab",
   "parameters": [],
   "entities": [
+    {
+      "v": "1",
+      "type": {
+        "name": "dashboard",
+        "version": "2"
+      },
+      "id": "54e8d0dc-1546-4acd-b103-e7e3329a37ef",
+      "data": {
+        "summary": {
+          "@type": "string",
+          "@value": ""
+        },
+        "search": {
+          "queries": [
+            {
+              "id": "ba8999b9-3b17-4090-ad5f-d9b03acd1d54",
+              "timerange": {
+                "from": 300,
+                "type": "relative"
+              },
+              "filters": [],
+              "query": {
+                "type": "elasticsearch",
+                "query_string": ""
+              },
+              "search_types": [
+                {
+                  "query": {
+                    "type": "elasticsearch",
+                    "query_string": "_exists_: host_hostname AND metricbeat_metricset_name: cpu"
+                  },
+                  "name": "chart",
+                  "timerange": {
+                    "from": 28800,
+                    "type": "relative"
+                  },
+                  "column_limit": null,
+                  "streams": [],
+                  "row_limit": null,
+                  "series": [
+                    {
+                      "type": "percentile",
+                      "id": "percentile(host_cpu_total_percent,95)",
+                      "field": "host_cpu_total_percent",
+                      "percentile": 95
+                    }
+                  ],
+                  "filter": null,
+                  "rollup": false,
+                  "row_groups": [
+                    {
+                      "type": "time",
+                      "fields": [
+                        "timestamp"
+                      ],
+                      "interval": {
+                        "type": "auto",
+                        "scaling": 1
+                      }
+                    }
+                  ],
+                  "type": "pivot",
+                  "id": "500fd351-cbcf-4a96-88f8-15603727945b",
+                  "filters": [],
+                  "column_groups": [
+                    {
+                      "type": "values",
+                      "fields": [
+                        "host_hostname"
+                      ],
+                      "limit": 15,
+                      "skip_empty_values": false
+                    }
+                  ],
+                  "sort": []
+                },
+                {
+                  "query": {
+                    "type": "elasticsearch",
+                    "query_string": "_exists_: host_hostname AND _exists_:system_memory_actual_used_percent"
+                  },
+                  "name": "chart",
+                  "timerange": {
+                    "from": 28800,
+                    "type": "relative"
+                  },
+                  "column_limit": null,
+                  "streams": [],
+                  "row_limit": null,
+                  "series": [
+                    {
+                      "type": "percentile",
+                      "id": "Used",
+                      "field": "system_memory_actual_used_percent",
+                      "percentile": 95
+                    }
+                  ],
+                  "filter": null,
+                  "rollup": false,
+                  "row_groups": [
+                    {
+                      "type": "time",
+                      "fields": [
+                        "timestamp"
+                      ],
+                      "interval": {
+                        "type": "auto",
+                        "scaling": 1
+                      }
+                    }
+                  ],
+                  "type": "pivot",
+                  "id": "170ce5f8-8be8-471d-9595-09b6dba5fc75",
+                  "filters": [],
+                  "column_groups": [
+                    {
+                      "type": "values",
+                      "fields": [
+                        "host_hostname"
+                      ],
+                      "limit": 15,
+                      "skip_empty_values": false
+                    }
+                  ],
+                  "sort": []
+                },
+                {
+                  "query": {
+                    "type": "elasticsearch",
+                    "query_string": "_exists_: network_bytes_tx AND _exists_: host_hostname"
+                  },
+                  "name": "chart",
+                  "timerange": {
+                    "from": 28800,
+                    "type": "relative"
+                  },
+                  "column_limit": null,
+                  "streams": [],
+                  "row_limit": null,
+                  "series": [
+                    {
+                      "type": "sum",
+                      "id": "bytes",
+                      "field": "network_bytes_tx"
+                    }
+                  ],
+                  "filter": null,
+                  "rollup": false,
+                  "row_groups": [
+                    {
+                      "type": "time",
+                      "fields": [
+                        "timestamp"
+                      ],
+                      "interval": {
+                        "type": "auto",
+                        "scaling": 1
+                      }
+                    }
+                  ],
+                  "type": "pivot",
+                  "id": "ca1e85de-88d0-4f08-a9a9-b9de73d903de",
+                  "filters": [],
+                  "column_groups": [
+                    {
+                      "type": "values",
+                      "fields": [
+                        "host_hostname"
+                      ],
+                      "limit": 15,
+                      "skip_empty_values": false
+                    }
+                  ],
+                  "sort": []
+                },
+                {
+                  "query": {
+                    "type": "elasticsearch",
+                    "query_string": "_exists_: host_hostname AND _exists_: filesystem_used_percent"
+                  },
+                  "name": "chart",
+                  "timerange": {
+                    "from": 28800,
+                    "type": "relative"
+                  },
+                  "column_limit": null,
+                  "streams": [],
+                  "row_limit": null,
+                  "series": [
+                    {
+                      "type": "percentile",
+                      "id": "percentile(filesystem_used_percent,95)",
+                      "field": "filesystem_used_percent",
+                      "percentile": 95
+                    }
+                  ],
+                  "filter": null,
+                  "rollup": false,
+                  "row_groups": [
+                    {
+                      "type": "time",
+                      "fields": [
+                        "timestamp"
+                      ],
+                      "interval": {
+                        "type": "auto",
+                        "scaling": 1
+                      }
+                    }
+                  ],
+                  "type": "pivot",
+                  "id": "48499789-9113-42db-84f5-548c7b58e95b",
+                  "filters": [],
+                  "column_groups": [
+                    {
+                      "type": "values",
+                      "fields": [
+                        "host_hostname"
+                      ],
+                      "limit": 15,
+                      "skip_empty_values": false
+                    }
+                  ],
+                  "sort": []
+                },
+                {
+                  "query": {
+                    "type": "elasticsearch",
+                    "query_string": "_exists_: network_bytes_tx AND _exists_: host_hostname"
+                  },
+                  "name": "chart",
+                  "timerange": {
+                    "from": 28800,
+                    "type": "relative"
+                  },
+                  "column_limit": null,
+                  "streams": [],
+                  "row_limit": null,
+                  "series": [
+                    {
+                      "type": "sum",
+                      "id": "bytes",
+                      "field": "network_bytes_rx"
+                    }
+                  ],
+                  "filter": null,
+                  "rollup": false,
+                  "row_groups": [
+                    {
+                      "type": "time",
+                      "fields": [
+                        "timestamp"
+                      ],
+                      "interval": {
+                        "type": "auto",
+                        "scaling": 1
+                      }
+                    }
+                  ],
+                  "type": "pivot",
+                  "id": "8242ad5b-04b0-4d7c-83d0-28d44307e8a9",
+                  "filters": [],
+                  "column_groups": [
+                    {
+                      "type": "values",
+                      "fields": [
+                        "host_hostname"
+                      ],
+                      "limit": 15,
+                      "skip_empty_values": false
+                    }
+                  ],
+                  "sort": []
+                }
+              ]
+            },
+            {
+              "id": "58cb3a9d-e461-4c69-b368-d7cdd22c2f6e",
+              "timerange": {
+                "from": 300,
+                "type": "relative"
+              },
+              "filters": [],
+              "query": {
+                "type": "elasticsearch",
+                "query_string": ""
+              },
+              "search_types": [
+                {
+                  "query": {
+                    "type": "elasticsearch",
+                    "query_string": "_exists_: network_interface_name"
+                  },
+                  "name": "chart",
+                  "timerange": {
+                    "from": 28800,
+                    "type": "relative"
+                  },
+                  "column_limit": null,
+                  "streams": [],
+                  "row_limit": null,
+                  "series": [
+                    {
+                      "type": "sum",
+                      "id": "rx",
+                      "field": "network_interface_packets_rx"
+                    },
+                    {
+                      "type": "sum",
+                      "id": "tx",
+                      "field": "network_interface_packets_tx"
+                    }
+                  ],
+                  "filter": null,
+                  "rollup": true,
+                  "row_groups": [
+                    {
+                      "type": "values",
+                      "fields": [
+                        "host_hostname",
+                        "network_interface_name"
+                      ],
+                      "limit": 15,
+                      "skip_empty_values": false
+                    }
+                  ],
+                  "type": "pivot",
+                  "id": "cd9e9e69-aa5c-4b4d-b8ad-2734acb47f2f",
+                  "filters": [],
+                  "column_groups": [],
+                  "sort": []
+                },
+                {
+                  "query": {
+                    "type": "elasticsearch",
+                    "query_string": "_exists_: network_interface_name"
+                  },
+                  "name": "chart",
+                  "timerange": {
+                    "from": 28800,
+                    "type": "relative"
+                  },
+                  "column_limit": null,
+                  "streams": [],
+                  "row_limit": null,
+                  "series": [
+                    {
+                      "type": "sum",
+                      "id": "rx",
+                      "field": "network_interface_dropped_rx"
+                    },
+                    {
+                      "type": "sum",
+                      "id": "tx",
+                      "field": "network_interface_dropped_tx"
+                    }
+                  ],
+                  "filter": null,
+                  "rollup": true,
+                  "row_groups": [
+                    {
+                      "type": "values",
+                      "fields": [
+                        "host_hostname",
+                        "network_interface_name"
+                      ],
+                      "limit": 15,
+                      "skip_empty_values": false
+                    }
+                  ],
+                  "type": "pivot",
+                  "id": "6832a2c0-780b-484e-b1c2-6ef8b4bdb9dd",
+                  "filters": [],
+                  "column_groups": [],
+                  "sort": []
+                },
+                {
+                  "query": {
+                    "type": "elasticsearch",
+                    "query_string": "_exists_: network_interface_name"
+                  },
+                  "name": "chart",
+                  "timerange": {
+                    "from": 28800,
+                    "type": "relative"
+                  },
+                  "column_limit": null,
+                  "streams": [],
+                  "row_limit": null,
+                  "series": [
+                    {
+                      "type": "sum",
+                      "id": "rx",
+                      "field": "network_interface_dropped_rx"
+                    },
+                    {
+                      "type": "sum",
+                      "id": "tx",
+                      "field": "network_interface_dropped_tx"
+                    }
+                  ],
+                  "filter": null,
+                  "rollup": true,
+                  "row_groups": [
+                    {
+                      "type": "values",
+                      "fields": [
+                        "host_hostname",
+                        "network_interface_name"
+                      ],
+                      "limit": 15,
+                      "skip_empty_values": false
+                    }
+                  ],
+                  "type": "pivot",
+                  "id": "2459df5f-9794-4de2-ba16-fbaaeb8f390b",
+                  "filters": [],
+                  "column_groups": [],
+                  "sort": []
+                },
+                {
+                  "query": {
+                    "type": "elasticsearch",
+                    "query_string": "_exists_:host_hostname AND _exists_:network_interface_name"
+                  },
+                  "name": "chart",
+                  "timerange": {
+                    "from": 28800,
+                    "type": "relative"
+                  },
+                  "column_limit": null,
+                  "streams": [],
+                  "row_limit": null,
+                  "series": [
+                    {
+                      "type": "percentile",
+                      "id": "percentile(network_interface_bytes_rx,95)",
+                      "field": "network_interface_bytes_rx",
+                      "percentile": 95
+                    }
+                  ],
+                  "filter": null,
+                  "rollup": false,
+                  "row_groups": [
+                    {
+                      "type": "time",
+                      "fields": [
+                        "timestamp"
+                      ],
+                      "interval": {
+                        "type": "auto",
+                        "scaling": 1
+                      }
+                    }
+                  ],
+                  "type": "pivot",
+                  "id": "699e4992-ddf9-451e-9e0e-d272f3f8b936",
+                  "filters": [],
+                  "column_groups": [
+                    {
+                      "type": "values",
+                      "fields": [
+                        "host_hostname",
+                        "network_interface_name"
+                      ],
+                      "limit": 15,
+                      "skip_empty_values": false
+                    }
+                  ],
+                  "sort": []
+                },
+                {
+                  "query": {
+                    "type": "elasticsearch",
+                    "query_string": "_exists_:host_hostname AND _exists_:network_interface_name"
+                  },
+                  "name": "chart",
+                  "timerange": {
+                    "from": 28800,
+                    "type": "relative"
+                  },
+                  "column_limit": null,
+                  "streams": [],
+                  "row_limit": null,
+                  "series": [
+                    {
+                      "type": "percentile",
+                      "id": "percentile(network_interface_bytes_tx,95)",
+                      "field": "network_interface_bytes_tx",
+                      "percentile": 95
+                    }
+                  ],
+                  "filter": null,
+                  "rollup": false,
+                  "row_groups": [
+                    {
+                      "type": "time",
+                      "fields": [
+                        "timestamp"
+                      ],
+                      "interval": {
+                        "type": "auto",
+                        "scaling": 1
+                      }
+                    }
+                  ],
+                  "type": "pivot",
+                  "id": "632bc457-5cc5-43f3-90e8-127b5df51e24",
+                  "filters": [],
+                  "column_groups": [
+                    {
+                      "type": "values",
+                      "fields": [
+                        "host_hostname",
+                        "network_interface_name"
+                      ],
+                      "limit": 15,
+                      "skip_empty_values": false
+                    }
+                  ],
+                  "sort": []
+                }
+              ]
+            }
+          ],
+          "parameters": [],
+          "requires": {},
+          "owner": "admin",
+          "created_at": "2024-04-07T01:23:00.956Z"
+        },
+        "created_at": "2024-04-06T13:52:41.756Z",
+        "requires": {},
+        "state": {
+          "ba8999b9-3b17-4090-ad5f-d9b03acd1d54": {
+            "selected_fields": null,
+            "static_message_list_id": null,
+            "titles": {
+              "tab": {
+                "title": "Overview"
+              },
+              "widget": {
+                "a34d96c0-3c74-414d-9c20-ba71e2610d60": "P95 CPU %",
+                "fd380b6a-455a-472b-a537-27b8c72ba93c": "P95 Filesystem Used %",
+                "516b7bfd-4ba1-4a6c-b229-c131150733ff": "P95 Memory Used %",
+                "0ca65231-d3a8-4816-a741-4c8df5072351": "Bytes TX",
+                "7ce80960-0837-4595-8ef4-9f4f3e9951bd": "Bytes Rx"
+              }
+            },
+            "widgets": [
+              {
+                "id": "0ca65231-d3a8-4816-a741-4c8df5072351",
+                "type": "aggregation",
+                "filter": null,
+                "filters": [],
+                "timerange": {
+                  "from": 28800,
+                  "type": "relative"
+                },
+                "query": {
+                  "type": "elasticsearch",
+                  "query_string": "_exists_: network_bytes_tx AND _exists_: host_hostname"
+                },
+                "streams": [],
+                "config": {
+                  "visualization": "line",
+                  "column_limit": 15,
+                  "event_annotation": false,
+                  "row_limit": null,
+                  "row_pivots": [
+                    {
+                      "fields": [
+                        "timestamp"
+                      ],
+                      "type": "time",
+                      "config": {
+                        "interval": {
+                          "type": "auto",
+                          "scaling": 1
+                        }
+                      }
+                    }
+                  ],
+                  "series": [
+                    {
+                      "config": {
+                        "name": "bytes"
+                      },
+                      "function": "sum(network_bytes_tx)"
+                    }
+                  ],
+                  "rollup": false,
+                  "column_pivots": [
+                    {
+                      "fields": [
+                        "host_hostname"
+                      ],
+                      "type": "values",
+                      "config": {
+                        "limit": 15
+                      }
+                    }
+                  ],
+                  "visualization_config": {
+                    "interpolation": "linear",
+                    "axis_type": "linear"
+                  },
+                  "formatting_settings": null,
+                  "sort": []
+                }
+              },
+              {
+                "id": "7ce80960-0837-4595-8ef4-9f4f3e9951bd",
+                "type": "aggregation",
+                "filter": null,
+                "filters": [],
+                "timerange": {
+                  "from": 28800,
+                  "type": "relative"
+                },
+                "query": {
+                  "type": "elasticsearch",
+                  "query_string": "_exists_: network_bytes_tx AND _exists_: host_hostname"
+                },
+                "streams": [],
+                "config": {
+                  "visualization": "line",
+                  "column_limit": 15,
+                  "event_annotation": false,
+                  "row_limit": null,
+                  "row_pivots": [
+                    {
+                      "fields": [
+                        "timestamp"
+                      ],
+                      "type": "time",
+                      "config": {
+                        "interval": {
+                          "type": "auto",
+                          "scaling": 1
+                        }
+                      }
+                    }
+                  ],
+                  "series": [
+                    {
+                      "config": {
+                        "name": "bytes"
+                      },
+                      "function": "sum(network_bytes_rx)"
+                    }
+                  ],
+                  "rollup": false,
+                  "column_pivots": [
+                    {
+                      "fields": [
+                        "host_hostname"
+                      ],
+                      "type": "values",
+                      "config": {
+                        "limit": 15
+                      }
+                    }
+                  ],
+                  "visualization_config": {
+                    "interpolation": "linear",
+                    "axis_type": "linear"
+                  },
+                  "formatting_settings": null,
+                  "sort": []
+                }
+              },
+              {
+                "id": "a34d96c0-3c74-414d-9c20-ba71e2610d60",
+                "type": "aggregation",
+                "filter": null,
+                "filters": [],
+                "timerange": {
+                  "from": 28800,
+                  "type": "relative"
+                },
+                "query": {
+                  "type": "elasticsearch",
+                  "query_string": "_exists_: host_hostname AND metricbeat_metricset_name: cpu"
+                },
+                "streams": [],
+                "config": {
+                  "visualization": "line",
+                  "column_limit": 15,
+                  "event_annotation": false,
+                  "row_limit": null,
+                  "row_pivots": [
+                    {
+                      "fields": [
+                        "timestamp"
+                      ],
+                      "type": "time",
+                      "config": {
+                        "interval": {
+                          "type": "auto",
+                          "scaling": 1
+                        }
+                      }
+                    }
+                  ],
+                  "series": [
+                    {
+                      "config": {
+                        "name": null
+                      },
+                      "function": "percentile(host_cpu_total_percent,95)"
+                    }
+                  ],
+                  "rollup": false,
+                  "column_pivots": [
+                    {
+                      "fields": [
+                        "host_hostname"
+                      ],
+                      "type": "values",
+                      "config": {
+                        "limit": 15
+                      }
+                    }
+                  ],
+                  "visualization_config": {
+                    "interpolation": "linear",
+                    "axis_type": "linear"
+                  },
+                  "formatting_settings": null,
+                  "sort": []
+                }
+              },
+              {
+                "id": "516b7bfd-4ba1-4a6c-b229-c131150733ff",
+                "type": "aggregation",
+                "filter": null,
+                "filters": [],
+                "timerange": {
+                  "from": 28800,
+                  "type": "relative"
+                },
+                "query": {
+                  "type": "elasticsearch",
+                  "query_string": "_exists_: host_hostname AND _exists_:system_memory_actual_used_percent"
+                },
+                "streams": [],
+                "config": {
+                  "visualization": "line",
+                  "column_limit": 15,
+                  "event_annotation": false,
+                  "row_limit": null,
+                  "row_pivots": [
+                    {
+                      "fields": [
+                        "timestamp"
+                      ],
+                      "type": "time",
+                      "config": {
+                        "interval": {
+                          "type": "auto",
+                          "scaling": 1
+                        }
+                      }
+                    }
+                  ],
+                  "series": [
+                    {
+                      "config": {
+                        "name": "Used"
+                      },
+                      "function": "percentile(system_memory_actual_used_percent,95)"
+                    }
+                  ],
+                  "rollup": false,
+                  "column_pivots": [
+                    {
+                      "fields": [
+                        "host_hostname"
+                      ],
+                      "type": "values",
+                      "config": {
+                        "limit": 15
+                      }
+                    }
+                  ],
+                  "visualization_config": {
+                    "interpolation": "linear",
+                    "axis_type": "linear"
+                  },
+                  "formatting_settings": null,
+                  "sort": []
+                }
+              },
+              {
+                "id": "fd380b6a-455a-472b-a537-27b8c72ba93c",
+                "type": "aggregation",
+                "filter": null,
+                "filters": [],
+                "timerange": {
+                  "from": 28800,
+                  "type": "relative"
+                },
+                "query": {
+                  "type": "elasticsearch",
+                  "query_string": "_exists_: host_hostname AND _exists_: filesystem_used_percent"
+                },
+                "streams": [],
+                "config": {
+                  "visualization": "line",
+                  "column_limit": 15,
+                  "event_annotation": false,
+                  "row_limit": null,
+                  "row_pivots": [
+                    {
+                      "fields": [
+                        "timestamp"
+                      ],
+                      "type": "time",
+                      "config": {
+                        "interval": {
+                          "type": "auto",
+                          "scaling": 1
+                        }
+                      }
+                    }
+                  ],
+                  "series": [
+                    {
+                      "config": {
+                        "name": null
+                      },
+                      "function": "percentile(filesystem_used_percent,95)"
+                    }
+                  ],
+                  "rollup": false,
+                  "column_pivots": [
+                    {
+                      "fields": [
+                        "host_hostname"
+                      ],
+                      "type": "values",
+                      "config": {
+                        "limit": 15
+                      }
+                    }
+                  ],
+                  "visualization_config": {
+                    "interpolation": "linear",
+                    "axis_type": "linear"
+                  },
+                  "formatting_settings": null,
+                  "sort": []
+                }
+              }
+            ],
+            "widget_mapping": {
+              "0ca65231-d3a8-4816-a741-4c8df5072351": [
+                "ca1e85de-88d0-4f08-a9a9-b9de73d903de"
+              ],
+              "7ce80960-0837-4595-8ef4-9f4f3e9951bd": [
+                "8242ad5b-04b0-4d7c-83d0-28d44307e8a9"
+              ],
+              "a34d96c0-3c74-414d-9c20-ba71e2610d60": [
+                "500fd351-cbcf-4a96-88f8-15603727945b"
+              ],
+              "516b7bfd-4ba1-4a6c-b229-c131150733ff": [
+                "170ce5f8-8be8-471d-9595-09b6dba5fc75"
+              ],
+              "fd380b6a-455a-472b-a537-27b8c72ba93c": [
+                "48499789-9113-42db-84f5-548c7b58e95b"
+              ]
+            },
+            "positions": {
+              "a34d96c0-3c74-414d-9c20-ba71e2610d60": {
+                "col": 1,
+                "row": 1,
+                "height": 4,
+                "width": 4
+              },
+              "fd380b6a-455a-472b-a537-27b8c72ba93c": {
+                "col": 9,
+                "row": 1,
+                "height": 4,
+                "width": 4
+              },
+              "516b7bfd-4ba1-4a6c-b229-c131150733ff": {
+                "col": 5,
+                "row": 1,
+                "height": 4,
+                "width": 4
+              },
+              "0ca65231-d3a8-4816-a741-4c8df5072351": {
+                "col": 7,
+                "row": 5,
+                "height": 4,
+                "width": 4
+              },
+              "7ce80960-0837-4595-8ef4-9f4f3e9951bd": {
+                "col": 3,
+                "row": 5,
+                "height": 4,
+                "width": 4
+              }
+            },
+            "formatting": {
+              "highlighting": []
+            },
+            "display_mode_settings": {
+              "positions": {}
+            }
+          },
+          "58cb3a9d-e461-4c69-b368-d7cdd22c2f6e": {
+            "selected_fields": null,
+            "static_message_list_id": null,
+            "titles": {
+              "widget": {
+                "0f2b79cc-16b4-4963-8394-1e4d3ab77024": "Dropped",
+                "f3f90d0c-d4c5-493f-9b8e-e5437858be04": "Errors",
+                "09741d1c-b00a-4f3c-82f2-024d2c89c2b8": "Packets",
+                "1ff024fd-50f1-4e32-bcb0-49c2fce668f8": "Bytex RX",
+                "5d9cbfd8-1cc7-4aa5-b6c6-56e2e49fc843": "Bytes TX"
+              },
+              "tab": {
+                "title": "Network Stats"
+              }
+            },
+            "widgets": [
+              {
+                "id": "f3f90d0c-d4c5-493f-9b8e-e5437858be04",
+                "type": "aggregation",
+                "filter": null,
+                "filters": [],
+                "timerange": {
+                  "from": 28800,
+                  "type": "relative"
+                },
+                "query": {
+                  "type": "elasticsearch",
+                  "query_string": "_exists_: network_interface_name"
+                },
+                "streams": [],
+                "config": {
+                  "visualization": "table",
+                  "column_limit": null,
+                  "event_annotation": false,
+                  "row_limit": 15,
+                  "row_pivots": [
+                    {
+                      "fields": [
+                        "host_hostname",
+                        "network_interface_name"
+                      ],
+                      "type": "values",
+                      "config": {
+                        "limit": 15
+                      }
+                    }
+                  ],
+                  "series": [
+                    {
+                      "config": {
+                        "name": "rx"
+                      },
+                      "function": "sum(network_interface_dropped_rx)"
+                    },
+                    {
+                      "config": {
+                        "name": "tx"
+                      },
+                      "function": "sum(network_interface_dropped_tx)"
+                    }
+                  ],
+                  "rollup": false,
+                  "column_pivots": [],
+                  "visualization_config": {
+                    "pinned_columns": []
+                  },
+                  "formatting_settings": null,
+                  "sort": []
+                }
+              },
+              {
+                "id": "1ff024fd-50f1-4e32-bcb0-49c2fce668f8",
+                "type": "aggregation",
+                "filter": null,
+                "filters": [],
+                "timerange": {
+                  "from": 28800,
+                  "type": "relative"
+                },
+                "query": {
+                  "type": "elasticsearch",
+                  "query_string": "_exists_:host_hostname AND _exists_:network_interface_name"
+                },
+                "streams": [],
+                "config": {
+                  "visualization": "line",
+                  "column_limit": 15,
+                  "event_annotation": false,
+                  "row_limit": null,
+                  "row_pivots": [
+                    {
+                      "fields": [
+                        "timestamp"
+                      ],
+                      "type": "time",
+                      "config": {
+                        "interval": {
+                          "type": "auto",
+                          "scaling": 1
+                        }
+                      }
+                    }
+                  ],
+                  "series": [
+                    {
+                      "config": {
+                        "name": null
+                      },
+                      "function": "percentile(network_interface_bytes_rx,95)"
+                    }
+                  ],
+                  "rollup": false,
+                  "column_pivots": [
+                    {
+                      "fields": [
+                        "host_hostname",
+                        "network_interface_name"
+                      ],
+                      "type": "values",
+                      "config": {
+                        "limit": 15
+                      }
+                    }
+                  ],
+                  "visualization_config": {
+                    "interpolation": "linear",
+                    "axis_type": "linear"
+                  },
+                  "formatting_settings": null,
+                  "sort": []
+                }
+              },
+              {
+                "id": "5d9cbfd8-1cc7-4aa5-b6c6-56e2e49fc843",
+                "type": "aggregation",
+                "filter": null,
+                "filters": [],
+                "timerange": {
+                  "from": 28800,
+                  "type": "relative"
+                },
+                "query": {
+                  "type": "elasticsearch",
+                  "query_string": "_exists_:host_hostname AND _exists_:network_interface_name"
+                },
+                "streams": [],
+                "config": {
+                  "visualization": "line",
+                  "column_limit": 15,
+                  "event_annotation": false,
+                  "row_limit": null,
+                  "row_pivots": [
+                    {
+                      "fields": [
+                        "timestamp"
+                      ],
+                      "type": "time",
+                      "config": {
+                        "interval": {
+                          "type": "auto",
+                          "scaling": 1
+                        }
+                      }
+                    }
+                  ],
+                  "series": [
+                    {
+                      "config": {
+                        "name": null
+                      },
+                      "function": "percentile(network_interface_bytes_tx,95)"
+                    }
+                  ],
+                  "rollup": false,
+                  "column_pivots": [
+                    {
+                      "fields": [
+                        "host_hostname",
+                        "network_interface_name"
+                      ],
+                      "type": "values",
+                      "config": {
+                        "limit": 15
+                      }
+                    }
+                  ],
+                  "visualization_config": {
+                    "interpolation": "linear",
+                    "axis_type": "linear"
+                  },
+                  "formatting_settings": null,
+                  "sort": []
+                }
+              },
+              {
+                "id": "09741d1c-b00a-4f3c-82f2-024d2c89c2b8",
+                "type": "aggregation",
+                "filter": null,
+                "filters": [],
+                "timerange": {
+                  "from": 28800,
+                  "type": "relative"
+                },
+                "query": {
+                  "type": "elasticsearch",
+                  "query_string": "_exists_: network_interface_name"
+                },
+                "streams": [],
+                "config": {
+                  "visualization": "table",
+                  "column_limit": null,
+                  "event_annotation": false,
+                  "row_limit": 15,
+                  "row_pivots": [
+                    {
+                      "fields": [
+                        "host_hostname",
+                        "network_interface_name"
+                      ],
+                      "type": "values",
+                      "config": {
+                        "limit": 15
+                      }
+                    }
+                  ],
+                  "series": [
+                    {
+                      "config": {
+                        "name": "rx"
+                      },
+                      "function": "sum(network_interface_packets_rx)"
+                    },
+                    {
+                      "config": {
+                        "name": "tx"
+                      },
+                      "function": "sum(network_interface_packets_tx)"
+                    }
+                  ],
+                  "rollup": false,
+                  "column_pivots": [],
+                  "visualization_config": {
+                    "pinned_columns": []
+                  },
+                  "formatting_settings": null,
+                  "sort": []
+                }
+              },
+              {
+                "id": "0f2b79cc-16b4-4963-8394-1e4d3ab77024",
+                "type": "aggregation",
+                "filter": null,
+                "filters": [],
+                "timerange": {
+                  "from": 28800,
+                  "type": "relative"
+                },
+                "query": {
+                  "type": "elasticsearch",
+                  "query_string": "_exists_: network_interface_name"
+                },
+                "streams": [],
+                "config": {
+                  "visualization": "table",
+                  "column_limit": null,
+                  "event_annotation": false,
+                  "row_limit": 15,
+                  "row_pivots": [
+                    {
+                      "fields": [
+                        "host_hostname",
+                        "network_interface_name"
+                      ],
+                      "type": "values",
+                      "config": {
+                        "limit": 15
+                      }
+                    }
+                  ],
+                  "series": [
+                    {
+                      "config": {
+                        "name": "rx"
+                      },
+                      "function": "sum(network_interface_dropped_rx)"
+                    },
+                    {
+                      "config": {
+                        "name": "tx"
+                      },
+                      "function": "sum(network_interface_dropped_tx)"
+                    }
+                  ],
+                  "rollup": false,
+                  "column_pivots": [],
+                  "visualization_config": {
+                    "pinned_columns": []
+                  },
+                  "formatting_settings": null,
+                  "sort": []
+                }
+              }
+            ],
+            "widget_mapping": {
+              "0f2b79cc-16b4-4963-8394-1e4d3ab77024": [
+                "6832a2c0-780b-484e-b1c2-6ef8b4bdb9dd"
+              ],
+              "f3f90d0c-d4c5-493f-9b8e-e5437858be04": [
+                "2459df5f-9794-4de2-ba16-fbaaeb8f390b"
+              ],
+              "09741d1c-b00a-4f3c-82f2-024d2c89c2b8": [
+                "cd9e9e69-aa5c-4b4d-b8ad-2734acb47f2f"
+              ],
+              "1ff024fd-50f1-4e32-bcb0-49c2fce668f8": [
+                "699e4992-ddf9-451e-9e0e-d272f3f8b936"
+              ],
+              "5d9cbfd8-1cc7-4aa5-b6c6-56e2e49fc843": [
+                "632bc457-5cc5-43f3-90e8-127b5df51e24"
+              ]
+            },
+            "positions": {
+              "0f2b79cc-16b4-4963-8394-1e4d3ab77024": {
+                "col": 5,
+                "row": 5,
+                "height": 4,
+                "width": 4
+              },
+              "f3f90d0c-d4c5-493f-9b8e-e5437858be04": {
+                "col": 1,
+                "row": 5,
+                "height": 4,
+                "width": 4
+              },
+              "09741d1c-b00a-4f3c-82f2-024d2c89c2b8": {
+                "col": 1,
+                "row": 1,
+                "height": 4,
+                "width": 8
+              },
+              "1ff024fd-50f1-4e32-bcb0-49c2fce668f8": {
+                "col": 9,
+                "row": 5,
+                "height": 4,
+                "width": 4
+              },
+              "5d9cbfd8-1cc7-4aa5-b6c6-56e2e49fc843": {
+                "col": 9,
+                "row": 1,
+                "height": 4,
+                "width": 4
+              }
+            },
+            "formatting": null,
+            "display_mode_settings": {
+              "positions": {}
+            }
+          }
+        },
+        "properties": [],
+        "owner": "admin",
+        "title": {
+          "@type": "string",
+          "@value": "Metricbeat"
+        },
+        "type": "DASHBOARD",
+        "description": {
+          "@type": "string",
+          "@value": ""
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "lookup_adapter",
+        "version": "1"
+      },
+      "id": "009d5f0c-aecb-4912-84f7-b3ee1958acf0",
+      "data": {
+        "_scope": {
+          "@type": "string",
+          "@value": "DEFAULT"
+        },
+        "name": {
+          "@type": "string",
+          "@value": "metricbeat-fix"
+        },
+        "title": {
+          "@type": "string",
+          "@value": "Metricbeat Fix"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "configuration": {
+          "type": {
+            "@type": "string",
+            "@value": "mongodb"
+          },
+          "cidr_lookup": {
+            "@type": "boolean",
+            "@value": false
+          }
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
     {
       "v": "1",
       "type": {
@@ -39,40 +1369,6 @@
             "@value": "none"
           }
         }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline",
-        "version": "1"
-      },
-      "id": "6c574fde-473f-423d-b993-4d937ea3c52d",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "Metricbeat"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "pipeline \"Metricbeat\"\nstage 20 match either\nrule \"MetricBeat-20-NetworkDataIncrementsIn\"\nrule \"MetricBeat-20-NetworkDataIncrementsOut\"\nrule \"MetricBeat-20-NetworkDroppedIn\"\nrule \"MetricBeat-20-NetworkDroppedOut\"\nrule \"MetricBeat-20-NetworkErrorsIn\"\nrule \"MetricBeat-20-NetworkErrorsOut\"\nrule \"MetricBeat-20-NetworkPacketsIn\"\nrule \"MetricBeat-20-NetworkPacketsOut\"\nrule \"MetricBeat-20-RemapFields\"\nstage 25 match pass\nrule \"MetricBeat-25-FixNegativeBytesIn\"\nrule \"MetricBeat-25-FixNegativeBytesOut\"\nrule \"MetricBeat-25-FixNegativeDroppedIn\"\nrule \"MetricBeat-25-FixNegativeDroppedOut\"\nrule \"MetricBeat-25-FixNegativeErrorsIn\"\nrule \"MetricBeat-25-FixNegativeErrorsOut\"\nrule \"MetricBeat-25-FixNegativePacketsIn\"\nrule \"MetricBeat-25-FixNegativePacketsOut\"\nstage 30 match pass\nrule \"MetricBeat-30-CalcMBytesIn\"\nrule \"MetricBeat-30-CalcMBytesOut\"\nstage 40 match either\nrule \"MetricBeat-40-NormalizeHostFields\"\nrule \"Metricbeat-40-RemapIPMacHostname\"\nend"
-        },
-        "connected_streams": [
-          {
-            "@type": "string",
-            "@value": "36e2da96-7e9c-4f6b-8308-2e98f8cf1353"
-          }
-        ]
       },
       "constraints": [
         {
@@ -140,10 +1436,548 @@
     {
       "v": "1",
       "type": {
+        "name": "pipeline",
+        "version": "1"
+      },
+      "id": "2e752648-b83b-4883-b318-4603116101ed",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Metricbeat"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "pipeline \"Metricbeat\"\nstage 10 match either\nrule \"MetricBeat-10-HandleCommonFields\"\nrule \"MetricBeat-10-ParseCloudFields\"\nstage 40 match pass\nrule \"Metricbeat-40-CPU\"\nrule \"Metricbeat-40-FSStat\"\nrule \"Metricbeat-40-FileSystem\"\nrule \"Metricbeat-40-Load\"\nrule \"Metricbeat-40-Memory\"\nrule \"Metricbeat-40-Network\"\nrule \"Metricbeat-40-Process\"\nrule \"Metricbeat-40-ProcessSummary\"\nrule \"Metricbeat-40-SocketSummary\"\nrule \"Metricbeat-40-Uptime\"\nstage 50 match pass\nrule \"MetricBeat-50-NetworkDataIncrementsIn\"\nrule \"MetricBeat-50-NetworkDataIncrementsOut\"\nstage 55 match pass\nrule \"MetricBeat-55-FixNegativeBytesIn\"\nrule \"MetricBeat-55-FixNegativeBytesOut\"\nstage 60 match pass\nrule \"MetricBeat-60-CalcMBytesIn\"\nrule \"MetricBeat-60-CalcMBytesOut\"\nend"
+        },
+        "connected_streams": [
+          {
+            "@type": "string",
+            "@value": "08bba129-89f0-45ea-9155-55df6a555230"
+          }
+        ]
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "d67aa5ab-8f8f-44e3-b71e-6e5fedcf102f",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Metricbeat-40-Process"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Metricbeat-40-Process\"\nwhen\n    has_field(\"metricbeat_metricset_name\")\n    && to_string($message.metricbeat_metricset_name) == \"process\"\nthen\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "3a87e343-848f-434f-92af-12a6535ca787",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Metricbeat-40-SocketSummary"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Metricbeat-40-SocketSummary\"\nwhen\n    has_field(\"metricbeat_metricset_name\")\n    && to_string($message.metricbeat_metricset_name) == \"socket_summary\"\nthen\n    rename_field(\"metricbeat_system_socket_summary_all_count\", \"network_connections_open\");\n    rename_field(\"metricbeat_system_socket_summary_all_listening\", \"network_connections_listening\");\n    rename_field(\"metricbeat_system_socket_summary_tcp_all_close_wait\", \"network_tcp_close_wait\");\n    rename_field(\"metricbeat_system_socket_summary_tcp_all_closing\", \"network_tcp_closing\");\n    rename_field(\"metricbeat_system_socket_summary_tcp_all_count\", \"network_tcp_total\");\n    rename_field(\"metricbeat_system_socket_summary_tcp_all_established\", \"network_tcp_established\");\n    rename_field(\"metricbeat_system_socket_summary_tcp_all_fin_wait1\", \"network_tcp_fin_wait1\");\n    rename_field(\"metricbeat_system_socket_summary_tcp_all_fin_wait2\", \"network_tcp_fin_wait_2\");\n    rename_field(\"metricbeat_system_socket_summary_tcp_all_last_ack\", \"network_tcp_last_ack\");\n    rename_field(\"metricbeat_system_socket_summary_tcp_all_listening\", \"network_tcp_listening\");\n    rename_field(\"metricbeat_system_socket_summary_tcp_all_orphan\", \"network_tcp_orphan\");\n    rename_field(\"metricbeat_system_socket_summary_tcp_all_syn_recv\", \"network_tcp_syn_recv\");\n    rename_field(\"metricbeat_system_socket_summary_tcp_all_syn_sent\", \"network_tcp_syn_sent\");\n    rename_field(\"metricbeat_system_socket_summary_tcp_all_time_wait\", \"network_tcp_time_wait\");\n    rename_field(\"metricbeat_system_socket_summary_tcp_memory\", \"network_tcp_memory_bytes\");\n    rename_field(\"metricbeat_system_socket_summary_udp_all_count\", \"network_udp_total\");\n    rename_field(\"metricbeat_system_socket_summary_udp_memory\", \"network_udp_memory_bytes\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "9e634b45-fcba-4051-bc44-0a576b086d26",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-60-CalcMBytesOut"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-60-CalcMBytesOut\"\nwhen\n  has_field(\"network_interface_name\")\nthen\n    let mbytes = to_double($message.network_interface_name) / 1048576.0;\n    set_field(\"network_interface_mbytes_tx\", mbytes);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "68d5e745-3526-4047-b354-ca10040c7f75",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Metricbeat-40-Memory"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Metricbeat-40-Memory\"\nwhen\n    has_field(\"metricbeat_metricset_name\")\n    && to_string($message.metricbeat_metricset_name) == \"memory\"\nthen\n    rename_field(\"metricbeat_system_memory_actual_free\", \"system_memory_actual_free_bytes\");\n    rename_field(\"metricbeat_system_memory_actual_used_bytes\", \"system_memory_actual_used_bytes\");\n    rename_field(\"metricbeat_system_memory_actual_used_pct\", \"system_memory_actual_used_percent\");\n    rename_field(\"metricbeat_system_memory_cached\", \"system_memory_cached_bytes\");\n    rename_field(\"metricbeat_system_memory_free\", \"system_memory_free_bytes\");\n    rename_field(\"metricbeat_system_memory_swap_free\", \"system_memory_swap_free_bytes\");\n    rename_field(\"metricbeat_system_memory_swap_total\", \"system_memory_swap_total_bytes\");\n    rename_field(\"metricbeat_system_memory_swap_used_bytes\", \"system_memory_swap_used_bytes\");\n    rename_field(\"metricbeat_system_memory_total\", \"system_memory_total_bytes\");\n    rename_field(\"metricbeat_system_memory_used_bytes\", \"system_memory_used_bytes\");\n    rename_field(\"metricbeat_system_memory_used_pct\", \"system_memory_used_percent\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "a8a0014d-191b-468c-98a9-7d57b244ae56",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-55-FixNegativeBytesOut"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-55-FixNegativeBytesOut\"\nwhen\n  has_field(\"network_interface_bytes_tx\") &&\n  to_long($message.network_interface_bytes_tx) < 0\nthen\n    set_field(\"network_interface_bytes_tx\", 0);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "7e690ae5-2f7f-4a60-a3f5-382ab102c3a3",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-50-NetworkDataIncrementsOut"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-50-NetworkDataIncrementsOut\"\nwhen\n  has_field(\"network_interface_name\") &&\n  has_field(\"network_interface_bytes_tx\") &&\n  to_long($message.network_interface_bytes_tx) > 0\nthen\n    let key = concat(to_string($message.source), concat(\"-\", concat(to_string($message.network_interface_name), \"-BYTESOUT\")));\n    let prev_bytes = to_long(lookup_value(\"metricbeat-fix\", key, 0));\n    let curr_bytes = to_long($message.network_interface_bytes_tx);\n    let diff_bytes = curr_bytes - prev_bytes;\n    lookup_set_value(\"metricbeat-fix\", key, $message.network_interface_bytes_tx);\n    set_field(\"network_interface_bytes_tx\", diff_bytes);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "7c94e570-ce9a-4025-914a-ce3cccf2aee3",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-10-ParseCloudFields"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-10-ParseCloudFields\"\nwhen\n    has_field(\"metricbeat_cloud_machine_type\")\nthen\n    rename_field(\"metricbeat_cloud_availability_zone\", \"host_cloud_az\");\n    rename_field(\"metricbeat_cloud_instance_id\", \"host_cloud_instance_id\");\n    rename_field(\"metricbeat_cloud_instance_name\", \"host_cloud_instance_name\");\n    rename_field(\"metricbeat_cloud_machine_type\", \"host_cloud_machine_type\");\n    rename_field(\"metricbeat_cloud_provider\", \"host_cloud_provider\");\n    rename_field(\"metricbeat_cloud_service_name\", \"host_cloud_service_name\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "1f515122-594c-485f-9936-fb44a463327f",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Metricbeat-40-Load"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Metricbeat-40-Load\"\nwhen\n    has_field(\"metricbeat_metricset_name\")\n    && to_string($message.metricbeat_metricset_name) == \"load\"\nthen\n    rename_field(\"metricbeat_system_load_1\", \"system_load_01m\");\n    rename_field(\"metricbeat_system_load_15\", \"system_load_15m\");\n    rename_field(\"metricbeat_system_load_5\", \"system_load_05m\");\n    rename_field(\"metricbeat_system_load_cores\", \"system_load_cores\");\n    rename_field(\"metricbeat_system_load_norm_1\", \"system_core_load_01m\");\n    rename_field(\"metricbeat_system_load_norm_15\", \"system_core_load_15m\");\n    rename_field(\"metricbeat_system_load_norm_5\", \"system_core_load_05m\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "bbfe957f-b73c-4feb-90ff-5308eb3724af",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Metricbeat-40-FileSystem"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Metricbeat-40-FileSystem\"\nwhen\n    has_field(\"metricbeat_metricset_name\")\n    && to_string($message.metricbeat_metricset_name) == \"filesystem\"\nthen\n    rename_field(\"metricbeat_system_filesystem_available\", \"filesystem_available_bytes\");\n    rename_field(\"metricbeat_system_filesystem_device_name\", \"filesystem_device_name\");\n    rename_field(\"metricbeat_system_filesystem_files\", \"filesystem_files\");\n    rename_field(\"metricbeat_system_filesystem_free\", \"filesystem_free_bytes\");\n    rename_field(\"metricbeat_system_filesystem_free_files\", \"filesystem_free_files\");\n    rename_field(\"metricbeat_system_filesystem_mount_point\", \"filesystem_mount_point\");\n    rename_field(\"metricbeat_system_filesystem_options\", \"filesystem_options\");\n    rename_field(\"metricbeat_system_filesystem_total\", \"filesystem_total_bytes\");\n    rename_field(\"metricbeat_system_filesystem_used_bytes\", \"filesystem_used_bytes\");\n    rename_field(\"metricbeat_system_filesystem_used_pct\", \"filesystem_used_percent\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "ef1e2022-c88b-4327-8d26-f432e594abdd",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-50-NetworkDataIncrementsIn"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-50-NetworkDataIncrementsIn\"\nwhen\n  has_field(\"network_interface_name\") &&\n  has_field(\"network_interface_bytes_rx\") &&\n  to_long($message.network_interface_bytes_rx) > 0\nthen\n    let key = concat(to_string($message.source), concat(\"-\", concat(to_string($message.network_interface_name), \"-BYTESIN\")));\n    let prev_bytes = to_long(lookup_value(\"metricbeat-fix\", key, 0));\n    let curr_bytes = to_long($message.network_interface_bytes_rx);\n    let diff_bytes = curr_bytes - prev_bytes;\n    lookup_set_value(\"metricbeat-fix\", key, $message.network_interface_bytes_rx);\n    set_field(\"network_interface_bytes_rx\", diff_bytes);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "2618c6d2-e758-4d33-b757-3df9761d4bcc",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-55-FixNegativeBytesIn"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-55-FixNegativeBytesIn\"\nwhen\n  has_field(\"network_interface_bytes_rx\") &&\n  to_long($message.network_interface_bytes_rx) < 0\nthen\n    set_field(\"network_interface_bytes_rx\", 0);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "6f89d525-1e53-4f10-bb63-11ca1758b07f",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Metricbeat-40-ProcessSummary"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Metricbeat-40-ProcessSummary\"\nwhen\n    has_field(\"metricbeat_metricset_name\")\n    && to_string($message.metricbeat_metricset_name) == \"process_summary\"\nthen\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "fbd10310-8f67-4526-96d0-d5c51afabdbb",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-60-CalcMBytesIn"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-60-CalcMBytesIn\"\nwhen\n  has_field(\"network_interface_bytes_rx\")\nthen\n    let mbytes = to_double($message.network_interface_bytes_rx) / 1048576.0;\n    set_field(\"network_interface_mbytes_rx\", mbytes);\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "39f69269-39ce-4da2-9bca-52e749289a0d",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Metricbeat-40-Network"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Metricbeat-40-Network\"\nwhen\n    has_field(\"metricbeat_metricset_name\")\n    && to_string($message.metricbeat_metricset_name) == \"network\"\nthen\n    rename_field(\"metricbeat_host_network_egress_bytes\", \"network_bytes_tx\");\n    rename_field(\"metricbeat_host_network_egress_packets\", \"network_packets_tx\");\n    rename_field(\"metricbeat_host_network_ingress_bytes\", \"network_bytes_rx\");\n    rename_field(\"metricbeat_host_network_ingress_packets\", \"network_packets_rx\");\n    rename_field(\"metricbeat_system_network_in_bytes\", \"network_interface_bytes_rx\");\n    rename_field(\"metricbeat_system_network_in_dropped\", \"network_interface_dropped_rx\");\n    rename_field(\"metricbeat_system_network_in_errors\", \"network_interface_errors_rx\");\n    rename_field(\"metricbeat_system_network_in_packets\", \"network_interface_packets_rx\");\n    rename_field(\"metricbeat_system_network_name\", \"network_interface_name\");\n    rename_field(\"metricbeat_system_network_out_bytes\", \"network_interface_bytes_tx\");\n    rename_field(\"metricbeat_system_network_out_dropped\", \"network_interface_dropped_tx\");\n    rename_field(\"metricbeat_system_network_out_errors\", \"network_interface_errors_tx\");\n    rename_field(\"metricbeat_system_network_out_packets\", \"network_interface_packets_tx\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "2ecba9ac-5a1a-4f98-a1d8-dd237900b44e",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Metricbeat-40-Uptime"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Metricbeat-40-Uptime\"\nwhen\n    has_field(\"metricbeat_metricset_name\")\n    && to_string($message.metricbeat_metricset_name) == \"uptime\"\nthen\n    rename_field(\"metricbeat_system_uptime_duration_ms\", \"system_uptime_ms\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "dc39972f-782b-4f4e-8b81-acf8615ae717",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Metricbeat-40-CPU"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Metricbeat-40-CPU\"\nwhen\n    has_field(\"metricbeat_metricset_name\")\n    && to_string($message.metricbeat_metricset_name) == \"cpu\"\nthen\n    rename_field(\"metricbeat_host_cpu_usage\", \"host_cpu_usage\");\n    remove_field(\"metricbeat_metricset_period\");\n    rename_field(\"metricbeat_system_cpu_cores\", \"host_cpu_cores\");\n    remove_field(\"metricbeat_system_cpu_idle_norm_pct\");\n    rename_field(\"metricbeat_system_cpu_idle_pct\", \"host_cpu_idle_percent\");\n    remove_field(\"metricbeat_system_cpu_iowait_norm_pct\");\n    rename_field(\"metricbeat_system_cpu_iowait_pct\", \"host_cpu_iowait_percent\");\n    remove_field(\"metricbeat_system_cpu_irq_norm_pct\");\n    rename_field(\"metricbeat_system_cpu_irq_pct\", \"host_cpu_irq_percent\");\n    remove_field(\"metricbeat_system_cpu_nice_norm_pct\");\n    rename_field(\"metricbeat_system_cpu_nice_pct\", \"host_cpu_nice_percent\");\n    remove_field(\"metricbeat_system_cpu_softirq_norm_pct\");\n    rename_field(\"metricbeat_system_cpu_softirq_pct\", \"host_cpu_softirq_percent\");\n    remove_field(\"metricbeat_system_cpu_steal_norm_pct\");\n    rename_field(\"metricbeat_system_cpu_steal_pct\", \"host_cpu_steal_percent\");\n    remove_field(\"metricbeat_system_cpu_system_norm_pct\");\n    rename_field(\"metricbeat_system_cpu_system_pct\", \"host_cpu_system_percent\");\n    remove_field(\"metricbeat_system_cpu_total_norm_pct\");\n    rename_field(\"metricbeat_system_cpu_total_pct\", \"host_cpu_total_percent\");\n    remove_field(\"metricbeat_system_cpu_user_norm_pct\");\n    rename_field(\"metricbeat_system_cpu_user_pct\", \"host_cpu_user_percent\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "e3b0828f-b62f-4d60-ae75-05298265e48d",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "MetricBeat-10-HandleCommonFields"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"MetricBeat-10-HandleCommonFields\"\nwhen\n    has_field(\"beats_type\")\n    && to_string($message.beats_type) == \"metricbeat\"\nthen\n    rename_field(\"beats_type\", \"event_source_product\");\n    remove_field(\"metricbeat_@metadata_beat\");\n    remove_field(\"metricbeat_@metadata_type\");\n    rename_field(\"metricbeat_@metadata_version\", \"event_source_product_version\");\n    remove_field(\"metricbeat_@timestamp\");\n    // Leave metricbeat_agent_ephemeral_id\n    // Leave metricbeat_agent_id\n    // Leave metricbeat_agent_name\n    remove_field(\"metricbeat_agent_type\"); // Dupe of beats_type\n    remove_field(\"metricbeat_agent_version\"); // Dupe of metricbeat_@metadata_version\n    remove_field(\"metricbeat_ecs_version\");\n    // Leave metricbeat_event_dataset\n    // Leave metricbeat_event_duration\n    // Leave metricbeat_event_module\n    rename_field(\"metricbeat_host_architecture\", \"host_architecture\");\n    rename_field(\"metricbeat_host_containerized\", \"host_containerized\");\n    rename_field(\"metricbeat_host_hostname\", \"host_hostname\");\n    rename_field(\"metricbeat_host_id\", \"host_id\");\n    rename_field(\"metricbeat_host_ip\", \"host_ip\");\n    rename_field(\"metricbeat_host_mac\", \"host_mac\");\n    remove_field(\"metricbeat_host_name\"); // Dupe of metricbeat_host_hostname\n    remove_field(\"metricbeat_host_os_codename\"); // Who needs this?\n    rename_field(\"metricbeat_host_os_family\", \"host_os_family\");\n    rename_field(\"metricbeat_host_os_kernel\", \"host_os_kernel\");\n    rename_field(\"metricbeat_host_os_name\", \"host_os_name\");\n    remove_field(\"metricbeat_host_os_platform\"); // Dupe of metricbeat_host_os_name\n    rename_field(\"metricbeat_host_os_type\", \"host_os_type\");\n    rename_field(\"metricbeat_host_os_version\", \"host_os_version\");\n    // Leave metricbeat_metricset_name\n    // Leave metricbeat_metricset_period\n    remove_field(\"metricbeat_service_type\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "c88276a8-cdfa-4423-9073-6694cf84b00d",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Metricbeat-40-FSStat"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Metricbeat-40-FSStat\"\nwhen\n    has_field(\"metricbeat_metricset_name\")\n    && to_string($message.metricbeat_metricset_name) == \"fsstat\"\nthen\n    rename_field(\"metricbeat_system_fsstat_count\", \"fsstat_count\");\n    rename_field(\"metricbeat_system_fsstat_total_files\", \"fsstat_total_files\");\n    rename_field(\"metricbeat_system_fsstat_total_size_free\", \"fsstat_total_size_free\");\n    rename_field(\"metricbeat_system_fsstat_total_size_total\", \"fsstat_total_size_total\");\n    rename_field(\"metricbeat_system_fsstat_total_size_used\", \"fsstat_total_size_used\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
         "name": "stream",
         "version": "1"
       },
-      "id": "36e2da96-7e9c-4f6b-8308-2e98f8cf1353",
+      "id": "08bba129-89f0-45ea-9155-55df6a555230",
       "data": {
         "alarm_callbacks": [],
         "outputs": [],
@@ -195,636 +2029,6 @@
         "default_stream": {
           "@type": "boolean",
           "@value": false
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "lookup_adapter",
-        "version": "1"
-      },
-      "id": "009d5f0c-aecb-4912-84f7-b3ee1958acf0",
-      "data": {
-        "_scope": {
-          "@type": "string",
-          "@value": "DEFAULT"
-        },
-        "name": {
-          "@type": "string",
-          "@value": "metricbeat-fix"
-        },
-        "title": {
-          "@type": "string",
-          "@value": "Metricbeat Fix"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "configuration": {
-          "type": {
-            "@type": "string",
-            "@value": "mongodb"
-          },
-          "cidr_lookup": {
-            "@type": "boolean",
-            "@value": false
-          }
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "7f178a3a-2a80-4aab-8b3d-82bcd10020a4",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "MetricBeat-25-FixNegativePacketsIn"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"MetricBeat-25-FixNegativePacketsIn\"\nwhen\n  has_field(\"network_packets_rx\") &&\n  to_long($message.network_packets_rx) < 0\nthen\n    set_field(\"network_packets_rx\", 0);\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "90e05b3b-f2f7-4212-96c1-5da9be99601c",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "MetricBeat-40-NormalizeHostFields"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"MetricBeat-40-NormalizeHostFields\"\nwhen\n    has_field(\"metricbeat_event_dataset\") \n    && has_field(\"metricbeat_host_mac\")\n    && has_field(\"metricbeat_host_id\")\nthen\n    set_field(\"host_mac\", replace(to_string($message.metricbeat_host_mac), \"-\", \":\", 99));\n    rename_field(\"metricbeat_host_id\", \"host_id\");\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "8d11ee10-ec0e-450e-a272-1611e6a451d1",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "MetricBeat-30-CalcMBytesIn"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"MetricBeat-30-CalcMBytesIn\"\nwhen\n  has_field(\"network_bytes_rx\")\nthen\n    let mbytes = to_double($message.network_bytes_rx) / 1048576.0;\n    set_field(\"network_mbytes_rx\", mbytes);\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "4ce5d431-31b0-47e2-9e59-dc4665ddd765",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "MetricBeat-20-NetworkDroppedOut"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"MetricBeat-20-NetworkDroppedOut\"\nwhen\n  has_field(\"metricbeat_system_network_name\") &&\n  has_field(\"metricbeat_system_network_out_dropped\") &&\n  to_long($message.metricbeat_system_network_out_dropped) >= 0\nthen\n    let key = concat(to_string($message.source), concat(\"-\", concat(to_string($message.metricbeat_system_network_name), \"-DroppedOut\")));\n    let prev_errors = to_long(lookup_value(\"metricbeat-fix\", key, 0));\n    let curr_errors = to_long($message.metricbeat_system_network_out_dropped);\n    let diff_errors = curr_errors - prev_errors;\n    lookup_set_value(\"metricbeat-fix\", key, $message.metricbeat_system_network_out_dropped);\n    set_field(\"network_dropped_tx\", diff_errors);\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "5eb3747a-fb27-4da6-804a-0a2fb7aaffa6",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "MetricBeat-20-NetworkErrorsIn"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"MetricBeat-20-NetworkErrorsIn\"\nwhen\n  has_field(\"metricbeat_system_network_name\") &&\n  has_field(\"metricbeat_system_network_in_errors\") &&\n  to_long($message.metricbeat_system_network_in_errors) > 0\nthen\n    let key = concat(to_string($message.source), concat(\"-\", concat(to_string($message.metricbeat_system_network_name), \"-ERRORSIN\")));\n    let prev_errors = to_long(lookup_value(\"metricbeat-fix\", key, 0));\n    let curr_errors = to_long($message.metricbeat_system_network_in_errors);\n    let diff_errors = curr_errors - prev_errors;\n    lookup_set_value(\"metricbeat-fix\", key, $message.metricbeat_system_network_in_errors);\n    set_field(\"network_errors_rx\", diff_errors);\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "9a014b86-ec41-4258-b184-135441a989cb",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "MetricBeat-20-NetworkPacketsIn"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"MetricBeat-20-NetworkPacketsIn\"\nwhen\n  has_field(\"metricbeat_system_network_name\") &&\n  has_field(\"metricbeat_system_network_in_packets\") &&\n  to_long($message.metricbeat_system_network_in_packets) > 0\nthen\n    let key = concat(to_string($message.source), concat(\"-\", concat(to_string($message.metricbeat_system_network_name), \"-PACKETSIN\")));\n    let prev_packets = to_long(lookup_value(\"metricbeat-fix\", key, 0));\n    let curr_packets = to_long($message.metricbeat_system_network_in_packets);\n    let diff_packets = curr_packets - prev_packets;\n    lookup_set_value(\"metricbeat-fix\", key, $message.metricbeat_system_network_in_packets);\n    set_field(\"network_packets_rx\", diff_packets);\n    set_field(\"network_interface_in\", $message.metricbeat_system_network_name);\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "287207bc-4e6e-41eb-ae09-15f4a1ab2bcd",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "MetricBeat-30-CalcMBytesOut"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"MetricBeat-30-CalcMBytesOut\"\nwhen\n  has_field(\"network_bytes_tx\")\nthen\n    let mbytes = to_double($message.network_bytes_tx) / 1048576.0;\n    set_field(\"network_mbytes_tx\", mbytes);\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "3f489ffc-c2e4-4779-9434-02f6da961380",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "MetricBeat-20-NetworkPacketsOut"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"MetricBeat-20-NetworkPacketsOut\"\nwhen\n  has_field(\"metricbeat_system_network_name\") &&\n  has_field(\"metricbeat_system_network_out_packets\") &&\n  to_long($message.metricbeat_system_network_out_packets) > 0\nthen\n    let key = concat(to_string($message.source), concat(\"-\", concat(to_string($message.metricbeat_system_network_name), \"-PACKETSOUT\")));\n    let prev_packets = to_long(lookup_value(\"metricbeat-fix\", key, 0));\n    let curr_packets = to_long($message.metricbeat_system_network_out_packets);\n    let diff_packets = curr_packets - prev_packets;\n    lookup_set_value(\"metricbeat-fix\", key, $message.metricbeat_system_network_out_packets);\n    set_field(\"network_packets_tx\", diff_packets);\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "9f6a38cc-9482-4e9f-abbd-be823aa33e84",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "MetricBeat-20-RemapFields"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"MetricBeat-20-RemapFields\"\nwhen\n  true\nthen\n    let ip_list = split(\",\", to_string($message.metricbeat_host_ip));\n    let ipv4_untrimmed = to_string(ip_list[0]);\n    let ipv4_trimmed = substring(ipv4_untrimmed, 1);\n    set_field(\"source_ip\", ipv4_trimmed);\n    set_field(\"source_hostname\", to_string($message.metricbeat_host_hostname));\n    set_field(\"source_mac\", replace(substring(to_string($message.metricbeat_host_mac), 1, 18), \"-\", \":\", 5));\n    set_associated_assets();\n    let asset_info = machine_asset_lookup(\"ip\", to_string($message.source_ip));\n    set_field(\"source_category\", asset_info.category);\n    set_field(\"source_friendly_hostname\", asset_info.name);\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "7abc9af5-d968-4adf-a5f5-12be2950b7ed",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "MetricBeat-25-FixNegativeErrorsOut"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"MetricBeat-25-FixNegativeErrorsOut\"\nwhen\n  has_field(\"network_errors_tx\") &&\n  to_long($message.network_errors_tx) < 0\nthen\n    set_field(\"network_errors_tx\", 0);\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "6b92b717-53d8-4063-8dd0-9d637f3a1944",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "Metricbeat-40-RemapIPMacHostname"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"Metricbeat-40-RemapIPMacHostname\"\nwhen\n  true\nthen\n    let ip_list = split(\",\", to_string($message.metricbeat_host_ip));\n    let ipv4_untrimmed = to_string(ip_list[0]);\n    let ipv4_trimmed = substring(ipv4_untrimmed, 1);\n    set_field(\"source_ip\", ipv4_trimmed);\n    set_field(\"source_hostname\", to_string($message.metricbeat_host_hostname));\n    set_field(\"source_mac\", replace(substring(to_string($message.metricbeat_host_mac), 1, 18), \"-\", \":\", 5));\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "e948d2ce-5013-4255-9dd3-8f7e3bd47bcd",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "MetricBeat-25-FixNegativeBytesOut"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"MetricBeat-25-FixNegativeBytesOut\"\nwhen\n  has_field(\"network_bytes_tx\") &&\n  to_long($message.network_bytes_tx) < 0\nthen\n    set_field(\"network_bytes_tx\", 0);\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "915cb13a-f3f7-4452-811c-11e67094467d",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "MetricBeat-25-FixNegativeDroppedOut"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"MetricBeat-25-FixNegativeDroppedOut\"\nwhen\n  has_field(\"network_dropped_tx\") &&\n  to_long($message.network_dropped_tx) < 0\nthen\n    set_field(\"network_dropped_tx\", 0);\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "3af7d22b-f5d3-44a8-af66-95b084e8f57e",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "MetricBeat-25-FixNegativeBytesIn"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"MetricBeat-25-FixNegativeBytesIn\"\nwhen\n  has_field(\"network_bytes_rx\") &&\n  to_long($message.network_bytes_rx) < 0\nthen\n    set_field(\"network_bytes_rx\", 0);\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "9c988106-c9df-480c-9402-a2b35cb0dd06",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "MetricBeat-20-NetworkErrorsOut"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"MetricBeat-20-NetworkErrorsOut\"\nwhen\n  has_field(\"metricbeat_system_network_name\") &&\n  has_field(\"metricbeat_system_network_out_errors\") &&\n  to_long($message.metricbeat_system_network_out_errors) >= 0\nthen\n    let key = concat(to_string($message.source), concat(\"-\", concat(to_string($message.metricbeat_system_network_name), \"-ERRORSOUT\")));\n    let prev_errors = to_long(lookup_value(\"metricbeat-fix\", key, 0));\n    let curr_errors = to_long($message.metricbeat_system_network_out_errors);\n    let diff_errors = curr_errors - prev_errors;\n    lookup_set_value(\"metricbeat-fix\", key, $message.metricbeat_system_network_out_errors);\n    set_field(\"network_errors_tx\", diff_errors);\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "fff1fd5d-669c-47a4-82bc-3248c008943b",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "MetricBeat-25-FixNegativeErrorsIn"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"MetricBeat-25-FixNegativeErrorsIn\"\nwhen\n  has_field(\"network_errors_rx\") &&\n  to_long($message.network_errors_rx) < 0\nthen\n    set_field(\"network_errors_rx\", 0);\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "5dc13866-2297-4f2e-a1ec-653ddf158f3c",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "MetricBeat-20-NetworkDroppedIn"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"MetricBeat-20-NetworkDroppedIn\"\nwhen\n  has_field(\"metricbeat_system_network_name\") &&\n  has_field(\"metricbeat_system_network_in_dropped\") &&\n  to_long($message.metricbeat_system_network_in_dropped) > 0\nthen\n    let key = concat(to_string($message.source), concat(\"-\", concat(to_string($message.metricbeat_system_network_name), \"-DroppedIN\")));\n    let prev_errors = to_long(lookup_value(\"metricbeat-fix\", key, 0));\n    let curr_errors = to_long($message.metricbeat_system_network_in_dropped);\n    let diff_errors = curr_errors - prev_errors;\n    lookup_set_value(\"metricbeat-fix\", key, $message.metricbeat_system_network_in_dropped);\n    set_field(\"network_dropped_rx\", diff_errors);\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "a6d7b5c6-2b60-4048-bab3-1912558b80a4",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "MetricBeat-25-FixNegativePacketsOut"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"MetricBeat-25-FixNegativePacketsOut\"\nwhen\n  has_field(\"network_packets_tx\") &&\n  to_long($message.network_packets_tx) < 0\nthen\n    set_field(\"network_packets_tx\", 0);\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "70098567-c913-44e2-b305-513465770d6f",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "MetricBeat-20-NetworkDataIncrementsIn"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"MetricBeat-20-NetworkDataIncrementsIn\"\nwhen\n  has_field(\"metricbeat_system_network_name\") &&\n  has_field(\"metricbeat_system_network_in_bytes\") &&\n  to_long($message.metricbeat_system_network_in_bytes) > 0\nthen\n    let key = concat(to_string($message.source), concat(\"-\", concat(to_string($message.metricbeat_system_network_name), \"-BYTESIN\")));\n    let prev_bytes = to_long(lookup_value(\"metricbeat-fix\", key, 0));\n    let curr_bytes = to_long($message.metricbeat_system_network_in_bytes);\n    let diff_bytes = curr_bytes - prev_bytes;\n    lookup_set_value(\"metricbeat-fix\", key, $message.metricbeat_system_network_in_bytes);\n    set_field(\"network_bytes_rx\", diff_bytes);\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "598aa5e5-aa47-4723-b9bc-1d613ae1b584",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "MetricBeat-20-NetworkDataIncrementsOut"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"MetricBeat-20-NetworkDataIncrementsOut\"\nwhen\n  has_field(\"metricbeat_system_network_name\") &&\n  has_field(\"metricbeat_system_network_out_bytes\") &&\n  to_long($message.metricbeat_system_network_out_bytes) > 0\nthen\n    let key = concat(to_string($message.source), concat(\"-\", concat(to_string($message.metricbeat_system_network_name), \"-BYTESOUT\")));\n    let prev_bytes = to_long(lookup_value(\"metricbeat-fix\", key, 0));\n    let curr_bytes = to_long($message.metricbeat_system_network_out_bytes);\n    let diff_bytes = curr_bytes - prev_bytes;\n    lookup_set_value(\"metricbeat-fix\", key, $message.metricbeat_system_network_out_bytes);\n    set_field(\"network_bytes_tx\", diff_bytes);\n    set_field(\"network_interface_out\", $message.metricbeat_system_network_name);\nend"
-        }
-      },
-      "constraints": [
-        {
-          "type": "server-version",
-          "version": ">=5.2.5+7eaa89d"
-        }
-      ]
-    },
-    {
-      "v": "1",
-      "type": {
-        "name": "pipeline_rule",
-        "version": "1"
-      },
-      "id": "432a290a-d6a9-44b4-a25e-4758e144845f",
-      "data": {
-        "title": {
-          "@type": "string",
-          "@value": "MetricBeat-25-FixNegativeDroppedIn"
-        },
-        "description": {
-          "@type": "string",
-          "@value": ""
-        },
-        "source": {
-          "@type": "string",
-          "@value": "rule \"MetricBeat-25-FixNegativeDroppedIn\"\nwhen\n  has_field(\"network_dropped_rx\") &&\n  to_long($message.network_dropped_rx) < 0\nthen\n    set_field(\"network_dropped_rx\", 0);\nend"
         }
       },
       "constraints": [
