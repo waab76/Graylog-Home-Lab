@@ -1,7 +1,7 @@
 {
   "v": "1",
   "id": "e3a2eb70-fd7f-472a-8b1d-0ed2f7791185",
-  "rev": 2,
+  "rev": 3,
   "name": "Metricbeat Processing",
   "summary": "Handling for Metricbeat data",
   "description": "",
@@ -1439,7 +1439,7 @@
         "name": "pipeline",
         "version": "1"
       },
-      "id": "2e752648-b83b-4883-b318-4603116101ed",
+      "id": "39cef4bf-f73c-49a3-90bb-f9fe2c99eafa",
       "data": {
         "title": {
           "@type": "string",
@@ -1451,12 +1451,12 @@
         },
         "source": {
           "@type": "string",
-          "@value": "pipeline \"Metricbeat\"\nstage 10 match either\nrule \"MetricBeat-10-HandleCommonFields\"\nrule \"MetricBeat-10-ParseCloudFields\"\nstage 40 match pass\nrule \"Metricbeat-40-CPU\"\nrule \"Metricbeat-40-FSStat\"\nrule \"Metricbeat-40-FileSystem\"\nrule \"Metricbeat-40-Load\"\nrule \"Metricbeat-40-Memory\"\nrule \"Metricbeat-40-Network\"\nrule \"Metricbeat-40-Process\"\nrule \"Metricbeat-40-ProcessSummary\"\nrule \"Metricbeat-40-SocketSummary\"\nrule \"Metricbeat-40-Uptime\"\nstage 50 match pass\nrule \"MetricBeat-50-NetworkDataIncrementsIn\"\nrule \"MetricBeat-50-NetworkDataIncrementsOut\"\nstage 55 match pass\nrule \"MetricBeat-55-FixNegativeBytesIn\"\nrule \"MetricBeat-55-FixNegativeBytesOut\"\nstage 60 match pass\nrule \"MetricBeat-60-CalcMBytesIn\"\nrule \"MetricBeat-60-CalcMBytesOut\"\nend"
+          "@value": "pipeline \"Metricbeat\"\nstage 10 match either\nrule \"MetricBeat-10-HandleCommonFields\"\nrule \"MetricBeat-10-ParseCloudFields\"\nstage 50 match pass\nrule \"MetricBeat-50-NetworkDataIncrementsIn\"\nrule \"MetricBeat-50-NetworkDataIncrementsOut\"\nstage 55 match pass\nrule \"MetricBeat-55-FixNegativeBytesIn\"\nrule \"MetricBeat-55-FixNegativeBytesOut\"\nstage 60 match pass\nrule \"MetricBeat-60-CalcMBytesIn\"\nrule \"MetricBeat-60-CalcMBytesOut\"\nstage 40 match pass\nrule \"Metricbeat-40-CPU\"\nrule \"Metricbeat-40-FSStat\"\nrule \"Metricbeat-40-FileSystem\"\nrule \"Metricbeat-40-Load\"\nrule \"Metricbeat-40-Memory\"\nrule \"Metricbeat-40-Network\"\nrule \"Metricbeat-40-Process\"\nrule \"Metricbeat-40-ProcessSummary\"\nrule \"Metricbeat-40-SocketSummary\"\nrule \"Metricbeat-40-Uptime\"\nrule \"Metricbeat-40-ProcessCGroup\"\nrule \"Metricbeat-40-ProcessSystem\"\nend"
         },
         "connected_streams": [
           {
             "@type": "string",
-            "@value": "08bba129-89f0-45ea-9155-55df6a555230"
+            "@value": "a8a702d2-87ef-4a2b-9ecc-2051318d1ff0"
           }
         ]
       },
@@ -1473,7 +1473,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "d67aa5ab-8f8f-44e3-b71e-6e5fedcf102f",
+      "id": "affa9bfc-3cb9-4db6-985c-cc6abe90ea7c",
       "data": {
         "title": {
           "@type": "string",
@@ -1485,7 +1485,7 @@
         },
         "source": {
           "@type": "string",
-          "@value": "rule \"Metricbeat-40-Process\"\nwhen\n    has_field(\"metricbeat_metricset_name\")\n    && to_string($message.metricbeat_metricset_name) == \"process\"\nthen\nend"
+          "@value": "rule \"Metricbeat-40-Process\"\nwhen\n    has_field(\"metricbeat_metricset_name\")\n    && to_string($message.metricbeat_metricset_name) == \"process\"\nthen\n    remove_field(\"metricbeat_process_args\");\n    rename_field(\"metricbeat_process_command_line\", \"process_command_line\");\n    set_field(\"process_command_line_length\", length(to_string($message.process_command_line)));\n    rename_field(\"metricbeat_process_cpu_pct\", \"process_cpu_percent\");\n    rename_field(\"metricbeat_process_cpu_start_time\", \"process_cpu_start_time\");\n    rename_field(\"metricbeat_process_executable\", \"process_path\");\n    rename_field(\"metricbeat_process_memory_pct\", \"process_memory_percent\");\n    rename_field(\"metricbeat_process_name\", \"process_name\");\n    rename_field(\"metricbeat_process_parent_pid\", \"process_parent_id\");\n    rename_field(\"metricbeat_process_pgid\", \"process_group_id\");\n    rename_field(\"metricbeat_process_pid\", \"process_id\");\n    rename_field(\"metricbeat_process_state\", \"process_state\");\n    rename_field(\"metricbeat_process_working_directory\", \"process_working_directory\");\n    rename_field(\"metricbeat_user_name\", \"process_user\");\nend"
         }
       },
       "constraints": [
@@ -1501,7 +1501,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "3a87e343-848f-434f-92af-12a6535ca787",
+      "id": "54f0743b-e961-48dc-a9ce-6e4730a88214",
       "data": {
         "title": {
           "@type": "string",
@@ -1529,7 +1529,35 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "9e634b45-fcba-4051-bc44-0a576b086d26",
+      "id": "40611602-f69b-4028-be12-4778542bb615",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Metricbeat-40-ProcessSystem"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Metricbeat-40-ProcessSystem\"\nwhen\n    has_field(\"metricbeat_system_process_cmdline\")\nthen\n    remove_field(\"metricbeat_system_process_cmdline\");\n    remove_field(\"metricbeat_system_process_cpu_start_time\");\n    remove_field(\"metricbeat_system_process_cpu_total_norm_pct\");\n    remove_field(\"metricbeat_system_process_cpu_total_pct\");\n    remove_field(\"metricbeat_system_process_cpu_total_value\");\n    remove_field(\"metricbeat_system_process_fd_limit_hard\");\n    remove_field(\"metricbeat_system_process_fd_limit_soft\");\n    remove_field(\"metricbeat_system_process_fd_open\");\n    remove_field(\"metricbeat_system_process_io_cancelled_write_bytes\");\n    remove_field(\"metricbeat_system_process_io_read_bytes\");\n    remove_field(\"metricbeat_system_process_io_read_char\");\n    remove_field(\"metricbeat_system_process_io_read_ops\");\n    remove_field(\"metricbeat_system_process_io_write_bytes\");\n    remove_field(\"metricbeat_system_process_io_write_char\");\n    remove_field(\"metricbeat_system_process_io_write_ops\");\n    remove_field(\"metricbeat_system_process_memory_rss_bytes\");\n    remove_field(\"metricbeat_system_process_memory_rss_pct\");\n    remove_field(\"metricbeat_system_process_memory_share\");\n    remove_field(\"metricbeat_system_process_memory_size\");\n    remove_field(\"metricbeat_system_process_num_threads\");\n    remove_field(\"metricbeat_system_process_state\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "bae9920f-024e-4c06-88ff-4561a458f9fc",
       "data": {
         "title": {
           "@type": "string",
@@ -1557,7 +1585,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "68d5e745-3526-4047-b354-ca10040c7f75",
+      "id": "63d1fdbc-3d59-4425-b097-49efeb062bdd",
       "data": {
         "title": {
           "@type": "string",
@@ -1585,7 +1613,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "a8a0014d-191b-468c-98a9-7d57b244ae56",
+      "id": "17f4d386-a300-48db-a2ac-1501f0a62947",
       "data": {
         "title": {
           "@type": "string",
@@ -1613,7 +1641,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "7e690ae5-2f7f-4a60-a3f5-382ab102c3a3",
+      "id": "23a92b37-d8d2-4c2c-bd9b-c16355e4fc26",
       "data": {
         "title": {
           "@type": "string",
@@ -1641,7 +1669,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "7c94e570-ce9a-4025-914a-ce3cccf2aee3",
+      "id": "674c4043-50a6-4bf3-acb2-c32eefcf7ee6",
       "data": {
         "title": {
           "@type": "string",
@@ -1669,7 +1697,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "1f515122-594c-485f-9936-fb44a463327f",
+      "id": "13342e70-1aff-488a-a815-5494bb405b68",
       "data": {
         "title": {
           "@type": "string",
@@ -1697,7 +1725,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "bbfe957f-b73c-4feb-90ff-5308eb3724af",
+      "id": "7bb8b8c5-b3ce-4d0c-b91b-87567727afd7",
       "data": {
         "title": {
           "@type": "string",
@@ -1725,7 +1753,35 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "ef1e2022-c88b-4327-8d26-f432e594abdd",
+      "id": "5b3e8efe-97b4-49e0-adc3-d6d81640d686",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "Metricbeat-40-ProcessCGroup"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"Metricbeat-40-ProcessCGroup\"\nwhen\n    has_field(\"metricbeat_system_process_cgroup_id\")\nthen\n    remove_field(\"metricbeat_system_process_cgroup_id\");\n    remove_field(\"metricbeat_system_process_cgroup_cgroups_version\");\n    remove_field(\"metricbeat_system_process_cgroup_path\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_id\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_path\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_pressure_full_10_pct\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_pressure_full_300_pct\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_pressure_full_60_pct\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_pressure_full_total\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_pressure_some_10_pct\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_pressure_some_300_pct\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_pressure_some_60_pct\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_pressure_some_total\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_stats_periods\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_stats_system_norm_pct\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_stats_system_ns\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_stats_system_pct\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_stats_throttled_periods\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_stats_throttled_us\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_stats_usage_norm_pct\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_stats_usage_ns\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_stats_usage_pct\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_stats_user_norm_pct\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_stats_user_ns\");\n    remove_field(\"metricbeat_system_process_cgroup_cpu_stats_user_pct\");\n    remove_field(\"metricbeat_system_process_cgroup_io_id\");\n    remove_field(\"metricbeat_system_process_cgroup_io_path\");\n    remove_field(\"metricbeat_system_process_cgroup_io_pressure_full_10_pct\");\n    remove_field(\"metricbeat_system_process_cgroup_io_pressure_full_300_pct\");\n    remove_field(\"metricbeat_system_process_cgroup_io_pressure_full_60_pct\");\n    remove_field(\"metricbeat_system_process_cgroup_io_pressure_full_total\");\n    remove_field(\"metricbeat_system_process_cgroup_io_pressure_some_10_pct\");\n    remove_field(\"metricbeat_system_process_cgroup_io_pressure_some_300_pct\");\n    remove_field(\"metricbeat_system_process_cgroup_io_pressure_some_60_pct\");\n    remove_field(\"metricbeat_system_process_cgroup_io_pressure_some_total\");\n    remove_field(\"metricbeat_system_process_cgroup_io_stats_loop1_discarded_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_io_stats_loop1_discarded_ios\");\n    remove_field(\"metricbeat_system_process_cgroup_io_stats_loop1_read_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_io_stats_loop1_read_ios\");\n    remove_field(\"metricbeat_system_process_cgroup_io_stats_loop1_write_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_io_stats_loop1_write_ios\");\n    remove_field(\"metricbeat_system_process_cgroup_io_stats_xvda_discarded_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_io_stats_xvda_discarded_ios\");\n    remove_field(\"metricbeat_system_process_cgroup_io_stats_xvda_read_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_io_stats_xvda_read_ios\");\n    remove_field(\"metricbeat_system_process_cgroup_io_stats_xvda_write_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_io_stats_xvda_write_ios\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_id\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_mem_events_high\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_mem_events_low\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_mem_events_max\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_mem_events_oom\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_mem_events_oom_kill\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_mem_low_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_mem_usage_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_memsw_events_fail\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_memsw_events_high\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_memsw_events_max\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_memsw_low_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_memsw_usage_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_path\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_active_anon_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_active_file_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_anon_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_anon_thp_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_file_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_file_dirty_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_file_mapped_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_file_thp_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_file_writeback_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_htp_collapse_alloc\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_inactive_anon_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_inactive_file_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_kernel_stack_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_major_page_faults\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_page_activate\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_page_deactivate\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_page_faults\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_page_lazy_free\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_page_lazy_freed\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_page_refill\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_page_scan\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_page_steal\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_page_tables_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_per_cpu_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_shmem_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_shmem_thp_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_slab_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_slab_reclaimable_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_slab_unreclaimable_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_sock_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_swap_cached_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_thp_fault_alloc\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_unevictable_bytes\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_workingset_activate_anon\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_workingset_activate_file\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_workingset_node_reclaim\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_workingset_refault_anon\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_workingset_refault_file\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_workingset_restore_anon\");\n    remove_field(\"metricbeat_system_process_cgroup_memory_stats_workingset_restore_file\");\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=5.2.5+7eaa89d"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "70145177-f982-42a6-b022-bac037a90b6d",
       "data": {
         "title": {
           "@type": "string",
@@ -1753,7 +1809,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "2618c6d2-e758-4d33-b757-3df9761d4bcc",
+      "id": "cdfded9a-3ae7-4b12-89f1-fd5cc190f8e9",
       "data": {
         "title": {
           "@type": "string",
@@ -1781,7 +1837,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "6f89d525-1e53-4f10-bb63-11ca1758b07f",
+      "id": "1be72873-0bbb-4ac4-893a-088a5d1dadd0",
       "data": {
         "title": {
           "@type": "string",
@@ -1793,7 +1849,7 @@
         },
         "source": {
           "@type": "string",
-          "@value": "rule \"Metricbeat-40-ProcessSummary\"\nwhen\n    has_field(\"metricbeat_metricset_name\")\n    && to_string($message.metricbeat_metricset_name) == \"process_summary\"\nthen\nend"
+          "@value": "rule \"Metricbeat-40-ProcessSummary\"\nwhen\n    has_field(\"metricbeat_metricset_name\")\n    && to_string($message.metricbeat_metricset_name) == \"process_summary\"\nthen\n    rename_field(\"metricbeat_system_process_summary_idle\", \"process_count_idle\");\n    rename_field(\"metricbeat_system_process_summary_sleeping\", \"process_count_sleeping\");\n    rename_field(\"metricbeat_system_process_summary_threads_blocked\", \"process_threads_io_blocked\");\n    rename_field(\"metricbeat_system_process_summary_threads_running\", \"process_threads_running\");\n    rename_field(\"metricbeat_system_process_summary_total\", \"process_count_total\");\nend"
         }
       },
       "constraints": [
@@ -1809,7 +1865,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "fbd10310-8f67-4526-96d0-d5c51afabdbb",
+      "id": "5fea94b2-0838-4c65-b12c-34b5dfac5d7a",
       "data": {
         "title": {
           "@type": "string",
@@ -1837,7 +1893,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "39f69269-39ce-4da2-9bca-52e749289a0d",
+      "id": "e410454b-a312-4505-9417-7c3aad2c69be",
       "data": {
         "title": {
           "@type": "string",
@@ -1865,7 +1921,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "2ecba9ac-5a1a-4f98-a1d8-dd237900b44e",
+      "id": "cf0adf1b-0033-4406-860a-d8c5b7b84107",
       "data": {
         "title": {
           "@type": "string",
@@ -1893,7 +1949,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "dc39972f-782b-4f4e-8b81-acf8615ae717",
+      "id": "e00dc378-bfb6-4a51-9464-1c9a831f6b52",
       "data": {
         "title": {
           "@type": "string",
@@ -1921,7 +1977,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "e3b0828f-b62f-4d60-ae75-05298265e48d",
+      "id": "43623a11-58b6-4bc5-8e03-eb5f3cfb5317",
       "data": {
         "title": {
           "@type": "string",
@@ -1949,7 +2005,7 @@
         "name": "pipeline_rule",
         "version": "1"
       },
-      "id": "c88276a8-cdfa-4423-9073-6694cf84b00d",
+      "id": "dd58860a-e427-4310-bcac-af0befd5607d",
       "data": {
         "title": {
           "@type": "string",
@@ -1977,7 +2033,7 @@
         "name": "stream",
         "version": "1"
       },
-      "id": "08bba129-89f0-45ea-9155-55df6a555230",
+      "id": "a8a702d2-87ef-4a2b-9ecc-2051318d1ff0",
       "data": {
         "alarm_callbacks": [],
         "outputs": [],

@@ -1,6 +1,17 @@
 # MetricBeat Processing
 
-This is a Graylog content pack for parsing data from Metricbeat.
+This is a Graylog content pack for parsing data from Metricbeat. This pack includes processing for the following Metricbeat metricsets:
+
+* CPU
+* Filesystem
+* FSStat
+* Load
+* Memory
+* Network
+* Process
+* Process Summary
+* Socket Summary
+* Uptime
 
 ## What's Inside
 
