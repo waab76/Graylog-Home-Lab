@@ -37,7 +37,7 @@ services:
   # Graylog: https://hub.docker.com/r/graylog/graylog/
   graylog:
     restart: "unless-stopped"
-    image: graylog/graylog-enterprise:5.2.5
+    image: graylog/graylog-enterprise:6.0.4
     environment:
       # CHANGE ME (must be at least 16 characters)!
       - GRAYLOG_PASSWORD_SECRET=1234567890123456
