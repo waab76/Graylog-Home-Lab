@@ -31,8 +31,7 @@ The pipeline processes messages found in the `Veilid Data` stream.
 
 **Stage 10**
 
-* The `Parse Syslog Log Level [0-7]` rules just convert Syslog numeric log levels to their corresponding text values. This would be more efficient with a lookup table, but I'm trying to keep things simple
-* The `Drop Syslog Facility Fields` rule drops the `facility` and `facility_num` fields from all messages
+Removed this stage because it was doing Syslog stuff, not Veilid stuff.
 
 **Stage 20**
 
@@ -45,6 +44,10 @@ If you want to add parsing rules for other log types that I haven't covered yet,
 This stage performs further parsing on compound fields extracted in Stage 20 including `veilid_conn_debug` and `veilid_receipt_details`.
 
 If you extracted a compound field in Stage 20 and you want to further parse it, you should do so in this stage.
+
+**Stage 40**
+
+This stage does some final data cleanup. It checks `remote_port` values so ephemeral ports can be properly marked. It also replaces any remote IP (v4 or v6) parsed from the logs with the sha256 hash of the IP and replaces IPs in the `message` field with "X.X.X.X" or "X:X:X:X:X:X:X:X" in order to preserve the anonymity of folks who may have connected to your node.
 
 ### Veilid Dashboard
 
