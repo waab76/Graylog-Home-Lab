@@ -37,7 +37,7 @@ services:
   # Graylog: https://hub.docker.com/r/graylog/graylog/
   graylog:
     restart: "unless-stopped"
-    image: graylog/graylog-enterprise:6.0.4
+    image: graylog/graylog-enterprise:6.1.4
     environment:
       # CHANGE ME (must be at least 16 characters)!
       - GRAYLOG_PASSWORD_SECRET=1234567890123456
@@ -59,8 +59,12 @@ services:
     ports:
       # Graylog web interface and REST API
       - 9000:9000
+      # rsyslog
+      - 1514:1514
       # GELF TCP
       - 12201:12201
+      # Beats
+      - 12202:12202
 networks:
   graylog:
     driver: bridge
