@@ -2,8 +2,6 @@
 
 This is a Graylog content pack for parsing and visualization of Veilid debug and error logs.
 
-It doesn't cover every debug/error log, but it does cover all of the logs that I saw in 24 hours of collecting Veilid debug and error logs. I will try to keep it up to date as I see more logs flow into my Graylog instance.
-
 This content pack is built to be easy to use for Veilid folks who might not be familiar with Graylog. There are definitely some spots where things are done inefficiently for the sake of simplicity. If you're a Graylog expert, you should be able to quickly adapt this content pack to your existing setup.
 
 ## What's Inside
@@ -85,7 +83,7 @@ When you return to the Content Packs list page, you should see the `Veilid` pack
 
 **On the Graylog side**
 
-You will need a TCP Syslog input running in Graylog to receive the data from Veilid.
+You will need a TCP Syslog input running in Graylog to receive the data from Veilid. The docker-compose file includes several open ports for sending data into Graylog. Port 1514 is a common choice for rsyslog data.
 
 **On the Veilid side**
 
@@ -95,7 +93,7 @@ You will need to update `/etc/rsyslog.conf` to forward syslog data from the host
 
 ```
 # Send Veilid logs to Graylog
-*.* action(type="omfwd" target="YOUR_IP_OR_HOSTNAME_HERE" port="12201" protocol="tcp"
+*.* action(type="omfwd" target="YOUR_IP_OR_HOSTNAME_HERE" port="1514" protocol="tcp"
             action.resumeRetryCount="100" template="RSYSLOG_SyslogProtocol23Format"
             queue.type="linkedList" queue.size="10000")
 ```
